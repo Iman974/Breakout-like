@@ -978,9 +978,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c654cce2e775fbf45bf0880fef435432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 3
   minStartDirectionAngle: -10
   maxStartDirectionAngle: -10
+  xFactor: 0
+  YFactor: 0
+  minXDirection: 1
+  maxXDirection: 1
+  minYDirection: 0.5
+  maxYDirection: 0.5
 --- !u!58 &1018332401
 CircleCollider2D:
   m_ObjectHideFlags: 0
