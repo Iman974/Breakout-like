@@ -3,6 +3,9 @@
 public class GamepadController : MonoBehaviour {
 
     [SerializeField] private float minHorizontal, maxHorizontal;
+    [SerializeField] private float ForceDirectionSensibility = 0.5f;
+    [SerializeField] private GameObject smokeEffect;
+    [SerializeField] private Vector2 smokeEffectOffset;
 
     private Camera mainCamera;
     private SpriteRenderer gamepadRenderer;
@@ -16,8 +19,6 @@ public class GamepadController : MonoBehaviour {
 
     private void Start () {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        ballRb2D = GameObject.FindWithTag("Ball").GetComponent<Rigidbody2D>();
-        ballSpeed = ballRb2D.GetComponent<Ball>().speed;
     }
 
     private void FixedUpdate() { // Makes the gamepad follow the mouse
@@ -27,7 +28,11 @@ public class GamepadController : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D other) {
         other.GetContacts(ballContacts);
 
-        ballRb2D.velocity = new Vector2(CalculateForceDirection(), 1f).normalized * ballSpeed;
+        other.gameObject.GetComponent<Animator>().SetTrigger("crush");
+        other.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(CalculateForceDirection(),
+            ForceDirectionSensibility).normalized * other.gameObject.GetComponent<Ball>().speed;
+
+        //Destroy(Instantiate(smokeEffect, ballContacts[0].point + smokeEffectOffset, Quaternion.identity), 0.5f);
     }
 
     private float CalculateForceDirection() {
