@@ -2,16 +2,15 @@
 
 public class Ball : MonoBehaviour {
 
-    [SerializeField] private float speed;
     [SerializeField] private float minStartDirectionAngle = -50f, maxStartDirectionAngle = 50f;
     [SerializeField] private float xFactor;
     [SerializeField] private float YFactor;
     [SerializeField] private float minXDirection, maxXDirection, minYDirection, maxYDirection;
 
     private Rigidbody2D rb2D;
-
-    private float debug;
     private Vector3 initial;
+
+    public float speed = 6f;
 
     private void Awake() {
         rb2D = GetComponent<Rigidbody2D>();
@@ -19,24 +18,18 @@ public class Ball : MonoBehaviour {
     }
 
     private void Start () {
-        /*rb2D.AddForce(new Vector2(Random.Range(minXDirection, maxXDirection),
-            Random.Range(minYDirection, maxYDirection)), ForceMode2D.Impulse);*/
-        rb2D.velocity = new Vector2(Random.Range(minXDirection, maxXDirection), Random.Range(minYDirection, maxYDirection));
+        rb2D.velocity = new Vector2(Random.Range(minXDirection, maxXDirection),
+            Random.Range(minYDirection, maxYDirection)).normalized * speed;
     }
 
     private void FixedUpdate () {
-        debug += 0.02f;
-        if (debug >= 1f) {
-            debug = 0f;
-            rb2D.velocity = Vector2.zero;
-            transform.position = initial;
-            rb2D.velocity = new Vector2(Random.Range(minXDirection, maxXDirection), Random.Range(minYDirection, maxYDirection));
-        }
     }
 
     private void OnDrawGizmosSelected() {
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + Random.Range(minXDirection, maxXDirection),
             transform.position.y + Random.Range(minYDirection, maxYDirection)));
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 1f);
     }
 }
