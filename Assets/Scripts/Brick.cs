@@ -20,6 +20,7 @@ public class Brick : MonoBehaviour {
         thisCollider.enabled = false;
         StartCoroutine(ScaleUp());
         StartCoroutine(Disappear());
+        GameManager.Instance.RemoveBrick();
     }
 
     private IEnumerator ScaleUp() {

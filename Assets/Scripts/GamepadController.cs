@@ -43,19 +43,11 @@ public class GamepadController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         Vector2 contactPoint = new Vector2(other.transform.position.x, upperYBound);
-        //ballRb2D.velocity = Vector2.Reflect(ballRb2D.velocity.normalized, Vector2.up).normalized * other.GetComponent<Ball>().speed;
 
         //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.cyan, 2f);
-        other.GetComponent<Rigidbody2D>().velocity = new Vector2((contactPoint -
-            (Vector2)gamepadRenderer.bounds.min).x - 1.5f, 1f).normalized * other.GetComponent<Ball>().speed;
+        other.GetComponent<Ball>().SetDirection(new Vector2((contactPoint - (Vector2)gamepadRenderer.bounds.min).x - 1.5f, 1f));
         //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.red, 2f);
 
         //Destroy(Instantiate(smokeEffect, ballContacts[0].point + smokeEffectOffset, Quaternion.identity), 0.5f);
-    }
-
-    private void CalculateForceDirection() {
-        //float forceX = ((new Vector2(gamepadRenderer.bounds.center.x, ballContacts[0].point.y) - ballContacts[0].point)).magnitude;
-
-        //return ballContacts[0].point.x < transform.position.x ? -forceX : forceX;
     }
 }

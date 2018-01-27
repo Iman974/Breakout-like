@@ -10,7 +10,6 @@ public class AnimatedAppear : MonoBehaviour {
     [SerializeField] private MonoBehaviour[] disabledDuringAnimation;
     [SerializeField] private float maxRandomDelay = 0.25f;
     [SerializeField] private bool randomDelay = true;
-    //[SerializeField] private Ball ball;
 
     private Vector2 targetedPosition;
     private Quaternion targetedRotation;
