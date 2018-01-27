@@ -1,43 +1,61 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class GamepadController : MonoBehaviour {
 
     [SerializeField] private float minHorizontal, maxHorizontal;
-    [SerializeField] private float ForceDirectionSensibility = 0.5f;
     [SerializeField] private GameObject smokeEffect;
     [SerializeField] private Vector2 smokeEffectOffset;
+    [SerializeField] private float firstPosLerpTime = 0.5f;
 
     private Camera mainCamera;
     private SpriteRenderer gamepadRenderer;
-    private Rigidbody2D ballRb2D;
-    private ContactPoint2D[] ballContacts = new ContactPoint2D[10];
-    private float ballSpeed;
+    private float upperYBound;
+    //private bool startSmoothing = false;
 
     private void Awake() {
         gamepadRenderer = GetComponent<SpriteRenderer>();
+        upperYBound = gamepadRenderer.bounds.max.y;
     }
 
     private void Start () {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        //StartCoroutine(SmoothStart());
+    }
+
+    private IEnumerator SmoothStart() { // For mobile input
+        //startSmoothing = true;
+        float firstMousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
+
+        for (float currentLerpTime = 0f; currentLerpTime < firstPosLerpTime; currentLerpTime += Time.deltaTime) {
+            transform.position = Vector2.Lerp(transform.position, new Vector2(firstMousePositionX, transform.position.y),
+                Mathf.Sin((currentLerpTime / firstPosLerpTime) * Mathf.PI * 0.5f));
+            firstMousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
+            yield return null;
+        }
+        //startSmoothing = false;
     }
 
     private void FixedUpdate() { // Makes the gamepad follow the mouse
-        transform.position = new Vector2(mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x, transform.position.y);
+        transform.position = new Vector2(mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x,
+            transform.position.y);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        other.GetContacts(ballContacts);
+    private void OnTriggerEnter2D(Collider2D other) {
+        Vector2 contactPoint = new Vector2(other.transform.position.x, upperYBound);
+        //ballRb2D.velocity = Vector2.Reflect(ballRb2D.velocity.normalized, Vector2.up).normalized * other.GetComponent<Ball>().speed;
 
-        other.gameObject.GetComponent<Animator>().SetTrigger("crush");
-        other.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(CalculateForceDirection(),
-            ForceDirectionSensibility).normalized * other.gameObject.GetComponent<Ball>().speed;
+        //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.cyan, 2f);
+        other.GetComponent<Rigidbody2D>().velocity = new Vector2((contactPoint -
+            (Vector2)gamepadRenderer.bounds.min).x - 1.5f, 1f).normalized * other.GetComponent<Ball>().speed;
+        //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.red, 2f);
 
         //Destroy(Instantiate(smokeEffect, ballContacts[0].point + smokeEffectOffset, Quaternion.identity), 0.5f);
     }
 
-    private float CalculateForceDirection() {
-        float forceX = ((new Vector2(gamepadRenderer.bounds.center.x, ballContacts[0].point.y) - ballContacts[0].point)).sqrMagnitude;
+    private void CalculateForceDirection() {
+        //float forceX = ((new Vector2(gamepadRenderer.bounds.center.x, ballContacts[0].point.y) - ballContacts[0].point)).magnitude;
 
-        return ballContacts[0].point.x < transform.position.x ? -forceX : forceX;
+        //return ballContacts[0].point.x < transform.position.x ? -forceX : forceX;
     }
 }

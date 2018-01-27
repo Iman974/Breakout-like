@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour {
     [SerializeField] private bool showStartAngle = true;
 
     private Rigidbody2D rb2D;
+    private float oldXVelocity;
 
     public float speed = 6f;
 
@@ -13,9 +14,15 @@ public class Ball : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    public void LaunchBall() {
+    public void Launch() {
         rb2D.velocity = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
             Random.Range(minYStartDirection, maxYStartDirection)).normalized * speed;
+    }
+
+    private void FixedUpdate() {
+        if (Mathf.Approximately(rb2D.velocity.x, oldXVelocity)) {
+
+        }
     }
 
     private void OnDrawGizmosSelected() {

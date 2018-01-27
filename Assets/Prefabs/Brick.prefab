@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212002720753466018}
   - component: {fileID: 61665808483998040}
   - component: {fileID: 114107859651857820}
+  - component: {fileID: 114569298929162138}
   m_Layer: 9
   m_Name: Brick
   m_TagString: Untagged
@@ -82,6 +83,80 @@ MonoBehaviour:
   scaleUpFactor: 1.04
   fadeOutOverFrames: 15
   fadeOutFactor: 0.7
+--- !u!114 &114569298929162138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983257029887418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8df043015216e47bb6e0c584abe5f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slideAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 10
+      inSlope: -7.9686427
+      outSlope: -7.9686427
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: -1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.75
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  rotationAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 50
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.7
+      value: 0
+      inSlope: 161.11205
+      outSlope: 161.11205
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  scaleAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: -1
+      inSlope: 6.3479905
+      outSlope: 6.3479905
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.7
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  disabledDuringAnimation: []
+  maxRandomDelay: 0.25
+  randomDelay: 1
 --- !u!212 &212002720753466018
 SpriteRenderer:
   m_ObjectHideFlags: 1
