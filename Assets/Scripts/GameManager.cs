@@ -5,11 +5,17 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     [SerializeField] private Text winText;
+    [SerializeField] private TextAnimation countdownTextAnimation;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private float comboTime = 0.75f;
 
     private GamepadController gamepad;
     private Camera mainCamera;
     private Ball mainBall;
     private int numberOfBricks;
+    private int score;
+    private int currentCombo = 1;
+    private float initialComboTime;
 
     public static GameManager Instance { get; private set; }
 
@@ -21,6 +27,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         }
         #endregion
+        initialComboTime = comboTime;
     }
 
     private void Start() {
@@ -30,6 +37,7 @@ public class GameManager : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
         mainBall = Ball.MainBall;
+        UpdateScore();
 
         StartCoroutine(StartGame());
     }
@@ -39,7 +47,9 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         Cursor.lockState = CursorLockMode.None;
-        
+
+        countdownTextAnimation.StartAnimation(1f, "3", "2", "1", "Go !" );
+
         while (!Input.GetButtonUp("Fire1")) {
             float mousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
             gamepad.transform.position = new Vector2(mousePositionX, transform.position.y);
@@ -49,11 +59,30 @@ public class GameManager : MonoBehaviour {
         mainBall.Launch();
     }
 
-    public void RemoveBrick() {
+    public void RemoveBrick(int scoreValue) {
         numberOfBricks--;
+        score += scoreValue * currentCombo;
+        if (comboTime > 0f) {
+            currentCombo++;
+            comboTime = initialComboTime;
+        }
+        UpdateScore();
 
         if (numberOfBricks == 0) {
             winText.gameObject.SetActive(true);
+        }
+    }
+
+    private void UpdateScore() {
+        scoreText.text = "Score: " + score;
+    }
+
+    private void Update() {
+        if (comboTime > 0f) {
+            comboTime -= Time.deltaTime;
+        } else {
+            currentCombo = 1;
+            comboTime = initialComboTime;
         }
     }
 }

@@ -7,6 +7,7 @@ public class Brick : MonoBehaviour {
     [SerializeField] private float scaleUpFactor = 1.025f;
     [SerializeField] private int fadeOutOverFrames = 50;
     [SerializeField] private float fadeOutFactor = 0.95f;
+    [SerializeField] private int scoreValue = 10;
 
     private Collider2D thisCollider;
     private SpriteRenderer thisRenderer;
@@ -20,7 +21,7 @@ public class Brick : MonoBehaviour {
         thisCollider.enabled = false;
         StartCoroutine(ScaleUp());
         StartCoroutine(Disappear());
-        GameManager.Instance.RemoveBrick();
+        GameManager.Instance.RemoveBrick(scoreValue);
     }
 
     private IEnumerator ScaleUp() {
