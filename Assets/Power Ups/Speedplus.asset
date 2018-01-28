@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe0e2684eefa0b4db280a056c5a46f7, type: 3}
+  m_Name: Speedplus
+  m_EditorClassIdentifier: 
+  powerUpSprite: {fileID: 21300000, guid: ea2849522ef536544bed32231c0e9441, type: 3}
+  powerUpName: Speed +
+  pickUpEffect: {fileID: 0}
+  fallSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: -0.029613266
+      outSlope: -0.029613266
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
+  horizontalMovement:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0.13794996
+      outSlope: 0.13794996
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 0
+      inSlope: -0.06595889
+      outSlope: -0.06595889
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0.17725545
+      outSlope: 0.17725545
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 0
+  colliderRadius: 0.35
+  lifetime: 10

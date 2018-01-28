@@ -10,21 +10,21 @@ public class Ball : MonoBehaviour {
     [SerializeField] private float speedUpMultiplier = 1.075f;
     [SerializeField] private float maxSpeed = 10f;
 
-    private Rigidbody2D rb2D;
     //private float oldXVelocity;
 
     public float speed = 6f;
     public static Ball MainBall { get; private set; }
+    public Rigidbody2D Rb2D { get; private set; }
 
     private void Awake() {
         if (mainBall) {
             MainBall = this;
         }
-        rb2D = GetComponent<Rigidbody2D>();
+        Rb2D = GetComponent<Rigidbody2D>();
     }
 
     public void Launch() { // should the ball be launched in a random direction or may the player be able to choose ?
-        rb2D.velocity = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
+        Rb2D.velocity = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
             Random.Range(minYStartDirection, maxYStartDirection)).normalized * speed;
         StartCoroutine(SpeedUpOverTime());
     }
@@ -36,7 +36,7 @@ public class Ball : MonoBehaviour {
     }
 
     public void SetDirection(Vector2 direction) {
-        rb2D.velocity = direction.normalized * speed;
+        Rb2D.velocity = direction.normalized * speed;
     }
 
     private void OnDrawGizmosSelected() {
@@ -52,10 +52,10 @@ public class Ball : MonoBehaviour {
     private IEnumerator SpeedUpOverTime() {
         while (speed < maxSpeed) {
             yield return new WaitForSeconds(speedUpDelay);
-            rb2D.velocity *= speedUpMultiplier;
+            Rb2D.velocity *= speedUpMultiplier;
             speed *= speedUpMultiplier;
         }
         speed = maxSpeed;
-        rb2D.velocity = rb2D.velocity.normalized * speed;
+        Rb2D.velocity = Rb2D.velocity.normalized * speed;
     }
 }

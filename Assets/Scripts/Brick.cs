@@ -7,7 +7,7 @@ public class Brick : MonoBehaviour {
     [SerializeField] private float scaleUpFactor = 1.025f;
     [SerializeField] private int fadeOutOverFrames = 50;
     [SerializeField] private float fadeOutFactor = 0.95f;
-    [SerializeField] private int scoreValue = 10;
+    [SerializeField] private int scoreValue = 7;
 
     private Collider2D thisCollider;
     private SpriteRenderer thisRenderer;

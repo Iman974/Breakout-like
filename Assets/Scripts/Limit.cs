@@ -17,4 +17,8 @@ public class Limit : MonoBehaviour {
             mainBall.SetDirection(new Vector2(transform.position.x - mainBall.transform.position.x, transform.position.y));
         }*/
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        GameManager.Instance.Lives--;
+    }
 }

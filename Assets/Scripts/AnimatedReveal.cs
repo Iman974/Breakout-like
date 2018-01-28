@@ -1,11 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AnimatedAppear : MonoBehaviour {
+public class AnimatedReveal : MonoBehaviour {
 
-    [SerializeField] private AnimationCurve slideAnimation;
-    [SerializeField] private AnimationCurve rotationAnimation;
-    [SerializeField] private AnimationCurve scaleAnimation;
+    [System.Serializable]
+    private class SlideAnimation {
+        public AnimationCurve xSlide = AnimationCurve.Constant(0f, 1f, 0f);
+        public AnimationCurve ySlide = AnimationCurve.Constant(0f, 1f, 0f);
+
+        public float MaxTime {
+            get {
+                float xSlideDuration = xSlide.keys[xSlide.length - 1].time;
+                float ySlideDuration = ySlide.keys[ySlide.length - 1].time;
+
+                return xSlideDuration > ySlideDuration ? xSlideDuration : ySlideDuration;
+            }
+        }
+    }
+
+    [SerializeField] private SlideAnimation slideAnimation;
+    [SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(0f, 1f, 0f);
+    [SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(0f, 1f, 0f);
     //[SerializeField] private float offScreenDistance;
     [SerializeField] private MonoBehaviour[] disabledDuringAnimation;
     [SerializeField] private float maxRandomDelay = 0.25f;
@@ -18,23 +33,23 @@ public class AnimatedAppear : MonoBehaviour {
     private bool initialRb2DState;
     private float totalTime;
     private const int curvesAmount = 3;
-    private int animatedObjects = 0;
+    private static int animatedObjects;
 
-    public static bool AnimationsOver { get; private set; }
+    public static bool IsAnimationRunning { get; private set; }
 
     private void Awake() {
+        IsAnimationRunning = true;
         animatedObjects++;
         rb2D = GetComponent<Rigidbody2D>();
         targetedPosition = transform.position;
         targetedRotation = transform.rotation;
         targetedScale = transform.localScale;
 
-        Keyframe[] lastKeyframes = new Keyframe[curvesAmount];
-        lastKeyframes[0] = slideAnimation.keys[slideAnimation.length - 1];
-        lastKeyframes[1] = rotationAnimation.keys[rotationAnimation.length - 1];
-        lastKeyframes[2] = scaleAnimation.keys[scaleAnimation.length - 1];
+        Keyframe[] lastKeyframes = new Keyframe[curvesAmount - 1];
+        lastKeyframes[0] = rotationAnimation.keys[rotationAnimation.length - 1];
+        lastKeyframes[1] = scaleAnimation.keys[scaleAnimation.length - 1];
 
-        totalTime = lastKeyframes[0].time;
+        totalTime = slideAnimation.MaxTime;
         foreach (Keyframe keyframe in lastKeyframes) {
             if (keyframe.time > totalTime) {
                 totalTime = keyframe.time;
@@ -65,7 +80,7 @@ public class AnimatedAppear : MonoBehaviour {
             yield return new WaitForSeconds(Random.Range(0f, maxRandomDelay));
         }
         for (float time = 0f; time < totalTime; time += Time.deltaTime) {
-            transform.position = targetedPosition + new Vector2(0f, slideAnimation.Evaluate(time));
+            transform.position = targetedPosition + new Vector2(slideAnimation.xSlide.Evaluate(time), slideAnimation.ySlide.Evaluate(time));
             yield return null;
         }
         transform.position = targetedPosition;
@@ -89,7 +104,7 @@ public class AnimatedAppear : MonoBehaviour {
         }
         animatedObjects--;
         if (animatedObjects == 0) {
-            AnimationsOver = true;
+            IsAnimationRunning = false;
         }
     }
 }

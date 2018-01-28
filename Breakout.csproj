@@ -282,12 +282,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AnimatedAppear.cs" />
+    <Compile Include="Assets\Scripts\AnimatedReveal.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\Brick.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GamepadController.cs" />
     <Compile Include="Assets\Scripts\Limit.cs" />
+    <Compile Include="Assets\Scripts\PowerUp.cs" />
+    <Compile Include="Assets\Scripts\PowerUpInGame.cs" />
     <Compile Include="Assets\Scripts\TextAnimation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
