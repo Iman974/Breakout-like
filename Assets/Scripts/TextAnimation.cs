@@ -7,6 +7,7 @@ public class TextAnimation : MonoBehaviour {
     [SerializeField] private AnimationCurve fontSizeAnimation;
     [SerializeField] private float sizeAnimationSpeed = 0.15f;
     [SerializeField] private AnimationCurve colorLerpAnimation;
+    [SerializeField] private float fadeOutSpeed = 0.01f;
 
     private Text textToAnimate;
     private string[] stringToSet;
@@ -61,6 +62,9 @@ public class TextAnimation : MonoBehaviour {
                     StartCoroutine(AnimateColor());
                 }
             }
+            if ((animation & Animation.ALPHA) != 0) {
+                StartCoroutine(AnimateAlpha());
+            }
 
             while (animationsRunning > 0) {
                 yield return null;
@@ -99,9 +103,19 @@ public class TextAnimation : MonoBehaviour {
         }
         AnimationsRunning--;
     }
+
+    private IEnumerator AnimateAlpha() {
+        float totalTime = 1f / fadeOutSpeed;
+
+        for (int i = 0; i < totalTime; i++) {
+            textToAnimate.color += new Color(0f, 0f, 0f, -fadeOutSpeed);
+            yield return null;
+        }
+    }
 }
 
 public enum Animation {
     COLOR = 1,
-    SIZE
+    SIZE,
+    ALPHA = 4
 }

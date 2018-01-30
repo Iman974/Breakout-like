@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
     }
 
     [SerializeField] private Text winText, loseText;
-    [SerializeField] private TextAnimation countdownTextAnimation;
+    [SerializeField] private TextAnimation centerTextAnimation;
     [SerializeField] private TextAnimation scoreTextAnimation;
     [SerializeField] private Text livesText;
     [SerializeField] private float comboTime = 0.75f;
@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private PowerUp[] powerUps;
     [SerializeField] private float minPowerUpDelay = 3f, maxPowerUpDelay = 8f;
     [SerializeField] private GameObject powerUpObject;
+    [SerializeField] private GameObject mainBallObject;
+    [SerializeField] private float startBallDistanceYFromGamePad = 1f;
 
     private GamepadController gamepad;
     private Camera mainCamera;
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour {
     private float powerUpTimer;
 
     public static GameManager Instance { get; private set; }
+    public float MousePositionX { get; private set; }
+
     public int Lives {
         get {
             return lives;
@@ -41,7 +45,8 @@ public class GameManager : MonoBehaviour {
         set {
             if (state != State.WIN) {
                 lives = value;
-                livesText.text = "x" + (lives - 1);
+                UpdateLivesOnUI();
+
                 if (lives <= 0) {
                     GameOver();
                 }
@@ -63,33 +68,36 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         numberOfBricks = GameObject.FindWithTag("Bricks").transform.childCount;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
         mainBall = Ball.MainBall;
+        Lives = lives;
         AddToScore(0);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         StartCoroutine(StartGame());
     }
 
-    private IEnumerator StartGame() {
+    private IEnumerator StartGame(bool countDown = true) {
         while (AnimatedReveal.IsAnimationRunning) {
             yield return null;
         }
         Cursor.lockState = CursorLockMode.None;
 
-        StartCoroutine(countdownTextAnimation.StartAnimation(Animation.SIZE, 1f, "3", "2", "1", "Go !" ));
+        if (countDown) {
+            StartCoroutine(centerTextAnimation.StartAnimation(Animation.SIZE, 1f, "3", "2", "1", "Go !"));
+        }
 
         mainBall.Rb2D.isKinematic = true;
         while (!Input.GetButtonUp("Fire1")) {
-            float mousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
-            gamepad.transform.position = new Vector2(mousePositionX, transform.position.y);
-            mainBall.transform.position = new Vector2(mousePositionX, mainBall.transform.position.y);
+            gamepad.LockBallAxisY = true;
             yield return null;
         }
-        if (countdownTextAnimation.CurrentAnimatingString != null && countdownTextAnimation.CurrentAnimatingString != "Go !") {
+        if (centerTextAnimation.CurrentAnimatingString != null && centerTextAnimation.CurrentAnimatingString != "Go !") {
             AddToScore(startedEarlyPenalty);
         }
+        gamepad.LockBallAxisY = false;
         mainBall.Rb2D.isKinematic = false;
         mainBall.Launch();
     }
@@ -130,12 +138,12 @@ public class GameManager : MonoBehaviour {
             comboTime = initialComboTime;
         }
 
-        powerUpTimer += Time.deltaTime;
+        /*powerUpTimer += Time.deltaTime;
         if (powerUpTimer >= minPowerUpDelay && true) {
             powerUpTimer = -50f;
             PowerUpInGame instantiatedPowerUp = Instantiate(powerUpObject, Vector2.zero, Quaternion.identity).GetComponent<PowerUpInGame>();
             instantiatedPowerUp.powerUp = powerUps[Random.Range(0, powerUps.Length)];
-        }
+        }*/
     }
 
     private void GameOver() {
@@ -146,5 +154,24 @@ public class GameManager : MonoBehaviour {
     private void Win() {
         winText.gameObject.SetActive(true);
         state = State.WIN;
+    }
+
+    private void UpdateLivesOnUI() {
+        if (lives > 1) {
+            livesText.text = "x" + (lives - 1);
+        } else {
+            livesText.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+    public void RestartGame() {
+        Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
+            Quaternion.identity).GetComponent<Ball>();
+        StartCoroutine(centerTextAnimation.StartAnimation(Animation.ALPHA, textToDisplay: "One more time !"));
+        StartCoroutine(StartGame(false));
+    }
+
+    private void FixedUpdate() {
+        MousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
     }
 }

@@ -11,7 +11,11 @@ public class GamepadController : MonoBehaviour {
     private Camera mainCamera;
     private SpriteRenderer gamepadRenderer;
     private float upperYBound;
+    private Ball mainBall;
+    private GameManager GMinstance;
     //private bool startSmoothing = false;
+
+    public bool LockBallAxisY { get; set; }
 
     private void Awake() {
         gamepadRenderer = GetComponent<SpriteRenderer>();
@@ -20,7 +24,8 @@ public class GamepadController : MonoBehaviour {
 
     private void Start () {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        //StartCoroutine(SmoothStart());
+        GMinstance = GameManager.Instance;
+        mainBall = Ball.MainBall;
     }
 
     private IEnumerator SmoothStart() { // For mobile input
@@ -37,8 +42,15 @@ public class GamepadController : MonoBehaviour {
     }
 
     private void FixedUpdate() { // Makes the gamepad follow the mouse
-        transform.position = new Vector2(mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x,
-            transform.position.y);
+        UpdateGamepadPosition();
+
+        if (LockBallAxisY) {
+            mainBall.AlignXToGamepad();
+        }
+    }
+
+    public void UpdateGamepadPosition() {
+        transform.position = new Vector2(GMinstance.MousePositionX, transform.position.y);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

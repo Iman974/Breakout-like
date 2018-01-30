@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour {
     [SerializeField] private float maxSpeed = 10f;
 
     //private float oldXVelocity;
+    private GameManager GMinstance;
 
     public float speed = 6f;
     public static Ball MainBall { get; private set; }
@@ -23,6 +24,10 @@ public class Ball : MonoBehaviour {
         Rb2D = GetComponent<Rigidbody2D>();
     }
 
+    private void Start() {
+        GMinstance = GameManager.Instance;
+    }
+
     public void Launch() { // should the ball be launched in a random direction or may the player be able to choose ?
         Rb2D.velocity = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
             Random.Range(minYStartDirection, maxYStartDirection)).normalized * speed;
@@ -33,6 +38,10 @@ public class Ball : MonoBehaviour {
         /*if (Mathf.Approximately(rb2D.velocity.x, oldXVelocity)) {
 
         }*/
+    }
+
+    public void AlignXToGamepad() {
+        transform.position = new Vector2(GMinstance.MousePositionX, transform.position.y);
     }
 
     public void SetDirection(Vector2 direction) {
