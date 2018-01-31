@@ -101,7 +101,7 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -120,14 +120,20 @@ MonoBehaviour:
       - serializedVersion: 2
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 2.1550903
+        outSlope: 2.1550903
         tangentMode: 0
+      - serializedVersion: 2
+        time: 0.6
+        value: 1
+        inSlope: 0.8333333
+        outSlope: 0.8333333
+        tangentMode: 34
       - serializedVersion: 2
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.68479216
+        outSlope: -0.68479216
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -138,14 +144,14 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2.0858018
+      outSlope: 2.0858018
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
+      inSlope: -1.643988
+      outSlope: -1.643988
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -156,8 +162,8 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 1.2739164
+      outSlope: 1.2739164
       tangentMode: 0
     - serializedVersion: 2
       time: 1
@@ -169,11 +175,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   disabledDuringAnimation: []
-  maxRandomDelay: 0.3
+  maxRandomDelay: 0.2
   randomDelay: 1
-  startPositionOffset: {x: 5, y: 5}
-  startRotationOffset: 0
-  startScaleOffset: 0
+  startPosition: {x: 5, y: 5}
+  startRotation: 50
+  startScale: 0
 --- !u!212 &212002720753466018
 SpriteRenderer:
   m_ObjectHideFlags: 1

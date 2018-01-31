@@ -7,12 +7,13 @@ public class TextAnimation : MonoBehaviour {
     [SerializeField] private AnimationCurve fontSizeAnimation;
     [SerializeField] private float sizeAnimationSpeed = 0.15f;
     [SerializeField] private AnimationCurve colorLerpAnimation;
-    [SerializeField] private float fadeOutSpeed = 0.01f;
+    [SerializeField] private AnimationCurve alphaAnimation;
 
     private Text textToAnimate;
     private string[] stringToSet;
     private bool wasEnabledAtStart;
     private Color initialColor;
+    private int initialFontSize;
 
     private int animationsRunning;
     private int AnimationsRunning {
@@ -36,6 +37,7 @@ public class TextAnimation : MonoBehaviour {
         textToAnimate = GetComponent<Text>();
         wasEnabledAtStart = textToAnimate.enabled;
         initialColor = textToAnimate.color;
+        initialFontSize = textToAnimate.fontSize;
     }
 
     public void SetText(string textToSet) {
@@ -80,35 +82,32 @@ public class TextAnimation : MonoBehaviour {
     }
 	
     private IEnumerator AnimateSize() {
-        float totalTime = fontSizeAnimation.keys[fontSizeAnimation.length - 1].time;
+        float totalTime = fontSizeAnimation[fontSizeAnimation.length - 1].time;
 
         for (float time = 0f; time < totalTime; time += sizeAnimationSpeed) {
-            textToAnimate.fontSize = (int)fontSizeAnimation.Evaluate(time);
+            textToAnimate.fontSize = initialFontSize + (int)fontSizeAnimation.Evaluate(time);
             yield return null;
         }
         AnimationsRunning--;
     }
 
     private IEnumerator AnimateColor() {
-        float totalTime = colorLerpAnimation.keys[colorLerpAnimation.length - 1].time;
+        float totalTime = colorLerpAnimation[colorLerpAnimation.length - 1].time;
 
         for (float time = 0f; time < totalTime; time += Time.deltaTime) {
             textToAnimate.color = Color.Lerp(initialColor, ColorToSet, colorLerpAnimation.Evaluate(time));
             yield return null;
         }
 
-        for (float time = 0f; time < totalTime; time += Time.deltaTime) {
-            textToAnimate.color = Color.Lerp(ColorToSet, initialColor, colorLerpAnimation.Evaluate(time));
-            yield return null;
-        }
         AnimationsRunning--;
     }
 
     private IEnumerator AnimateAlpha() {
-        float totalTime = 1f / fadeOutSpeed;
+        float totalTime = alphaAnimation[alphaAnimation.length - 1].time;
 
-        for (int i = 0; i < totalTime; i++) {
-            textToAnimate.color += new Color(0f, 0f, 0f, -fadeOutSpeed);
+        for (float time = 0f; time < totalTime; time += Time.deltaTime) {
+            textToAnimate.color = new Color(textToAnimate.color.r, textToAnimate.color.g, textToAnimate.color.b,
+                alphaAnimation.Evaluate(time));
             yield return null;
         }
     }

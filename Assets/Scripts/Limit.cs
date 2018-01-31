@@ -16,8 +16,8 @@ public class Limit : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         GameManager.Instance.Lives--;
         Destroy(other.gameObject, 3f);
-        if (GameManager.Instance.Lives > 0) {
-            GameManager.Instance.RestartGame();
+        if (GameManager.Instance.GameState != GameManager.State.WIN) {
+            GameManager.Instance.Invoke("RestartGame", 1f);
         }
     }
 }

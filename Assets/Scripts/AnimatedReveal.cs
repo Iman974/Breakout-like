@@ -10,8 +10,8 @@ public class AnimatedReveal : MonoBehaviour {
 
         public float MaxTime {
             get {
-                float xSlideDuration = xSlide.keys[xSlide.length - 1].time;
-                float ySlideDuration = ySlide.keys[ySlide.length - 1].time;
+                float xSlideDuration = xSlide[xSlide.length - 1].time;
+                float ySlideDuration = ySlide[ySlide.length - 1].time;
 
                 return xSlideDuration > ySlideDuration ? xSlideDuration : ySlideDuration;
             }
@@ -25,9 +25,9 @@ public class AnimatedReveal : MonoBehaviour {
     [SerializeField] private Behaviour[] disabledDuringAnimation;
     [SerializeField] private float maxRandomDelay = 0.25f;
     [SerializeField] private bool randomDelay = true;
-    [SerializeField] private Vector2 startPositionOffset;
-    [SerializeField] private float startRotationOffset;
-    [SerializeField] private float startScaleOffset;
+    [SerializeField] private Vector2 relativeStartPosition;
+    [SerializeField] private float relativeStartRotation;
+    [SerializeField] private float relativeStartScale;
 
     private Vector2 targetedPosition;
     private Quaternion targetedRotation;
@@ -55,10 +55,13 @@ public class AnimatedReveal : MonoBehaviour {
         targetedRotation = transform.rotation;
         targetedScale = transform.localScale;
 
+        transform.position = transform.position + (Vector3)relativeStartPosition;
+        transform.rotation = transform.rotation * Quaternion.Euler(new Vector3(0f, 0f, relativeStartRotation));
+        transform.localScale = transform.localScale + new Vector3(relativeStartScale, relativeStartScale, 0f);
 
         Keyframe[] lastKeyframes = new Keyframe[curvesAmount - 1];
-        lastKeyframes[0] = rotationAnimation.keys[rotationAnimation.length - 1];
-        lastKeyframes[1] = scaleAnimation.keys[scaleAnimation.length - 1];
+        lastKeyframes[0] = rotationAnimation[rotationAnimation.length - 1];
+        lastKeyframes[1] = scaleAnimation[scaleAnimation.length - 1];
 
         totalTime = slideAnimation.MaxTime;
         foreach (Keyframe keyframe in lastKeyframes) {
@@ -79,35 +82,40 @@ public class AnimatedReveal : MonoBehaviour {
     }
 
     private void StartAnimations() {
-        StartCoroutine(SlideScreen());
-        StartCoroutine(ScaleAndRotate());
+        StartCoroutine(SlideScaleRotate());
     }
 	
-    private IEnumerator SlideScreen() {
+    private IEnumerator SlideScaleRotate() {
         if (randomDelay) {
             yield return new WaitForSeconds(Random.Range(0f, maxRandomDelay));
         }
 
-        float startAnimationPosX = targetedPosition.x + startPositionOffset.x;
-        float startAnimationPosY = targetedPosition.y + startPositionOffset.y;
+        Quaternion startAnimationRotation = Quaternion.Euler(new Vector3(0f, 0f, relativeStartRotation));
+        Vector3 startAnimationScale = new Vector3(relativeStartScale, relativeStartScale, 1f);
+        float startAnimationPosX = targetedPosition.x + relativeStartPosition.x;
+        float startAnimationPosY = targetedPosition.y + relativeStartPosition.y;
 
         for (float time = 0f; time < totalTime; time += Time.deltaTime) {
-            transform.position = new Vector2(Mathf.Lerp(startAnimationPosX, targetedPosition.x, slideAnimation.xSlide.Evaluate(time)),
-                Mathf.Lerp(startAnimationPosY, targetedPosition.y, slideAnimation.ySlide.Evaluate(time)));
+            float evaluatedPosX = slideAnimation.xSlide.Evaluate(time);
+            float evaluatedPosY = slideAnimation.ySlide.Evaluate(time);
+            float evaluatedRotation = rotationAnimation.Evaluate(time);
+            float evaluatedScale = scaleAnimation.Evaluate(time);
+
+            if (evaluatedPosX > 0) {
+                transform.position = new Vector2(Mathf.LerpUnclamped(startAnimationPosX, targetedPosition.x, evaluatedPosX),
+            Mathf.LerpUnclamped(startAnimationPosY, targetedPosition.y, evaluatedPosY));
+            }
+            if (evaluatedRotation > 0) {
+                transform.rotation = Quaternion.LerpUnclamped(startAnimationRotation, targetedRotation, evaluatedRotation);
+            }
+            if (evaluatedScale > 0) {
+                transform.localScale = Vector3.LerpUnclamped(startAnimationScale, targetedScale, evaluatedScale);
+            }
             yield return null;
         }
-    }
-
-    private IEnumerator ScaleAndRotate() {
-        Quaternion startAnimationRotation = Quaternion.Euler(new Vector3(0f, 0f, startRotationOffset));
-        Vector3 startAnimationScale = new Vector3(0f, 0f, startScaleOffset);
-
-        for (float time = 0f; time < totalTime; time += Time.deltaTime) {
-            transform.rotation = Quaternion.Lerp(startAnimationRotation, targetedRotation, rotationAnimation.Evaluate(time));
-
-            transform.localScale = Vector3.Lerp(startAnimationScale, targetedScale, scaleAnimation.Evaluate(time));
-            yield return null;
-        }
+        transform.position = targetedPosition;
+        transform.rotation = targetedRotation;
+        transform.localScale = targetedScale;
 
         foreach (var behaviour in disabledDuringAnimation) {
             behaviour.enabled = true;

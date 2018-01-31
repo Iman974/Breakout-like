@@ -10,4 +10,6 @@ public class PowerUp : ScriptableObject {
     public AnimationCurve horizontalMovement = AnimationCurve.Constant(0f, 1f, 0f);
     public float colliderRadius = 0.3f;
     public float lifetime = 10f;
+    public Vector2 targetedRelativePosition;
+    public float movementSpeed = 0.001f;
 }

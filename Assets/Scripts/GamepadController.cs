@@ -14,8 +14,6 @@ public class GamepadController : MonoBehaviour {
     private GameManager GMinstance;
     //private bool startSmoothing = false;
 
-    public bool LockBallAxisY { get; set; }
-
     private void Awake() {
         gamepadRenderer = GetComponent<SpriteRenderer>();
         upperYBound = gamepadRenderer.bounds.max.y;
@@ -41,10 +39,6 @@ public class GamepadController : MonoBehaviour {
 
     private void FixedUpdate() { // Makes the gamepad follow the mouse
         UpdateGamepadPosition();
-
-        if (LockBallAxisY) {
-            Ball.MainBall.AlignXToGamepad();
-        }
     }
 
     public void UpdateGamepadPosition() {

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    private enum State {
+    public enum State {
         PLAYING,
         GAMEOVER,
         WIN
@@ -13,16 +13,13 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text winText, loseText;
     [SerializeField] private TextAnimation centerTextAnimation;
     [SerializeField] private TextAnimation scoreTextAnimation;
+    [SerializeField] private GameObject mainBallObject;
     [SerializeField] private Text livesText;
     [SerializeField] private float comboTime = 0.75f;
     [SerializeField] private int startedEarlyPenalty = -15;
     [SerializeField] private Color scoreUpColor = Color.green;
     [SerializeField] private Color scoreDownColor = Color.red;
     [SerializeField] private int lives = 1;
-    [SerializeField] private PowerUp[] powerUps;
-    [SerializeField] private float minPowerUpDelay = 3f, maxPowerUpDelay = 8f;
-    [SerializeField] private GameObject powerUpObject;
-    [SerializeField] private GameObject mainBallObject;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
 
     private GamepadController gamepad;
@@ -31,18 +28,17 @@ public class GameManager : MonoBehaviour {
     private int score;
     private int currentCombo = 1;
     private float initialComboTime;
-    private State state;
-    private float powerUpTimer;
 
     public static GameManager Instance { get; private set; }
     public float MousePositionX { get; private set; }
+    public State GameState { get; private set; }
 
     public int Lives {
         get {
             return lives;
         }
         set {
-            if (state != State.WIN) {
+            if (GameState != State.WIN) {
                 lives = value;
                 UpdateLivesOnUI();
 
@@ -87,16 +83,15 @@ public class GameManager : MonoBehaviour {
             StartCoroutine(centerTextAnimation.StartAnimation(Animation.SIZE, 1f, "3", "2", "1", "Go !"));
         }
 
-        Ball.MainBall.Rb2D.isKinematic = true;
-        gamepad.LockBallAxisY = true;
+        Ball.MainBall.transform.parent = gamepad.transform;
+
         while (!Input.GetButtonUp("Fire1")) {
             yield return null;
         }
-        if (centerTextAnimation.CurrentAnimatingString != null && centerTextAnimation.CurrentAnimatingString != "Go !") {
+        if (countDown && centerTextAnimation.CurrentAnimatingString != null && centerTextAnimation.CurrentAnimatingString != "Go !") {
             AddToScore(startedEarlyPenalty);
         }
-        gamepad.LockBallAxisY = false;
-        Ball.MainBall.Rb2D.isKinematic = false;
+        Ball.MainBall.transform.parent = null;
         Ball.MainBall.Launch();
     }
 
@@ -135,23 +130,16 @@ public class GameManager : MonoBehaviour {
             currentCombo = 1;
             comboTime = initialComboTime;
         }
-
-        /*powerUpTimer += Time.deltaTime;
-        if (powerUpTimer >= minPowerUpDelay && true) {
-            powerUpTimer = -50f;
-            PowerUpInGame instantiatedPowerUp = Instantiate(powerUpObject, Vector2.zero, Quaternion.identity).GetComponent<PowerUpInGame>();
-            instantiatedPowerUp.powerUp = powerUps[Random.Range(0, powerUps.Length)];
-        }*/
     }
 
     private void GameOver() {
         loseText.gameObject.SetActive(true);
-        state = State.GAMEOVER;
+        GameState = State.GAMEOVER;
     }
 
     private void Win() {
         winText.gameObject.SetActive(true);
-        state = State.WIN;
+        GameState = State.WIN;
     }
 
     private void UpdateLivesOnUI() {
@@ -166,6 +154,7 @@ public class GameManager : MonoBehaviour {
         Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
             Quaternion.identity).GetComponent<Ball>();
         newMainBall.GetComponent<AnimatedReveal>().enabled = false;
+
         StartCoroutine(centerTextAnimation.StartAnimation(Animation.ALPHA, textToDisplay: "One more time !"));
         StartCoroutine(StartGame(false));
     }

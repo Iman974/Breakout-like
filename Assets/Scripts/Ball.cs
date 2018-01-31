@@ -28,6 +28,7 @@ public class Ball : MonoBehaviour {
     }
 
     public void Launch() { // should the ball be launched in a random direction or may the player be able to choose ?
+        Rb2D.isKinematic = false;
         Rb2D.velocity = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
             Random.Range(minYStartDirection, maxYStartDirection)).normalized * speed;
         StartCoroutine(SpeedUpOverTime());
@@ -37,10 +38,6 @@ public class Ball : MonoBehaviour {
         /*if (Mathf.Approximately(rb2D.velocity.x, oldXVelocity)) {
 
         }*/
-    }
-
-    public void AlignXToGamepad() {
-        transform.position = new Vector2(GMinstance.MousePositionX, transform.position.y);
     }
 
     public void SetDirection(Vector2 direction) {
@@ -58,6 +55,6 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        MainBall = null;
+        //MainBall = null;
     }
 }
