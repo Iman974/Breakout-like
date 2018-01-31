@@ -466,6 +466,9 @@ MonoBehaviour:
   disabledDuringAnimation: []
   maxRandomDelay: 0.25
   randomDelay: 1
+  startPositionOffset: {x: 0, y: 0}
+  startRotationOffset: 0
+  startScaleOffset: 0
 --- !u!1001 &165095175
 Prefab:
   m_ObjectHideFlags: 0
@@ -673,13 +676,13 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -691,21 +694,15 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 10
-        inSlope: -7.9686427
-        outSlope: -7.9686427
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: -1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.75
-        value: 0
-        inSlope: 1
-        outSlope: 1
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -715,13 +712,13 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 45
-      inSlope: -127.8069
-      outSlope: -127.8069
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.6
-      value: 0
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -733,13 +730,13 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: -1
-      inSlope: 6.3479905
-      outSlope: 6.3479905
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.5
-      value: 0
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -747,9 +744,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   disabledDuringAnimation:
+  - {fileID: 186703703}
   - {fileID: 186703706}
-  maxRandomDelay: 0.25
-  randomDelay: 0
+  maxRandomDelay: 0.2
+  randomDelay: 1
+  startPositionOffset: {x: 0, y: -3}
+  startRotationOffset: 0
+  startScaleOffset: 0
 --- !u!1 &192318670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2624,7 @@ MonoBehaviour:
     type: 2}
   mainBallObject: {fileID: 1856787026408946, guid: d458690baec646c48bf9250d94dd96a9,
     type: 2}
-  startBallDistanceYFromGamePad: 0
+  startBallDistanceYFromGamePad: 1
 --- !u!4 &2075976898
 Transform:
   m_ObjectHideFlags: 0

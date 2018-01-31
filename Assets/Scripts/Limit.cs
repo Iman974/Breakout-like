@@ -5,11 +5,6 @@ public class Limit : MonoBehaviour {
     [SerializeField] private float triggerPushTime = 5f;
 
     private float closeTimer = 0f;
-    private Ball mainBall;
-
-    private void Start() {
-        mainBall = Ball.MainBall;
-    }
 
     private void FixedUpdate() {
         /*closeTimer += 0.02f;
@@ -21,6 +16,8 @@ public class Limit : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         GameManager.Instance.Lives--;
         Destroy(other.gameObject, 3f);
-        GameManager.Instance.RestartGame();
+        if (GameManager.Instance.Lives > 0) {
+            GameManager.Instance.RestartGame();
+        }
     }
 }

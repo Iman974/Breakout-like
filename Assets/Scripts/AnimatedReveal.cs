@@ -22,9 +22,12 @@ public class AnimatedReveal : MonoBehaviour {
     [SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(0f, 1f, 0f);
     [SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(0f, 1f, 0f);
     //[SerializeField] private float offScreenDistance;
-    [SerializeField] private MonoBehaviour[] disabledDuringAnimation;
+    [SerializeField] private Behaviour[] disabledDuringAnimation;
     [SerializeField] private float maxRandomDelay = 0.25f;
     [SerializeField] private bool randomDelay = true;
+    [SerializeField] private Vector2 startPositionOffset;
+    [SerializeField] private float startRotationOffset;
+    [SerializeField] private float startScaleOffset;
 
     private Vector2 targetedPosition;
     private Quaternion targetedRotation;
@@ -38,12 +41,20 @@ public class AnimatedReveal : MonoBehaviour {
     public static bool IsAnimationRunning { get; private set; }
 
     private void Awake() {
+        // All the anim init was there
+    }
+
+    private void Start() {
+        //transform.position = (Vector2)transform.position + new Vector2(transform.position.x, offScreenDistance);
         IsAnimationRunning = true;
         animatedObjects++;
+
         rb2D = GetComponent<Rigidbody2D>();
+
         targetedPosition = transform.position;
         targetedRotation = transform.rotation;
         targetedScale = transform.localScale;
+
 
         Keyframe[] lastKeyframes = new Keyframe[curvesAmount - 1];
         lastKeyframes[0] = rotationAnimation.keys[rotationAnimation.length - 1];
@@ -63,10 +74,7 @@ public class AnimatedReveal : MonoBehaviour {
         foreach (var behaviour in disabledDuringAnimation) {
             behaviour.enabled = false;
         }
-    }
 
-    private void Start() {
-        //transform.position = (Vector2)transform.position + new Vector2(transform.position.x, offScreenDistance);
         Invoke("StartAnimations", 0.5f); // Only for debug purposes
     }
 
@@ -79,22 +87,27 @@ public class AnimatedReveal : MonoBehaviour {
         if (randomDelay) {
             yield return new WaitForSeconds(Random.Range(0f, maxRandomDelay));
         }
+
+        float startAnimationPosX = targetedPosition.x + startPositionOffset.x;
+        float startAnimationPosY = targetedPosition.y + startPositionOffset.y;
+
         for (float time = 0f; time < totalTime; time += Time.deltaTime) {
-            transform.position = targetedPosition + new Vector2(slideAnimation.xSlide.Evaluate(time), slideAnimation.ySlide.Evaluate(time));
+            transform.position = new Vector2(Mathf.Lerp(startAnimationPosX, targetedPosition.x, slideAnimation.xSlide.Evaluate(time)),
+                Mathf.Lerp(startAnimationPosY, targetedPosition.y, slideAnimation.ySlide.Evaluate(time)));
             yield return null;
         }
-        transform.position = targetedPosition;
     }
 
     private IEnumerator ScaleAndRotate() {
-        for (float time = 0f; time < totalTime; time += Time.deltaTime) {
-            transform.rotation =  targetedRotation * Quaternion.Euler(new Vector3(0f, 0f, rotationAnimation.Evaluate(time)));
+        Quaternion startAnimationRotation = Quaternion.Euler(new Vector3(0f, 0f, startRotationOffset));
+        Vector3 startAnimationScale = new Vector3(0f, 0f, startScaleOffset);
 
-            float evaluatedScale = scaleAnimation.Evaluate(time);
-            transform.localScale = targetedScale + new Vector3(evaluatedScale, evaluatedScale, 0f);
+        for (float time = 0f; time < totalTime; time += Time.deltaTime) {
+            transform.rotation = Quaternion.Lerp(startAnimationRotation, targetedRotation, rotationAnimation.Evaluate(time));
+
+            transform.localScale = Vector3.Lerp(startAnimationScale, targetedScale, scaleAnimation.Evaluate(time));
             yield return null;
         }
-        transform.rotation = targetedRotation;
 
         foreach (var behaviour in disabledDuringAnimation) {
             behaviour.enabled = true;

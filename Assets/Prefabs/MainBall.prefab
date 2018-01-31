@@ -114,39 +114,33 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    ySlide:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ySlide:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 10
-        inSlope: -7.9686427
-        outSlope: -7.9686427
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: -1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.75
-        value: 0
-        inSlope: 1
-        outSlope: 1
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -156,31 +150,31 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   scaleAnimation:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: -1
-      inSlope: 6.3479905
-      outSlope: 6.3479905
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.5
-      value: 0
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -188,9 +182,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   disabledDuringAnimation:
-  - {fileID: 0}
+  - {fileID: 58680238338222432}
   maxRandomDelay: 0.25
   randomDelay: 0
+  startPositionOffset: {x: 0, y: -3}
+  startRotationOffset: 0
+  startScaleOffset: 0
 --- !u!114 &114065184502798066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,8 +203,7 @@ MonoBehaviour:
   maxXStartDirection: 1
   minYStartDirection: 0.5
   maxYStartDirection: 1
-  showStartAngle: 0
-  mainBall: 1
+  isMainBall: 1
   speedUpDelay: 3
   speedUpMultiplier: 1.05
   maxSpeed: 10

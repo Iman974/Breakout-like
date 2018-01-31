@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour {
 
     private GamepadController gamepad;
     private Camera mainCamera;
-    private Ball mainBall;
     private int numberOfBricks;
     private int score;
     private int currentCombo = 1;
@@ -69,7 +68,6 @@ public class GameManager : MonoBehaviour {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         numberOfBricks = GameObject.FindWithTag("Bricks").transform.childCount;
         gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
-        mainBall = Ball.MainBall;
         Lives = lives;
         AddToScore(0);
 
@@ -89,17 +87,17 @@ public class GameManager : MonoBehaviour {
             StartCoroutine(centerTextAnimation.StartAnimation(Animation.SIZE, 1f, "3", "2", "1", "Go !"));
         }
 
-        mainBall.Rb2D.isKinematic = true;
+        Ball.MainBall.Rb2D.isKinematic = true;
+        gamepad.LockBallAxisY = true;
         while (!Input.GetButtonUp("Fire1")) {
-            gamepad.LockBallAxisY = true;
             yield return null;
         }
         if (centerTextAnimation.CurrentAnimatingString != null && centerTextAnimation.CurrentAnimatingString != "Go !") {
             AddToScore(startedEarlyPenalty);
         }
         gamepad.LockBallAxisY = false;
-        mainBall.Rb2D.isKinematic = false;
-        mainBall.Launch();
+        Ball.MainBall.Rb2D.isKinematic = false;
+        Ball.MainBall.Launch();
     }
 
     public void RemoveBrick(int scoreValue) {
@@ -167,6 +165,7 @@ public class GameManager : MonoBehaviour {
     public void RestartGame() {
         Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
             Quaternion.identity).GetComponent<Ball>();
+        newMainBall.GetComponent<AnimatedReveal>().enabled = false;
         StartCoroutine(centerTextAnimation.StartAnimation(Animation.ALPHA, textToDisplay: "One more time !"));
         StartCoroutine(StartGame(false));
     }

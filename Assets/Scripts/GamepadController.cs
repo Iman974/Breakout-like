@@ -11,7 +11,6 @@ public class GamepadController : MonoBehaviour {
     private Camera mainCamera;
     private SpriteRenderer gamepadRenderer;
     private float upperYBound;
-    private Ball mainBall;
     private GameManager GMinstance;
     //private bool startSmoothing = false;
 
@@ -25,7 +24,6 @@ public class GamepadController : MonoBehaviour {
     private void Start () {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         GMinstance = GameManager.Instance;
-        mainBall = Ball.MainBall;
     }
 
     private IEnumerator SmoothStart() { // For mobile input
@@ -45,7 +43,7 @@ public class GamepadController : MonoBehaviour {
         UpdateGamepadPosition();
 
         if (LockBallAxisY) {
-            mainBall.AlignXToGamepad();
+            Ball.MainBall.AlignXToGamepad();
         }
     }
 

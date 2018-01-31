@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983257029887418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,21 +101,15 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 10
-        inSlope: -7.9686427
-        outSlope: -7.9686427
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: -1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.75
-        value: 0
-        inSlope: 1
-        outSlope: 1
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -125,21 +119,15 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 10
-        inSlope: -7.9686427
-        outSlope: -7.9686427
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: -1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.75
-        value: 0
-        inSlope: 1
-        outSlope: 1
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -149,15 +137,15 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 50
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.7
-      value: 0
-      inSlope: 209.3196
-      outSlope: 209.3196
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -167,13 +155,13 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: -1
-      inSlope: 3.439511
-      outSlope: 3.439511
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.5
-      value: 0
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -181,8 +169,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   disabledDuringAnimation: []
-  maxRandomDelay: 0.25
+  maxRandomDelay: 0.3
   randomDelay: 1
+  startPositionOffset: {x: 5, y: 5}
+  startRotationOffset: 0
+  startScaleOffset: 0
 --- !u!212 &212002720753466018
 SpriteRenderer:
   m_ObjectHideFlags: 1
