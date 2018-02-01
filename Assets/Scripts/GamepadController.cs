@@ -49,7 +49,8 @@ public class GamepadController : MonoBehaviour {
         Vector2 contactPoint = new Vector2(other.transform.position.x, upperYBound);
 
         //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.cyan, 2f);
-        other.GetComponent<Ball>().SetDirection(new Vector2((contactPoint - (Vector2)gamepadRenderer.bounds.min).x - 1.5f, 1f));
+        other.GetComponent<Ball>().Direction = new Vector2((contactPoint - (Vector2)gamepadRenderer.bounds.min).x - 1.5f, 1f);
+        // It is better to use already existing things than to create and throw away var over & over
         //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.red, 2f);
 
         //Destroy(Instantiate(smokeEffect, ballContacts[0].point + smokeEffectOffset, Quaternion.identity), 0.5f);

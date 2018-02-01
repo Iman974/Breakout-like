@@ -8,6 +8,10 @@ public class PowerUpSpawner : MonoBehaviour {
     [SerializeField] private float powerUpSpawnTimeRange = 3f;
     [SerializeField] private Vector2 minSpawnArea, maxSpawnArea;
 
+    private void Start() {
+        InvokeRepeating("SpawnPowerUp", powerUpSpawnTimeRange, powerUpSpawnTimeRange);
+    }
+
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(minSpawnArea, new Vector2(maxSpawnArea.x, minSpawnArea.y));
@@ -16,7 +20,10 @@ public class PowerUpSpawner : MonoBehaviour {
         Gizmos.DrawLine(new Vector2(minSpawnArea.x, maxSpawnArea.y), minSpawnArea);
     }
 
-    private void FixedUpdate() {
-        
+    private void SpawnPowerUp() {
+        PowerUpInGame newPowerUp = Instantiate(powerUpObject, new Vector2(Random.Range(minSpawnArea.x, maxSpawnArea.x),
+            Random.Range(minSpawnArea.y, maxSpawnArea.y)), Quaternion.identity).GetComponent<PowerUpInGame>();
+
+        newPowerUp.powerUp = powerUps[Random.Range(0, powerUps.Length)];
     }
 }

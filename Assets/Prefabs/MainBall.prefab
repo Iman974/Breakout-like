@@ -58,7 +58,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: a78f3bd2dd399194b8144df26b5b4130, type: 2}
   m_Interpolate: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   - {fileID: 58680238338222432}
   maxRandomDelay: 0.25
   randomDelay: 0
-  relativeStartPosition: {x: 0, y: 0}
+  relativeStartPosition: {x: 0, y: -4}
   relativeStartRotation: 0
   relativeStartScale: 0
 --- !u!114 &114065184502798066

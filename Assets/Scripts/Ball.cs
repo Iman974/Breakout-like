@@ -11,16 +11,37 @@ public class Ball : MonoBehaviour {
 
     //private float oldXVelocity;
     private GameManager GMinstance;
+    private float speed = 6f;
 
-    public float speed = 6f;
     public static Ball MainBall { get; private set; }
     public Rigidbody2D Rb2D { get; private set; }
+    public bool DoSpeedUpOverTime { get; set; }
+
+    public Vector2 Direction {
+        get {
+            return Rb2D.velocity;
+        }
+        set {
+            Rb2D.velocity = value.normalized * speed;
+        }
+    }
+
+    public float Speed {
+        get {
+            return speed;
+        }
+        set {
+            Rb2D.velocity = Rb2D.velocity.normalized * value;
+            speed = value;
+        }
+    }
 
     private void Awake() {
         if (isMainBall) {
             MainBall = this;
         }
         Rb2D = GetComponent<Rigidbody2D>();
+        DoSpeedUpOverTime = true;
     }
 
     private void Start() {
@@ -29,7 +50,7 @@ public class Ball : MonoBehaviour {
 
     public void Launch() { // should the ball be launched in a random direction or may the player be able to choose ?
         Rb2D.isKinematic = false;
-        Rb2D.velocity = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
+        Direction = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
             Random.Range(minYStartDirection, maxYStartDirection)).normalized * speed;
         StartCoroutine(SpeedUpOverTime());
     }
@@ -40,18 +61,16 @@ public class Ball : MonoBehaviour {
         }*/
     }
 
-    public void SetDirection(Vector2 direction) {
-        Rb2D.velocity = direction.normalized * speed;
-    }
-
     private IEnumerator SpeedUpOverTime() {
+        if (!DoSpeedUpOverTime) {
+            yield return null;
+        }
+
         while (speed < maxSpeed) {
             yield return new WaitForSeconds(speedUpDelay);
-            Rb2D.velocity *= speedUpMultiplier;
-            speed *= speedUpMultiplier;
+            Speed *= speedUpMultiplier;
         }
         speed = maxSpeed;
-        Rb2D.velocity = Rb2D.velocity.normalized * speed;
     }
 
     private void OnDestroy() {

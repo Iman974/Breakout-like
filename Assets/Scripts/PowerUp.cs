@@ -12,4 +12,13 @@ public class PowerUp : ScriptableObject {
     public float lifetime = 10f;
     public Vector2 targetedRelativePosition;
     public float movementSpeed = 0.001f;
+    public float powerUpDuration = 2f;
+
+    [SerializeField] private string powerName;
+
+    public void TriggerPower() {
+        if (powerName != string.Empty) {
+            Powers.Instance.StartCoroutine(powerName, powerUpDuration);
+        }
+    }
 }

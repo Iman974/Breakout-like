@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour {
         }
 
         Ball.MainBall.transform.parent = gamepad.transform;
+        Ball.MainBall.transform.localPosition = new Vector3(0f, Ball.MainBall.transform.localPosition.y);
 
         while (!Input.GetButtonUp("Fire1")) {
             yield return null;

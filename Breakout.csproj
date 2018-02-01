@@ -288,6 +288,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GamepadController.cs" />
     <Compile Include="Assets\Scripts\Limit.cs" />
+    <Compile Include="Assets\Scripts\Powers.cs" />
     <Compile Include="Assets\Scripts\PowerUp.cs" />
     <Compile Include="Assets\Scripts\PowerUpInGame.cs" />
     <Compile Include="Assets\Scripts\PowerUpSpawner.cs" />

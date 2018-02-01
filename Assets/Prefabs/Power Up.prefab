@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 58229800548576602}
   - component: {fileID: 212190266177348622}
   - component: {fileID: 114949130164499240}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Power Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ca8ee87f5b962469729192bd5e4fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.001
   powerUp: {fileID: 0}
 --- !u!212 &212190266177348622
 SpriteRenderer:

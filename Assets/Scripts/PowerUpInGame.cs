@@ -23,13 +23,16 @@ public class PowerUpInGame : MonoBehaviour {
         movementSpeed = powerUp.movementSpeed;
     }
 
-    private void Update() {
-        //timeSinceInstantiation += Time.deltaTime;
-    }
-
     private void FixedUpdate() {
         timeToEval += movementSpeed;
         transform.position = new Vector2(Mathf.Lerp(startPosition.x, relativeTargetedPosition.x, powerUpXMovement.Evaluate(timeToEval)),
             Mathf.Lerp(startPosition.y, relativeTargetedPosition.y, powerUpYMovement.Evaluate(timeToEval)));
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        powerUp.TriggerPower();
+        // Play pick up anim
+        Destroy(gameObject);
     }
 }
