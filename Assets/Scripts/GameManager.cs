@@ -39,11 +39,13 @@ public class GameManager : MonoBehaviour {
         }
         set {
             gameState = value;
-            if (value == State.WIN) {
-                winText.gameObject.SetActive(true);
+            if (value != State.PLAYING) {
                 PowerUpSpawner.Instance.CancelInvoke();
-            } else if (value == State.GAMEOVER) {
-                loseText.gameObject.SetActive(true);
+                if (value == State.WIN) {
+                    winText.gameObject.SetActive(true);
+                } else {
+                    loseText.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour {
         }
         #endregion
         initialComboTime = comboTime;
+        GameState = State.PLAYING;
     }
 
     private void Start() {

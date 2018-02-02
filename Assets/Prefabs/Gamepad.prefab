@@ -106,6 +106,8 @@ MonoBehaviour:
     type: 2}
   smokeEffectOffset: {x: 0, y: 0.25}
   firstPosLerpTime: 0.75
+  checkIfMovingRate: 0.04
+  minImpactRequiredAcceleration: 20
 --- !u!114 &114616089274622600
 MonoBehaviour:
   m_ObjectHideFlags: 1

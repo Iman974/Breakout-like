@@ -20,7 +20,7 @@ public class Limit : MonoBehaviour {
 
         GameManager.Instance.Lives--;
         Destroy(other.gameObject, 2f);
-        if (GameManager.Instance.GameState != GameManager.State.WIN) {
+        if (GameManager.Instance.GameState == GameManager.State.PLAYING) {
             GameManager.Instance.Invoke("RestartGame", 2f);
         }
     }
