@@ -31,7 +31,22 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance { get; private set; }
     public float MousePositionX { get; private set; }
-    public State GameState { get; private set; }
+
+    private State gameState;
+    public State GameState {
+        get {
+            return gameState;
+        }
+        set {
+            gameState = value;
+            if (value == State.WIN) {
+                winText.gameObject.SetActive(true);
+                PowerUpSpawner.Instance.CancelInvoke();
+            } else if (value == State.GAMEOVER) {
+                loseText.gameObject.SetActive(true);
+            }
+        }
+    }
 
     public int Lives {
         get {
@@ -43,7 +58,7 @@ public class GameManager : MonoBehaviour {
                 UpdateLivesOnUI();
 
                 if (lives <= 0) {
-                    GameOver();
+                    GameState = State.GAMEOVER;
                 }
             }
         }
@@ -105,7 +120,7 @@ public class GameManager : MonoBehaviour {
         }
 
         if (numberOfBricks == 0) {
-            Win();
+            GameState = State.WIN;
         }
     }
 
@@ -131,16 +146,6 @@ public class GameManager : MonoBehaviour {
             currentCombo = 1;
             comboTime = initialComboTime;
         }
-    }
-
-    private void GameOver() {
-        loseText.gameObject.SetActive(true);
-        GameState = State.GAMEOVER;
-    }
-
-    private void Win() {
-        winText.gameObject.SetActive(true);
-        GameState = State.WIN;
     }
 
     private void UpdateLivesOnUI() {

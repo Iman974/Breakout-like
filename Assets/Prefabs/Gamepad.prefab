@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f1dce1d8c079440a945ff87e9776ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minHorizontal: -6.792
-  maxHorizontal: 6.792
+  minHorizontal: -5.25
+  maxHorizontal: 5.25
   smokeEffect: {fileID: 1837579622439644, guid: 982fd6b1f50bb4340a28867e332bc0dd,
     type: 2}
   smokeEffectOffset: {x: 0, y: 0.25}

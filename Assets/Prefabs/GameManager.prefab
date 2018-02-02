@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d074c00f67dcaf4284d5db1add303e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedUpMultiplier: 1.5
+  speedUpMultiplier: 1.25
 --- !u!114 &114282958409452230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,6 +94,6 @@ MonoBehaviour:
   powerUpObject: {fileID: 1123985711743280, guid: da38537bed3a13241a466265f229a645,
     type: 2}
   powerUpSpawnRate: 1
-  powerUpSpawnTimeRange: 10
+  powerUpSpawnTimeRange: 15
   minSpawnArea: {x: -5, y: 1}
   maxSpawnArea: {x: 5, y: -1}

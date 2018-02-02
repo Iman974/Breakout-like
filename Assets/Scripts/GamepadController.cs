@@ -3,20 +3,23 @@ using System.Collections;
 
 public class GamepadController : MonoBehaviour {
 
-    [SerializeField] private float minHorizontal, maxHorizontal;
+    [SerializeField] private float minHorizontal = -5.25f, maxHorizontal = 5.25f;
     [SerializeField] private GameObject smokeEffect;
     [SerializeField] private Vector2 smokeEffectOffset;
-    [SerializeField] private float firstPosLerpTime = 0.5f;
+    [SerializeField] private float firstPosLerpTime = 0.5f; // Mobile input
 
     private Camera mainCamera;
     private SpriteRenderer gamepadRenderer;
     private float upperYBound;
     private GameManager GMinstance;
+    private float xAcceleration;
+    private Rigidbody2D rb2D;
     //private bool startSmoothing = false;
 
     private void Awake() {
         gamepadRenderer = GetComponent<SpriteRenderer>();
         upperYBound = gamepadRenderer.bounds.max.y;
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     private void Start () {
@@ -42,7 +45,14 @@ public class GamepadController : MonoBehaviour {
     }
 
     public void UpdateGamepadPosition() {
-        transform.position = new Vector2(GMinstance.MousePositionX, transform.position.y);
+        Vector2 nextPosition = new Vector2(GMinstance.MousePositionX, transform.position.y);
+
+        if (Input.GetButton("Fire1")) {
+            nextPosition = new Vector2(Mathf.Clamp(nextPosition.x, minHorizontal, maxHorizontal), nextPosition.y);
+            if (Mathf.Approximately(nextPosition.x, minHorizontal) || Mathf.Approximately(nextPosition.x, maxHorizontal)) {
+            }
+        }
+        transform.position = nextPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

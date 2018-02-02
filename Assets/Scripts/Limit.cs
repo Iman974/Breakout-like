@@ -14,10 +14,14 @@ public class Limit : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (!other.CompareTag("Ball")) {
+            return;
+        }
+
         GameManager.Instance.Lives--;
-        Destroy(other.gameObject, 3f);
+        Destroy(other.gameObject, 2f);
         if (GameManager.Instance.GameState != GameManager.State.WIN) {
-            GameManager.Instance.Invoke("RestartGame", 1f);
+            GameManager.Instance.Invoke("RestartGame", 2f);
         }
     }
 }

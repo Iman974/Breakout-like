@@ -8,6 +8,20 @@ public class PowerUpSpawner : MonoBehaviour {
     [SerializeField] private float powerUpSpawnTimeRange = 3f;
     [SerializeField] private Vector2 minSpawnArea, maxSpawnArea;
 
+    private Vector2 randomSpawnLocation;
+
+    public static PowerUpSpawner Instance { get; private set; }
+
+    private void Awake() {
+        #region Singleton
+        if (Instance == null) {
+            Instance = this;
+        } else if (Instance != this) {
+            Destroy(gameObject);
+        }
+        #endregion
+    }
+
     private void Start() {
         InvokeRepeating("SpawnPowerUp", powerUpSpawnTimeRange, powerUpSpawnTimeRange);
     }
@@ -21,8 +35,9 @@ public class PowerUpSpawner : MonoBehaviour {
     }
 
     private void SpawnPowerUp() {
-        PowerUpInGame newPowerUp = Instantiate(powerUpObject, new Vector2(Random.Range(minSpawnArea.x, maxSpawnArea.x),
-            Random.Range(minSpawnArea.y, maxSpawnArea.y)), Quaternion.identity).GetComponent<PowerUpInGame>();
+        randomSpawnLocation = new Vector2(Random.Range(minSpawnArea.x, maxSpawnArea.x), Random.Range(minSpawnArea.y, maxSpawnArea.y));
+
+        PowerUpInGame newPowerUp = Instantiate(powerUpObject, randomSpawnLocation, Quaternion.identity).GetComponent<PowerUpInGame>();
 
         newPowerUp.powerUp = powerUps[Random.Range(0, powerUps.Length)];
     }

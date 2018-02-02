@@ -29,8 +29,11 @@ public class PowerUpInGame : MonoBehaviour {
             Mathf.Lerp(startPosition.y, relativeTargetedPosition.y, powerUpYMovement.Evaluate(timeToEval)));
     }
 
-
     private void OnTriggerEnter2D(Collider2D other) {
+        if (!other.CompareTag("Ball")) {
+            Destroy(gameObject, 1f);
+            return;
+        }
         powerUp.TriggerPower();
         // Play pick up anim
         Destroy(gameObject);

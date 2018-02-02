@@ -7,7 +7,7 @@ public class Powers : MonoBehaviour {
 
     public static Powers Instance;
 
-    private float invertedSpeedMultiplier;
+    private float speedBeforePowerUp;
 
     private void Awake() {
         #region Singleton
@@ -17,16 +17,16 @@ public class Powers : MonoBehaviour {
             Destroy(gameObject);
         }
         #endregion
-        invertedSpeedMultiplier = 1f / speedUpMultiplier;
     }
 
     private IEnumerator SpeedUp(float powerUpDuration) {
         Ball.MainBall.DoSpeedUpOverTime = false;
+        speedBeforePowerUp = Ball.MainBall.Speed;
         Ball.MainBall.Speed *= speedUpMultiplier;
 
         yield return new WaitForSeconds(powerUpDuration);
 
-        Ball.MainBall.Speed *= invertedSpeedMultiplier;
+        Ball.MainBall.Speed = speedBeforePowerUp;
         Ball.MainBall.DoSpeedUpOverTime = true;
     }
 }

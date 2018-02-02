@@ -8,10 +8,11 @@ public class Ball : MonoBehaviour {
     [SerializeField] private float speedUpDelay = 4f;
     [SerializeField] private float speedUpMultiplier = 1.075f;
     [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float speed = 6f;
 
     //private float oldXVelocity;
     private GameManager GMinstance;
-    private float speed = 6f;
+    private bool d;
 
     public static Ball MainBall { get; private set; }
     public Rigidbody2D Rb2D { get; private set; }
@@ -51,7 +52,7 @@ public class Ball : MonoBehaviour {
     public void Launch() { // should the ball be launched in a random direction or may the player be able to choose ?
         Rb2D.isKinematic = false;
         Direction = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
-            Random.Range(minYStartDirection, maxYStartDirection)).normalized * speed;
+            Random.Range(minYStartDirection, maxYStartDirection));
         StartCoroutine(SpeedUpOverTime());
     }
 
@@ -62,18 +63,14 @@ public class Ball : MonoBehaviour {
     }
 
     private IEnumerator SpeedUpOverTime() {
-        if (!DoSpeedUpOverTime) {
-            yield return null;
-        }
+        while (speed < maxSpeed || !DoSpeedUpOverTime) {
+            if (!DoSpeedUpOverTime) {
+                yield return null;
+            }
 
-        while (speed < maxSpeed) {
             yield return new WaitForSeconds(speedUpDelay);
             Speed *= speedUpMultiplier;
         }
         speed = maxSpeed;
-    }
-
-    private void OnDestroy() {
-        //MainBall = null;
     }
 }

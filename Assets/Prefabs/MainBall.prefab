@@ -204,10 +204,10 @@ MonoBehaviour:
   minYStartDirection: 0.5
   maxYStartDirection: 1
   isMainBall: 1
-  speedUpDelay: 3
+  speedUpDelay: 4
   speedUpMultiplier: 1.05
   maxSpeed: 10
-  speed: 4
+  speed: 6
 --- !u!212 &212849276861724562
 SpriteRenderer:
   m_ObjectHideFlags: 1
