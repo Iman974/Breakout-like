@@ -12,10 +12,12 @@ public class Ball : MonoBehaviour {
 
     //private float oldXVelocity;
     private GameManager GMinstance;
+    private CircleCollider2D thisCollider;
 
     public static Ball MainBall { get; private set; }
     public Rigidbody2D Rb2D { get; private set; }
     public bool DoSpeedUpOverTime { get; set; }
+    public float Radius { get; private set; }
 
     public Vector2 Direction {
         get {
@@ -32,7 +34,9 @@ public class Ball : MonoBehaviour {
         }
         set {
             Rb2D.velocity = Rb2D.velocity.normalized * value;
-            speed = value;
+            if (value != speed) {
+                speed = value;
+            }
         }
     }
 
@@ -41,7 +45,9 @@ public class Ball : MonoBehaviour {
             MainBall = this;
         }
         Rb2D = GetComponent<Rigidbody2D>();
+        thisCollider = GetComponent<CircleCollider2D>();
         DoSpeedUpOverTime = true;
+        Radius = thisCollider.radius;
     }
 
     private void Start() {
@@ -55,10 +61,8 @@ public class Ball : MonoBehaviour {
         //StartCoroutine(SpeedUpOverTime());
     }
 
-    private void FixedUpdate() {
-        /*if (Mathf.Approximately(rb2D.velocity.x, oldXVelocity)) {
-
-        }*/
+    private void LateUpdate() {
+        Speed = speed;
     }
 
     private IEnumerator SpeedUpOverTime() {

@@ -37,7 +37,6 @@ public class PowerUpSpawner : MonoBehaviour {
     private void SpawnPowerUp() {
         for (int i = 0; i < powerUpSpawnRate; i++) {
             randomSpawnLocation = new Vector2(Random.Range(minSpawnArea.x, maxSpawnArea.x), Random.Range(minSpawnArea.y, maxSpawnArea.y));
-
             PowerUpInGame newPowerUp = Instantiate(powerUpObject, randomSpawnLocation, Quaternion.identity).GetComponent<PowerUpInGame>();
 
             newPowerUp.powerUp = powerUps[Random.Range(0, powerUps.Length)];

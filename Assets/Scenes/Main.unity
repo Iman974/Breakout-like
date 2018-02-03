@@ -171,6 +171,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114837739829467550, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: powerUps.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4983606727916206, guid: dfd04877fe4161c4497b7efe080f2caf, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -228,6 +233,34 @@ Prefab:
       propertyPath: livesText
       value: 
       objectReference: {fileID: 1195263107}
+    - target: {fileID: 114837739829467550, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: powerUps.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c7db548a0b958349bb306a3e675fbf9,
+        type: 2}
+    - target: {fileID: 114218396799013762, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: divisionBallCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837739829467550, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: powerUps.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ee9ef38b8568354aa1d6af43b7a4187,
+        type: 2}
+    - target: {fileID: 114218396799013762, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: subDivisionBall
+      value: 
+      objectReference: {fileID: 1190938799236838, guid: 7acd7deda44829b45a0933fbdc5c7d04,
+        type: 2}
+    - target: {fileID: 114218396799013762, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: subBalldistanceFromMainBall
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfd04877fe4161c4497b7efe080f2caf, type: 2}
   m_IsPrefabParent: 0
@@ -966,8 +999,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -7, y: 0}
-  - {x: 7, y: 0}
+  - {x: -6.9, y: 0}
+  - {x: 6.9, y: 0}
 --- !u!114 &540049412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,7 +1244,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 917132259}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 0, z: 0}
+  m_LocalPosition: {x: -6.92, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010806747}
@@ -1322,7 +1355,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1006494117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: 0, z: 0}
+  m_LocalPosition: {x: 6.92, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010806747}
@@ -2279,8 +2312,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -7, y: 0}
-  - {x: 7, y: 0}
+  - {x: -6.9, y: 0}
+  - {x: 6.9, y: 0}
 --- !u!114 &2058491950
 MonoBehaviour:
   m_ObjectHideFlags: 0

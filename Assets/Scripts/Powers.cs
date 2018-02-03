@@ -4,6 +4,9 @@ using System.Collections;
 public class Powers : MonoBehaviour {
 
     [SerializeField] private float speedUpMultiplier;
+    [SerializeField] private int divisionBallCount = 3;
+    [SerializeField] private GameObject subDivisionBall;
+    [SerializeField] private float subBalldistanceFromMainBall = 1f;
 
     public static Powers Instance;
 
@@ -40,5 +43,16 @@ public class Powers : MonoBehaviour {
         foreach (Collider2D collider in Brick.brickColliders) {
             collider.isTrigger = false;
         }
+    }
+
+    private IEnumerator Division() {
+        for (int i = 0; i < divisionBallCount; i++) {
+            Ball newSubBall = Instantiate(subDivisionBall, (Vector2)Ball.MainBall.transform.position +
+                Ball.MainBall.Direction.normalized * subBalldistanceFromMainBall, Quaternion.identity).GetComponent<Ball>();
+            newSubBall.Speed = Ball.MainBall.Speed;
+            newSubBall.Direction = Ball.MainBall.Direction;
+            newSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, 10f * i);
+        }
+        yield return null;
     }
 }
