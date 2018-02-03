@@ -14,7 +14,6 @@ public class GamepadController : MonoBehaviour {
     private SpriteRenderer gamepadRenderer;
     private float upperYBound;
     private GameManager GMinstance;
-    private float xAcceleration;
     private float xBeginDrag;
     private Rigidbody2D rb2D;
     private float accelerationTime;
@@ -22,13 +21,19 @@ public class GamepadController : MonoBehaviour {
     private float dragDirection = 1f;
     private Vector2 nextPosition;
     private bool clampHorizontal;
+    private float xExtent = 1.5f;
     //private bool startSmoothing = false;
+
+    public float XAcceleration { get; private set; }
+
+    public float maxAcceleration = 100f;
 
     private void Awake() {
         gamepadRenderer = GetComponent<SpriteRenderer>();
         upperYBound = gamepadRenderer.bounds.max.y;
         rb2D = GetComponent<Rigidbody2D>();
         nextPosition.y = transform.position.y;
+        xExtent = gamepadRenderer.bounds.extents.x;
     }
 
     private void Start () {
@@ -60,12 +65,16 @@ public class GamepadController : MonoBehaviour {
             int i = 0;
             if (Input.GetButtonDown("Fire1")) {
                 ResetAcceleration();
-                InvokeRepeating("Timer", 0f, 0.02f);
+                InvokeRepeating("AccelerationTimer", 0f, 0.02f);
                 InvokeRepeating("CheckIfMoving", 0f, checkIfMovingRate);
             }
             if (Mathf.Approximately(nextPosition.x, minHorizontal) || Mathf.Approximately(nextPosition.x, maxHorizontal)) {
-                xAcceleration = Mathf.Abs(transform.position.x - xBeginDrag) / accelerationTime;
-                if (!impactTriggered && xAcceleration >= minImpactRequiredAcceleration) {
+                XAcceleration = Mathf.Abs(transform.position.x - xBeginDrag) / accelerationTime;
+                if (XAcceleration > maxAcceleration) {
+                    XAcceleration = maxAcceleration;
+                }
+
+                if (!impactTriggered && XAcceleration >= minImpactRequiredAcceleration) {
                     TriggerImpact();
                 }
             } else if (impactTriggered) {
@@ -108,21 +117,24 @@ public class GamepadController : MonoBehaviour {
     private void TriggerImpact() {
         impactTriggered = true;
         ResetAcceleration();
-        // Trigger the impact effect relatively to the acceleration -> xAcceleration / minImpactRequiredAcceleration
 
-        Debug.Log(xAcceleration);
+        foreach (Limit limit in Limit.Instances) { // make the impact only on the side where the gamepad hit
+            limit.Impact();
+        }
     }
 
-    private void Timer() {
+    private void AccelerationTimer() {
         accelerationTime += 0.02f;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Vector2 contactPoint = new Vector2(other.transform.position.x, upperYBound);
+        Vector3 contactPoint = new Vector2(other.transform.position.x, upperYBound);
 
         //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.cyan, 2f);
-        other.GetComponent<Ball>().Direction = new Vector2((contactPoint - (Vector2)gamepadRenderer.bounds.min).x - 1.5f, 1f);
+
+        other.GetComponent<Ball>().Direction = new Vector2((contactPoint - gamepadRenderer.bounds.min).x - xExtent, 1f);
         // It is better to use already existing things than to create and throw away var over & over
+
         //Debug.DrawRay(other.transform.position, ballRb2D.velocity.normalized, Color.red, 2f);
 
         //Destroy(Instantiate(smokeEffect, ballContacts[0].point + smokeEffectOffset, Quaternion.identity), 0.5f);

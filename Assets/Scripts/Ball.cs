@@ -12,7 +12,6 @@ public class Ball : MonoBehaviour {
 
     //private float oldXVelocity;
     private GameManager GMinstance;
-    private bool d;
 
     public static Ball MainBall { get; private set; }
     public Rigidbody2D Rb2D { get; private set; }
@@ -53,7 +52,7 @@ public class Ball : MonoBehaviour {
         Rb2D.isKinematic = false;
         Direction = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
             Random.Range(minYStartDirection, maxYStartDirection));
-        StartCoroutine(SpeedUpOverTime());
+        //StartCoroutine(SpeedUpOverTime());
     }
 
     private void FixedUpdate() {

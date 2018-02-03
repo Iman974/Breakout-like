@@ -228,11 +228,6 @@ Prefab:
       propertyPath: livesText
       value: 
       objectReference: {fileID: 1195263107}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
-        type: 2}
-      propertyPath: lives
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfd04877fe4161c4497b7efe080f2caf, type: 2}
   m_IsPrefabParent: 0
@@ -985,7 +980,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerPushTime: 5
+  closeDistance: 0
+  impactForce: {x: 0, y: 0}
 --- !u!1 &642740094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,7 +1246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerPushTime: 5
+  closeDistance: 0.25
+  impactForce: {x: 3, y: 0}
 --- !u!1001 &946639542
 Prefab:
   m_ObjectHideFlags: 0
@@ -1360,7 +1357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerPushTime: 5
+  closeDistance: 0.25
+  impactForce: {x: -3, y: 0}
 --- !u!1001 &1094858063
 Prefab:
   m_ObjectHideFlags: 0
@@ -2346,7 +2344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerPushTime: 5
+  closeDistance: 0.25
+  impactForce: {x: 0, y: -3}
 --- !u!1001 &2092475859
 Prefab:
   m_ObjectHideFlags: 0
@@ -2390,6 +2389,11 @@ Prefab:
         type: 2}
       propertyPath: m_Interpolate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114065184502798066, guid: d458690baec646c48bf9250d94dd96a9,
+        type: 2}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d458690baec646c48bf9250d94dd96a9, type: 2}
