@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Brick : MonoBehaviour {
 
@@ -12,15 +13,28 @@ public class Brick : MonoBehaviour {
     private Collider2D thisCollider;
     private SpriteRenderer thisRenderer;
 
+    public static List<Collider2D> brickColliders = new List<Collider2D>();
+
     private void Awake() {
         thisCollider = GetComponent<Collider2D>();
         thisRenderer = GetComponent<SpriteRenderer>();
+
+        brickColliders.Add(thisCollider);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        DestroyBrick();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        DestroyBrick();
+    }
+    
+    private void DestroyBrick() {
         thisCollider.enabled = false;
         StartCoroutine(ScaleUp());
         StartCoroutine(Disappear());
+        brickColliders.Remove(thisCollider);
         GameManager.Instance.RemoveBrick(scoreValue);
     }
 

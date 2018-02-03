@@ -91,9 +91,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUps:
   - {fileID: 11400000, guid: 2510f1fee60ff9e4492addb893bb03a2, type: 2}
+  - {fileID: 11400000, guid: 5c7db548a0b958349bb306a3e675fbf9, type: 2}
   powerUpObject: {fileID: 1123985711743280, guid: da38537bed3a13241a466265f229a645,
     type: 2}
-  powerUpSpawnRate: 1
-  powerUpSpawnTimeRange: 15
+  powerUpSpawnRate: 2
+  powerUpSpawnTimeRange: 10
   minSpawnArea: {x: -5, y: 1}
   maxSpawnArea: {x: 5, y: -1}

@@ -59,15 +59,14 @@ public class GamepadController : MonoBehaviour {
     }
 
     private void Update() {
+        if (Input.GetButtonDown("Fire1")) {
+            ResetAcceleration();
+            InvokeRepeating("AccelerationTimer", 0f, 0.02f);
+            InvokeRepeating("CheckIfMoving", 0f, checkIfMovingRate);
+        }
         if (Input.GetButton("Fire1") && transform.position.x >= minHorizontal && transform.position.x <= maxHorizontal) {
             clampHorizontal = true;
 
-            int i = 0;
-            if (Input.GetButtonDown("Fire1")) {
-                ResetAcceleration();
-                InvokeRepeating("AccelerationTimer", 0f, 0.02f);
-                InvokeRepeating("CheckIfMoving", 0f, checkIfMovingRate);
-            }
             if (Mathf.Approximately(nextPosition.x, minHorizontal) || Mathf.Approximately(nextPosition.x, maxHorizontal)) {
                 XAcceleration = Mathf.Abs(transform.position.x - xBeginDrag) / accelerationTime;
                 if (XAcceleration > maxAcceleration) {
@@ -121,6 +120,7 @@ public class GamepadController : MonoBehaviour {
         foreach (Limit limit in Limit.Instances) { // make the impact only on the side where the gamepad hit
             limit.Impact();
         }
+        Debug.Log("Impact triggered");
     }
 
     private void AccelerationTimer() {

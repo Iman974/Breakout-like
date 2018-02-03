@@ -29,4 +29,16 @@ public class Powers : MonoBehaviour {
         Ball.MainBall.Speed = speedBeforePowerUp;
         Ball.MainBall.DoSpeedUpOverTime = true;
     }
+
+    private IEnumerator Destruction(float powerUpDuration) {
+        foreach (Collider2D collider in Brick.brickColliders) {
+            collider.isTrigger = true;
+        }
+
+        yield return new WaitForSeconds(powerUpDuration);
+
+        foreach (Collider2D collider in Brick.brickColliders) {
+            collider.isTrigger = false;
+        }
+    }
 }
