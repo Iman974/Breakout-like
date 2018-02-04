@@ -7,10 +7,12 @@ public class Powers : MonoBehaviour {
     [SerializeField] private int divisionBallCount = 3;
     [SerializeField] private GameObject subDivisionBall;
     [SerializeField] private float subBalldistanceFromMainBall = 1f;
+    [SerializeField] private float subBallDivisionOffset = 5f;
 
     public static Powers Instance;
 
     private float speedBeforePowerUp;
+    private bool isDivisionEven;
 
     private void Awake() {
         #region Singleton
@@ -46,12 +48,23 @@ public class Powers : MonoBehaviour {
     }
 
     private IEnumerator Division() {
-        for (int i = 0; i < divisionBallCount; i++) {
-            Ball newSubBall = Instantiate(subDivisionBall, (Vector2)Ball.MainBall.transform.position +
-                Ball.MainBall.Direction.normalized * subBalldistanceFromMainBall, Quaternion.identity).GetComponent<Ball>();
-            newSubBall.Speed = Ball.MainBall.Speed;
-            newSubBall.Direction = Ball.MainBall.Direction;
-            newSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, 10f * i);
+        isDivisionEven = divisionBallCount % 2 == 0;
+        int count = isDivisionEven ? divisionBallCount / 2 : (divisionBallCount - 1) / 2;
+
+        Ball firstSubBall = Instantiate(subDivisionBall, (Vector2)Ball.MainBall.transform.position +
+            Ball.MainBall.Direction.normalized * subBalldistanceFromMainBall, Quaternion.identity).GetComponent<Ball>(); // To Change
+        firstSubBall.Speed = Ball.MainBall.Speed;
+        firstSubBall.Direction = Ball.MainBall.Direction;
+
+        firstSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, ((firstSubBall.Radius * 100f) *
+            (0 - count)) + (subBallDivisionOffset * (0 - count)));
+
+        for (int i = 1; i < divisionBallCount; i++) {
+            Ball newSubBall = Instantiate(subDivisionBall, (Vector2)firstSubBall.transform.position,
+                Quaternion.identity).GetComponent<Ball>();
+
+            newSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, i * (firstSubBall.Radius * 100f) +
+                (subBallDivisionOffset * i));
         }
         yield return null;
     }

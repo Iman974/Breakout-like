@@ -63,6 +63,9 @@ public class Ball : MonoBehaviour {
 
     private void LateUpdate() {
         Speed = speed;
+        if (isMainBall) {
+            Debug.DrawRay(transform.position, Direction, Color.blue);
+        }
     }
 
     private IEnumerator SpeedUpOverTime() {

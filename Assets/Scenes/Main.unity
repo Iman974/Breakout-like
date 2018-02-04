@@ -242,7 +242,7 @@ Prefab:
     - target: {fileID: 114218396799013762, guid: dfd04877fe4161c4497b7efe080f2caf,
         type: 2}
       propertyPath: divisionBallCount
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114837739829467550, guid: dfd04877fe4161c4497b7efe080f2caf,
         type: 2}
@@ -260,6 +260,11 @@ Prefab:
         type: 2}
       propertyPath: subBalldistanceFromMainBall
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114218396799013762, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: subBallDivisionOffset
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfd04877fe4161c4497b7efe080f2caf, type: 2}

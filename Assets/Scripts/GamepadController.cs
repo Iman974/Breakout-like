@@ -120,7 +120,6 @@ public class GamepadController : MonoBehaviour {
         foreach (Limit limit in Limit.Instances) { // make the impact only on the side where the gamepad hit
             limit.Impact();
         }
-        Debug.Log("Impact triggered");
     }
 
     private void AccelerationTimer() {
