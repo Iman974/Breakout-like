@@ -170,6 +170,8 @@ MonoBehaviour:
   relativeStartPosition: {x: 0, y: -4}
   relativeStartRotation: 0
   relativeStartScale: 0
+  animationSpeed: 1
+  debugAnim: 0
 --- !u!114 &114065184502798066
 MonoBehaviour:
   m_ObjectHideFlags: 1

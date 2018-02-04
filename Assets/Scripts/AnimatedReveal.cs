@@ -5,8 +5,8 @@ public class AnimatedReveal : MonoBehaviour {
 
     [System.Serializable]
     private class SlideAnimation {
-        public AnimationCurve xSlide = AnimationCurve.Constant(0f, 1f, 0f);
-        public AnimationCurve ySlide = AnimationCurve.Constant(0f, 1f, 0f);
+        public AnimationCurve xSlide = AnimationCurve.Constant(1f, 1f, 1f);
+        public AnimationCurve ySlide = AnimationCurve.Constant(1f, 1f, 1f);
 
         public float MaxTime {
             get {
@@ -19,15 +19,17 @@ public class AnimatedReveal : MonoBehaviour {
     }
 
     [SerializeField] private SlideAnimation slideAnimation;
-    [SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(0f, 1f, 0f);
-    [SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(0f, 1f, 0f);
+    [SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(1f, 1f, 1f);
+    [SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(1f, 1f, 1f);
     //[SerializeField] private float offScreenDistance;
     [SerializeField] private Behaviour[] disabledDuringAnimation;
-    [SerializeField] private float maxRandomDelay = 0.25f;
     [SerializeField] private bool randomDelay = true;
+    [SerializeField] private bool fixedRandomDelay;
+    [SerializeField] private float maxRandomDelay = 0.25f;
     [SerializeField] private Vector2 relativeStartPosition;
     [SerializeField] private float relativeStartRotation;
     [SerializeField] private float relativeStartScale;
+    [SerializeField] private float animationSpeed = 1f;
 
     private Vector2 targetedPosition;
     private Quaternion targetedRotation;
@@ -42,14 +44,13 @@ public class AnimatedReveal : MonoBehaviour {
 
     private void Awake() {
         // All the anim init was there
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     private void Start() {
         //transform.position = (Vector2)transform.position + new Vector2(transform.position.x, offScreenDistance);
         IsAnimationRunning = true;
         animatedObjects++;
-
-        rb2D = GetComponent<Rigidbody2D>();
 
         targetedPosition = transform.position;
         targetedRotation = transform.rotation;
@@ -94,16 +95,16 @@ public class AnimatedReveal : MonoBehaviour {
         Vector3 startAnimationScale = new Vector3(relativeStartScale, relativeStartScale, 1f);
         float startAnimationPosX = targetedPosition.x + relativeStartPosition.x;
         float startAnimationPosY = targetedPosition.y + relativeStartPosition.y;
+        // find a way not to process not wanted animation instead of just setting the animation to a constant 0 ?
+        for (float timeToEval = 0f; timeToEval < totalTime; timeToEval += animationSpeed * Time.deltaTime) {
+            float evaluatedPosX = slideAnimation.xSlide.Evaluate(timeToEval);
+            float evaluatedPosY = slideAnimation.ySlide.Evaluate(timeToEval);
+            float evaluatedRotation = rotationAnimation.Evaluate(timeToEval);
+            float evaluatedScale = scaleAnimation.Evaluate(timeToEval);
 
-        for (float time = 0f; time < totalTime; time += Time.deltaTime) {
-            float evaluatedPosX = slideAnimation.xSlide.Evaluate(time);
-            float evaluatedPosY = slideAnimation.ySlide.Evaluate(time);
-            float evaluatedRotation = rotationAnimation.Evaluate(time);
-            float evaluatedScale = scaleAnimation.Evaluate(time);
-
-            if (evaluatedPosX > 0) {
+            if (evaluatedPosX > 0 || evaluatedPosY > 0) { // Separate these ?
                 transform.position = new Vector2(Mathf.LerpUnclamped(startAnimationPosX, targetedPosition.x, evaluatedPosX),
-            Mathf.LerpUnclamped(startAnimationPosY, targetedPosition.y, evaluatedPosY));
+                    Mathf.LerpUnclamped(startAnimationPosY, targetedPosition.y, evaluatedPosY));
             }
             if (evaluatedRotation > 0) {
                 transform.rotation = Quaternion.LerpUnclamped(startAnimationRotation, targetedRotation, evaluatedRotation);

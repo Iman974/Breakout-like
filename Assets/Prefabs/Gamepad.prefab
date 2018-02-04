@@ -108,6 +108,7 @@ MonoBehaviour:
   firstPosLerpTime: 0.75
   checkIfMovingRate: 0.04
   minImpactRequiredAcceleration: 20
+  maxAcceleration: 100
 --- !u!114 &114616089274622600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +201,8 @@ MonoBehaviour:
   relativeStartPosition: {x: 0, y: -4}
   relativeStartRotation: 45
   relativeStartScale: 0
+  animationSpeed: 1
+  debugAnim: 0
 --- !u!212 &212923505263629820
 SpriteRenderer:
   m_ObjectHideFlags: 1

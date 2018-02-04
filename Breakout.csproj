@@ -288,6 +288,7 @@
     <Compile Include="Assets\Scripts\DestroyAfterHitCount.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GamepadController.cs" />
+    <Compile Include="Assets\Scripts\GenericAnimation.cs" />
     <Compile Include="Assets\Scripts\Limit.cs" />
     <Compile Include="Assets\Scripts\Powers.cs" />
     <Compile Include="Assets\Scripts\PowerUp.cs" />

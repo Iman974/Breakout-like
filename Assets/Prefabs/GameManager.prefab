@@ -78,12 +78,14 @@ MonoBehaviour:
   mainBallObject: {fileID: 1856787026408946, guid: d458690baec646c48bf9250d94dd96a9,
     type: 2}
   livesText: {fileID: 0}
+  scoreboard: {fileID: 0}
   comboTime: 1
   startedEarlyPenalty: -15
   scoreUpColor: {r: 0, g: 1, b: 0, a: 1}
   scoreDownColor: {r: 1, g: 0, b: 0, a: 1}
   lives: 2
   startBallDistanceYFromGamePad: 1
+  debugState: 0
 --- !u!114 &114837739829467550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +104,6 @@ MonoBehaviour:
   powerUpObject: {fileID: 1123985711743280, guid: da38537bed3a13241a466265f229a645,
     type: 2}
   powerUpSpawnRate: 2
-  powerUpSpawnTimeRange: 10
+  powerUpSpawnTimeRange: 9
   minSpawnArea: {x: -5, y: 1}
   maxSpawnArea: {x: 5, y: -1}

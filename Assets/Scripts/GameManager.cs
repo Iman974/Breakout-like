@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    [System.Serializable]
     public enum State {
         LAUNCH,
         PLAYING,
@@ -16,12 +17,14 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private TextAnimation scoreTextAnimation;
     [SerializeField] private GameObject mainBallObject;
     [SerializeField] private Text livesText;
+    [SerializeField] private Image scoreboard;
     [SerializeField] private float comboTime = 0.75f;
     [SerializeField] private int startedEarlyPenalty = -15;
     [SerializeField] private Color scoreUpColor = Color.green;
     [SerializeField] private Color scoreDownColor = Color.red;
     [SerializeField] private int lives = 1;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
+    [SerializeField] private State debugState;
 
     private GamepadController gamepad;
     private Camera mainCamera;
@@ -39,10 +42,11 @@ public class GameManager : MonoBehaviour {
         }
         set {
             gameState = value;
-            if (value > State.LAUNCH) {
+            if (value > State.PLAYING) {
                 PowerUpSpawner.Instance.CancelInvoke();
                 if (value == State.WIN) {
                     winText.gameObject.SetActive(true);
+                    scoreboard.gameObject.SetActive(true);
                 } else if (value == State.GAMEOVER) {
                     loseText.gameObject.SetActive(true);
                 }
@@ -147,6 +151,10 @@ public class GameManager : MonoBehaviour {
         } else {
             currentCombo = 1;
             comboTime = initialComboTime;
+        }
+        if (debugState != 0) {
+            GameState = State.WIN;
+            debugState = 0;
         }
     }
 

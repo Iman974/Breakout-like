@@ -175,11 +175,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   disabledDuringAnimation: []
-  maxRandomDelay: 0.2
   randomDelay: 1
+  fixedRandomDelay: 0
+  maxRandomDelay: 0.2
   relativeStartPosition: {x: 10, y: -10}
   relativeStartRotation: 55
   relativeStartScale: 0
+  animationSpeed: 1
 --- !u!212 &212002720753466018
 SpriteRenderer:
   m_ObjectHideFlags: 1
