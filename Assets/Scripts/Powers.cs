@@ -6,13 +6,13 @@ public class Powers : MonoBehaviour {
     [SerializeField] private float speedUpMultiplier;
     [SerializeField] private int divisionBallCount = 3;
     [SerializeField] private GameObject subDivisionBall;
-    [SerializeField] private float subBalldistanceFromMainBall = 1f;
+    [SerializeField] private float subBallDistanceFromMainBall = 0.5f;
     [SerializeField] private float subBallDivisionOffset = 5f;
+    [SerializeField] private float subBallSpeedMultiplier = 1.5f;
 
     public static Powers Instance;
 
     private float speedBeforePowerUp;
-    private bool isDivisionEven;
 
     private void Awake() {
         #region Singleton
@@ -48,24 +48,29 @@ public class Powers : MonoBehaviour {
     }
 
     private IEnumerator Division() {
-        isDivisionEven = divisionBallCount % 2 == 0;
-        int count = isDivisionEven ? divisionBallCount / 2 : (divisionBallCount - 1) / 2;
+        bool isDivisionEven = divisionBallCount % 2 == 0;
+        float count = isDivisionEven ? (divisionBallCount - 1) * 0.5f : (divisionBallCount - 1) / 2f;
+        float subBallSpeed = Ball.MainBall.Speed * subBallSpeedMultiplier;
 
-        Ball firstSubBall = Instantiate(subDivisionBall, (Vector2)Ball.MainBall.transform.position +
-            Ball.MainBall.Direction.normalized * subBalldistanceFromMainBall, Quaternion.identity).GetComponent<Ball>(); // To Change
-        firstSubBall.Speed = Ball.MainBall.Speed;
-        firstSubBall.Direction = Ball.MainBall.Direction;
+        Ball firstSubBall = InstantiateSubBall((Vector2)Ball.MainBall.transform.position + (Ball.MainBall.Direction *
+                subBallDistanceFromMainBall), ((Ball.MainBall.Radius * 100f) * -count) + (subBallDivisionOffset * -count));
+        firstSubBall.Speed = subBallSpeed;
+        firstSubBall.Direction = firstSubBall.transform.position - Ball.MainBall.transform.position;
 
-        firstSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, ((firstSubBall.Radius * 100f) *
-            (0 - count)) + (subBallDivisionOffset * (0 - count)));
+        for (int i = 0; i < divisionBallCount; i++) {
+            Ball newSubBall = InstantiateSubBall(firstSubBall.transform.position, i * ((firstSubBall.Radius * 100f) +
+                subBallDivisionOffset));
 
-        for (int i = 1; i < divisionBallCount; i++) {
-            Ball newSubBall = Instantiate(subDivisionBall, (Vector2)firstSubBall.transform.position,
-                Quaternion.identity).GetComponent<Ball>();
-
-            newSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, i * (firstSubBall.Radius * 100f) +
-                (subBallDivisionOffset * i));
+            newSubBall.Speed = subBallSpeed;
+            newSubBall.Direction = newSubBall.transform.position - Ball.MainBall.transform.position;
         }
         yield return null;
+    }
+
+    private Ball InstantiateSubBall(Vector2 atPosition, float rotationAroundMainBall) {
+        Ball newSubBall = Instantiate(subDivisionBall, atPosition, Quaternion.identity).GetComponent<Ball>();
+        newSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, rotationAroundMainBall);
+
+        return newSubBall;
     }
 }

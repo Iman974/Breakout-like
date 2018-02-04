@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class PowerUpSpawner : MonoBehaviour {
 
@@ -22,7 +23,10 @@ public class PowerUpSpawner : MonoBehaviour {
         #endregion
     }
 
-    private void Start() {
+    private IEnumerator Start() {
+        while (GameManager.Instance.GameState == GameManager.State.LAUNCH) {
+            yield return null;
+        }
         InvokeRepeating("SpawnPowerUp", powerUpSpawnTimeRange, powerUpSpawnTimeRange);
     }
 

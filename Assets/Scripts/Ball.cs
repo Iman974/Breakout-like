@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour {
 
     public Vector2 Direction {
         get {
-            return Rb2D.velocity;
+            return Rb2D.velocity.normalized;
         }
         set {
             Rb2D.velocity = value.normalized * speed;
@@ -58,14 +58,11 @@ public class Ball : MonoBehaviour {
         Rb2D.isKinematic = false;
         Direction = new Vector2(Random.Range(minXStartDirection, maxXStartDirection),
             Random.Range(minYStartDirection, maxYStartDirection));
-        //StartCoroutine(SpeedUpOverTime());
+        StartCoroutine(SpeedUpOverTime());
     }
 
     private void LateUpdate() {
         Speed = speed;
-        if (isMainBall) {
-            Debug.DrawRay(transform.position, Direction, Color.blue);
-        }
     }
 
     private IEnumerator SpeedUpOverTime() {

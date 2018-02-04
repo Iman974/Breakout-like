@@ -54,6 +54,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedUpMultiplier: 1.25
+  divisionBallCount: 4
+  subDivisionBall: {fileID: 1190938799236838, guid: 7acd7deda44829b45a0933fbdc5c7d04,
+    type: 2}
+  subBallDistanceFromMainBall: 0.5
+  subBallDivisionOffset: 16
+  subBallSpeedMultiplier: 1.5
 --- !u!114 &114282958409452230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,8 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUps:
-  - {fileID: 11400000, guid: 2510f1fee60ff9e4492addb893bb03a2, type: 2}
+  - {fileID: 11400000, guid: 7ee9ef38b8568354aa1d6af43b7a4187, type: 2}
   - {fileID: 11400000, guid: 5c7db548a0b958349bb306a3e675fbf9, type: 2}
+  - {fileID: 11400000, guid: 2510f1fee60ff9e4492addb893bb03a2, type: 2}
   powerUpObject: {fileID: 1123985711743280, guid: da38537bed3a13241a466265f229a645,
     type: 2}
   powerUpSpawnRate: 2

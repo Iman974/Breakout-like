@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public enum State {
+        LAUNCH,
         PLAYING,
         GAMEOVER,
         WIN
@@ -24,7 +25,6 @@ public class GameManager : MonoBehaviour {
 
     private GamepadController gamepad;
     private Camera mainCamera;
-    private int numberOfBricks;
     private int score;
     private int currentCombo = 1;
     private float initialComboTime;
@@ -39,11 +39,11 @@ public class GameManager : MonoBehaviour {
         }
         set {
             gameState = value;
-            if (value != State.PLAYING) {
+            if (value > State.LAUNCH) {
                 PowerUpSpawner.Instance.CancelInvoke();
                 if (value == State.WIN) {
                     winText.gameObject.SetActive(true);
-                } else {
+                } else if (value == State.GAMEOVER) {
                     loseText.gameObject.SetActive(true);
                 }
             }
@@ -75,12 +75,11 @@ public class GameManager : MonoBehaviour {
         }
         #endregion
         initialComboTime = comboTime;
-        GameState = State.PLAYING;
+        GameState = State.LAUNCH;
     }
 
     private void Start() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        numberOfBricks = GameObject.FindWithTag("Bricks").transform.childCount;
         gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
         Lives = lives;
         AddToScore(0);
@@ -112,17 +111,17 @@ public class GameManager : MonoBehaviour {
         }
         Ball.MainBall.transform.parent = null;
         Ball.MainBall.Launch();
+        GameState = State.PLAYING;
     }
 
     public void RemoveBrick(int scoreValue) {
-        numberOfBricks--;
         AddToScore(scoreValue * currentCombo);
         if (comboTime > 0f) {
             currentCombo++;
             comboTime = initialComboTime;
         }
 
-        if (numberOfBricks == 0) {
+        if (Brick.brickColliders.Count == 0) {
             GameState = State.WIN;
         }
     }
