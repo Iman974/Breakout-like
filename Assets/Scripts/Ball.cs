@@ -18,6 +18,7 @@ public class Ball : MonoBehaviour {
     public Rigidbody2D Rb2D { get; private set; }
     public bool DoSpeedUpOverTime { get; set; }
     public float Radius { get; private set; }
+    public int CollisionCount { get; private set; }
 
     public Vector2 Direction {
         get {
@@ -75,5 +76,9 @@ public class Ball : MonoBehaviour {
             Speed *= speedUpMultiplier;
         }
         speed = maxSpeed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        CollisionCount++;
     }
 }
