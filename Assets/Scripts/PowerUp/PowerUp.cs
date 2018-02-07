@@ -3,6 +3,7 @@
 [CreateAssetMenu(fileName = "New Power Up")]
 public class PowerUp : ScriptableObject {
 
+    public IPowerUp power;
     public Sprite powerUpSprite;
     public string powerUpName;
     public GameObject pickUpEffect;
@@ -14,11 +15,7 @@ public class PowerUp : ScriptableObject {
     public float movementSpeed = 0.001f;
     public float powerUpDuration = 2f;
 
-    [SerializeField] private string powerName;
-
     public void TriggerPower() {
-        if (powerName != string.Empty) {
-            Powers.Instance.StartCoroutine(powerName, powerUpDuration);
-        }
+        power.ActivatePower();
     }
 }
