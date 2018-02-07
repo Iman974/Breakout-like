@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58184407750192738}
   - component: {fileID: 50455363013440488}
   - component: {fileID: 114032173655716824}
+  - component: {fileID: 114423210680336736}
   m_Layer: 13
   m_Name: SubBall
   m_TagString: Untagged
@@ -98,6 +99,18 @@ MonoBehaviour:
   speedUpMultiplier: 1.05
   maxSpeed: 10
   speed: 6
+--- !u!114 &114423210680336736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1190938799236838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0c1eff0f202aef4e95167345743feb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitCount: 4
 --- !u!212 &212420571213087476
 SpriteRenderer:
   m_ObjectHideFlags: 1
