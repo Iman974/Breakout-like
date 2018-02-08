@@ -3,7 +3,8 @@
 [CreateAssetMenu(fileName = "New Power Up")]
 public class PowerUp : ScriptableObject {
 
-    public IPowerUp power;
+    private IPower power;
+
     public Sprite powerUpSprite;
     public string powerUpName;
     public GameObject pickUpEffect;
@@ -13,9 +14,20 @@ public class PowerUp : ScriptableObject {
     public float lifetime = 10f;
     public Vector2 targetedRelativePosition = new Vector2(0f, -10f);
     public float movementSpeed = 0.001f;
-    public float powerUpDuration = 2f;
+    public PowersName powerName;
+
+    public void InitPower() {
+        power = (IPower)typeof(Powers).GetField(powerName.ToString()).GetValue(Powers.Instance);
+    }
 
     public void TriggerPower() {
         power.ActivatePower();
     }
+}
+
+public abstract class IPower {
+
+    [SerializeField] protected float powerDuration = 2f;
+
+    public abstract void ActivatePower();
 }

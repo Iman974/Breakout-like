@@ -16,6 +16,7 @@ public class PowerUpInGame : MonoBehaviour {
         GetComponent<CircleCollider2D>().radius = powerUp.colliderRadius;
         GetComponent<SpriteRenderer>().sprite = powerUp.powerUpSprite;
         startPosition = transform.position;
+        powerUp.InitPower();
 
         powerUpXMovement = powerUp.horizontalMovement;
         powerUpYMovement = powerUp.verticalMovement;

@@ -55,4 +55,4 @@ MonoBehaviour:
   targetedRelativePosition: {x: 0, y: -10}
   movementSpeed: 0.0007
   powerUpDuration: 2
-  powerName: SpeedUp
+  powerName: 0

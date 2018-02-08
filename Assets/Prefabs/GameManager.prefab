@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4983606727916206}
   - component: {fileID: 114282958409452230}
   - component: {fileID: 114837739829467550}
-  - component: {fileID: 114218396799013762}
+  - component: {fileID: 114548148951014804}
   m_Layer: 8
   m_Name: GameManager
   m_TagString: Untagged
@@ -42,24 +42,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114218396799013762
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1907727119124048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d074c00f67dcaf4284d5db1add303e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedUpMultiplier: 1.25
-  divisionBallCount: 4
-  subDivisionBall: {fileID: 1190938799236838, guid: 7acd7deda44829b45a0933fbdc5c7d04,
-    type: 2}
-  subBallDistanceFromMainBall: 0.5
-  subBallDivisionOffset: 16
-  subBallSpeedMultiplier: 1.5
 --- !u!114 &114282958409452230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,6 +68,31 @@ MonoBehaviour:
   lives: 2
   startBallDistanceYFromGamePad: 1
   debugState: 0
+--- !u!114 &114548148951014804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907727119124048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01106a0939a5bed4f980e80f41fd7860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpeedUpPower:
+    powerDuration: 2.5
+    speedUpMultiplier: 1.25
+  defaultDestroyPower:
+    powerDuration: 2
+  defaultDividePower:
+    powerDuration: 0
+    subDivisionBall: {fileID: 1190938799236838, guid: 7acd7deda44829b45a0933fbdc5c7d04,
+      type: 2}
+    divisionBallCount: 4
+    subBallDistanceFromMainBall: 0.5
+    subBallDivisionOffset: 15
+    subBallSpeedMultiplier: 1.5
+    maxHitCount: 4
 --- !u!114 &114837739829467550
 MonoBehaviour:
   m_ObjectHideFlags: 1

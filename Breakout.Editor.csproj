@@ -5,21 +5,19 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2CDDC030-9055-1285-544B-6AD001EB2903}</ProjectGuid>
+    <ProjectGuid>{8A69DC76-CC12-C5E8-0B7A-A77DE4A3BE68}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -284,21 +282,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Animation\AnimatedReveal.cs" />
-    <Compile Include="Assets\Scripts\Animation\Animations.cs" />
-    <Compile Include="Assets\Scripts\Animation\GenericAnimation.cs" />
-    <Compile Include="Assets\Scripts\Animation\IAnimatable.cs" />
-    <Compile Include="Assets\Scripts\Animation\TextAnimation.cs" />
-    <Compile Include="Assets\Scripts\Ball.cs" />
-    <Compile Include="Assets\Scripts\Brick.cs" />
-    <Compile Include="Assets\Scripts\DestroyAfterHitCount.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GamepadController.cs" />
-    <Compile Include="Assets\Scripts\Limit.cs" />
-    <Compile Include="Assets\Scripts\PowerUp\Powers.cs" />
-    <Compile Include="Assets\Scripts\PowerUp\PowerUp.cs" />
-    <Compile Include="Assets\Scripts\PowerUp\PowerUpInGame.cs" />
-    <Compile Include="Assets\Scripts\PowerUp\PowerUpSpawner.cs" />
+    <ProjectReference Include="Breakout.csproj">
+      <Project>{2CDDC030-9055-1285-544B-6AD001EB2903}</Project>
+      <Name>Breakout</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Editor\AnimationEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

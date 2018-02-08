@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Powers : MonoBehaviour {
+public enum PowersName {
+    defaultSpeedUpPower,
+    defaultDestroyPower,
+    defaultDividePower
+}
 
-    [SerializeField] private float speedUpMultiplier;
-    [SerializeField] private int divisionBallCount = 3;
-    [SerializeField] private GameObject subDivisionBall;
-    [SerializeField] private float subBallDistanceFromMainBall = 0.5f;
-    [SerializeField] private float subBallDivisionOffset = 5f;
-    [SerializeField] private float subBallSpeedMultiplier = 1.5f;
+public class Powers : MonoBehaviour {
 
     public static Powers Instance;
 
-    private float speedBeforePowerUp;
+    public SpeedUpPower defaultSpeedUpPower;
+    public DestroyPower defaultDestroyPower;
+    public DividePower defaultDividePower;
 
     private void Awake() {
         #region Singleton
@@ -24,53 +25,122 @@ public class Powers : MonoBehaviour {
         #endregion
     }
 
-    private IEnumerator SpeedUp(float powerUpDuration) {
-        Ball.MainBall.DoSpeedUpOverTime = false;
-        speedBeforePowerUp = Ball.MainBall.Speed;
-        Ball.MainBall.Speed *= speedUpMultiplier;
+    [System.Serializable]
+    public class SpeedUpPower : IPower {
 
-        yield return new WaitForSeconds(powerUpDuration);
+        [SerializeField] private float speedUpMultiplier = 1.25f;
 
-        Ball.MainBall.Speed = speedBeforePowerUp;
-        Ball.MainBall.DoSpeedUpOverTime = true;
-    }
+        private float speedBeforePowerUp;
 
-    private IEnumerator Destruction(float powerUpDuration) {
-        foreach (Collider2D collider in Brick.brickColliders) {
-            collider.isTrigger = true;
+        public SpeedUpPower(float speedMul, float duration) {
+            speedUpMultiplier = speedMul;
+            powerDuration = duration;
         }
 
-        yield return new WaitForSeconds(powerUpDuration);
+        public override void ActivatePower() {
+            GameManager.Instance.StartCoroutine(SpeedUp());
+        }
 
-        foreach (Collider2D collider in Brick.brickColliders) {
-            collider.isTrigger = false;
+        private IEnumerator SpeedUp() {
+            Ball.MainBall.DoSpeedUpOverTime = false;
+            speedBeforePowerUp = Ball.MainBall.Speed;
+            Ball.MainBall.Speed *= speedUpMultiplier;
+
+            yield return new WaitForSeconds(powerDuration);
+
+            Ball.MainBall.Speed = speedBeforePowerUp;
+            Ball.MainBall.DoSpeedUpOverTime = true;
         }
     }
 
-    private IEnumerator Division() {
-        bool isDivisionEven = divisionBallCount % 2 == 0;
-        float count = isDivisionEven ? (divisionBallCount - 1) * 0.5f : (divisionBallCount - 1) / 2f;
-        float subBallSpeed = Ball.MainBall.Speed * subBallSpeedMultiplier;
+    [System.Serializable]
+    public class DestroyPower : IPower {
 
-        Ball firstSubBall = InstantiateSubBall((Vector2)Ball.MainBall.transform.position + (Ball.MainBall.Direction *
-                subBallDistanceFromMainBall), ((Ball.MainBall.Radius * 100f) * -count) + (subBallDivisionOffset * -count));
-        firstSubBall.Speed = subBallSpeed;
-        firstSubBall.Direction = firstSubBall.transform.position - Ball.MainBall.transform.position;
-
-        for (int i = 0; i < divisionBallCount; i++) {
-            Ball newSubBall = InstantiateSubBall(firstSubBall.transform.position, i * ((firstSubBall.Radius * 100f) +
-                subBallDivisionOffset));
-
-            newSubBall.Speed = subBallSpeed;
-            newSubBall.Direction = newSubBall.transform.position - Ball.MainBall.transform.position;
+        public override void ActivatePower() {
+            GameManager.Instance.StartCoroutine(SetBricksAsDestroyable());
         }
-        yield return null;
+
+        private IEnumerator SetBricksAsDestroyable() {
+            foreach (Collider2D collider in Brick.brickColliders) {
+                collider.isTrigger = true;
+            }
+
+            yield return new WaitForSeconds(powerDuration);
+
+            foreach (Collider2D collider in Brick.brickColliders) {
+                collider.isTrigger = false;
+            }
+        }
     }
 
-    private Ball InstantiateSubBall(Vector2 atPosition, float rotationAroundMainBall) {
-        Ball newSubBall = Instantiate(subDivisionBall, atPosition, Quaternion.identity).GetComponent<Ball>();
-        newSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, rotationAroundMainBall);
+    [System.Serializable]
+    public class DividePower : IPower {
 
-        return newSubBall;
+        [SerializeField] private GameObject subDivisionBall;
+        [SerializeField] private int divisionBallCount = 3;
+        [SerializeField] private float subBallDistanceFromMainBall = 0.5f;
+        [SerializeField] private float subBallDivisionOffset = 5f;
+        [SerializeField] private float subBallSpeedMultiplier = 1.5f;
+        [SerializeField] private int maxHitCount = 4;
+
+        public DividePower(int ballCount, int newMaxHitCount) {
+            divisionBallCount = ballCount;
+            maxHitCount = newMaxHitCount;
+
+            DestroyAfterHitCount[] destroyCounters = FindObjectsOfType<DestroyAfterHitCount>();
+
+            foreach (var counter in destroyCounters) {
+                counter.maxHitCount = maxHitCount;
+            }
+        }
+
+        public override void ActivatePower() {
+            DivideMainBall();
+        }
+
+        public void DivideMainBall() {
+            bool isDivisionEven = divisionBallCount % 2 == 0;
+            float count = isDivisionEven ? (divisionBallCount - 1) * 0.5f : (divisionBallCount - 1) / 2f;
+            float subBallSpeed = Ball.MainBall.Speed * subBallSpeedMultiplier;
+            Ball[] subDivisionBalls = new Ball[divisionBallCount];
+
+            Ball firstSubBall = InstantiateSubBall((Vector2)Ball.MainBall.transform.position + (Ball.MainBall.Direction *
+                    subBallDistanceFromMainBall), ((Ball.MainBall.Radius * 100f) * -count) + (subBallDivisionOffset * -count));
+            subDivisionBalls[0] = firstSubBall;
+            firstSubBall.Speed = subBallSpeed;
+            firstSubBall.Direction = firstSubBall.transform.position - Ball.MainBall.transform.position;
+
+            for (int i = 1; i < divisionBallCount; i++) {
+                Ball newSubBall = InstantiateSubBall(firstSubBall.transform.position, i * ((firstSubBall.Radius * 100f) +
+                    subBallDivisionOffset));
+                subDivisionBalls[i] = newSubBall;
+
+                newSubBall.Speed = subBallSpeed;
+                newSubBall.Direction = newSubBall.transform.position - Ball.MainBall.transform.position;
+            }
+
+            /*int destroyedSubBalls = 0;
+            while (destroyedSubBalls < divisionBallCount) {
+                for (int i = 0; i < divisionBallCount; i++) {
+                    if (subDivisionBalls[i] == null) {
+                        continue;
+                    }
+
+                    if (subDivisionBalls[i].CollisionCount >= subBallMaxHitCount) {
+                        Destroy(subDivisionBalls[i].gameObject);
+                        subDivisionBalls[i] = null;
+                        destroyedSubBalls++;
+                    }
+                }
+                yield return null;
+            }*/
+        }
+
+        private Ball InstantiateSubBall(Vector2 atPosition, float rotationAroundMainBall) {
+            Ball newSubBall = Instantiate(subDivisionBall, atPosition, Quaternion.identity).GetComponent<Ball>();
+            newSubBall.transform.RotateAround(Ball.MainBall.transform.position, Vector3.forward, rotationAroundMainBall);
+
+            return newSubBall;
+        }
     }
 }
