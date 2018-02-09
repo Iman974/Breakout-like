@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-public abstract class IAnimatable {
+public abstract class Animatable : MonoBehaviour {
 
     [SerializeField] protected float animationSpeed = 1f;
 
-    protected AnimatedReveal attachedAnimation;
     protected float totalTime;
 
     public abstract void Animate();

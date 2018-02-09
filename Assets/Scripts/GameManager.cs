@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator StartGame(bool countDown = true) {
-        while (AnimatedReveal.IsAnimationRunning) {
+        while (CustomAnimation.IsAnimationRunning) {
             yield return null;
         }
         Cursor.lockState = CursorLockMode.None;
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour {
     public void RestartGame() {
         Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
             Quaternion.identity).GetComponent<Ball>();
-        newMainBall.GetComponent<AnimatedReveal>().enabled = false;
+        newMainBall.GetComponent<CustomAnimation>().enabled = false;
 
         StartCoroutine(centerTextAnimation.StartAnimation(Animation.ALPHA, textToDisplay: "One more time !"));
         StartCoroutine(StartGame(false));

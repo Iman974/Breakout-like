@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AnimatedReveal : MonoBehaviour {
+public class CustomAnimation : MonoBehaviour {
 
-    [SerializeField] private Animations.SlideAnimation.SlideCurves slideAnimation;
-    [SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(1f, 1f, 1f);
-    [SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(1f, 1f, 1f);
+    //[SerializeField] private SlideAnimation.SlideCurves slideAnimation;
+    //[SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(1f, 1f, 1f);
+    //[SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(1f, 1f, 1f);
     //[SerializeField] private float offScreenDistance;
     [SerializeField] private Behaviour[] disabledDuringAnimation;
     [SerializeField] private bool randomDelay = true;
     [SerializeField] private bool fixedDelay;
     [SerializeField] private float maxRandomDelay = 0.25f;
-    [SerializeField] private bool slide, rotate, scale;
-    [SerializeField] private Vector2 relativeStartPosition;
-    [SerializeField] private float relativeStartRotation;
-    [SerializeField] private float relativeStartScale;
+    //[SerializeField] private Vector2 relativeStartPosition;
+    //[SerializeField] private float relativeStartRotation;
+    //[SerializeField] private float relativeStartScale;
     //[SerializeField] private float animationSpeed = 1f;
 
     //private Vector2 targetedPosition;
@@ -22,11 +21,10 @@ public class AnimatedReveal : MonoBehaviour {
     //private Vector3 targetedScale;
     private Rigidbody2D rb2D;
     private bool initialRb2DState;
-    private float totalTime;
-    private const int curvesAmount = 3;
+    //private float totalTime;
     private static int animatedObjects;
 
-    public IAnimatable builtAnimation;
+    private Animatable[] linkedAnimations;
 
     public static bool IsAnimationRunning { get; private set; }
 
@@ -40,24 +38,20 @@ public class AnimatedReveal : MonoBehaviour {
         IsAnimationRunning = true;
         animatedObjects++;
 
-        //targetedPosition = transform.position;
-        //targetedRotation = transform.rotation;
-        //targetedScale = transform.localScale;
 
-        transform.position = transform.position + (Vector3)relativeStartPosition;
-        transform.rotation = transform.rotation * Quaternion.Euler(new Vector3(0f, 0f, relativeStartRotation));
-        transform.localScale = transform.localScale + new Vector3(relativeStartScale, relativeStartScale, 0f);
+        linkedAnimations = GetComponents<Animatable>();
+        Debug.Log(linkedAnimations.Length);
 
-        Keyframe[] lastKeyframes = new Keyframe[curvesAmount - 1];
-        lastKeyframes[0] = rotationAnimation[rotationAnimation.length - 1];
-        lastKeyframes[1] = scaleAnimation[scaleAnimation.length - 1];
+        //Keyframe[] lastKeyframes = new Keyframe[curvesAmount - 1];
+        //lastKeyframes[0] = rotationAnimation[rotationAnimation.length - 1];
+        //lastKeyframes[1] = scaleAnimation[scaleAnimation.length - 1];
 
-        totalTime = slideAnimation.MaxTime;
-        foreach (Keyframe keyframe in lastKeyframes) {
-            if (keyframe.time > totalTime) {
-                totalTime = keyframe.time;
-            }
-        }
+        //totalTime = slideAnimation.MaxTime;
+        //foreach (Keyframe keyframe in lastKeyframes) {
+        //    if (keyframe.time > totalTime) {
+        //        totalTime = keyframe.time;
+        //    }
+        //}
 
         if (rb2D != null) {
             initialRb2DState = rb2D.isKinematic;
@@ -67,11 +61,14 @@ public class AnimatedReveal : MonoBehaviour {
             behaviour.enabled = false;
         }
 
-        Invoke("StartAnimations", 0.5f); // Only for debug purposes
+        Invoke("StartAnimation", 0.5f); // Only for debug purposes
     }
 
-    private void StartAnimations() {
-        StartCoroutine(SlideScaleRotate());
+    private void StartAnimation() {
+        //StartCoroutine(SlideScaleRotate());
+        foreach (var animation in linkedAnimations) {
+            animation.Animate();
+        }
     }
 	
     private IEnumerator SlideScaleRotate() {
@@ -116,11 +113,5 @@ public class AnimatedReveal : MonoBehaviour {
         if (animatedObjects == 0) {
             IsAnimationRunning = false;
         }
-    }
-
-    private void Animate() {
-        /*foreach (IAnimatable animation in _animations) {
-            animation.Animate();
-        }*/
     }
 }
