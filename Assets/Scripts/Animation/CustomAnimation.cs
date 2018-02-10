@@ -7,12 +7,11 @@ public class CustomAnimation : MonoBehaviour {
     //[SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(1f, 1f, 1f);
     //[SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(1f, 1f, 1f);
     //[SerializeField] private float offScreenDistance;
-    [SerializeField] private Animatable[] customAnimations;
+    //[SerializeField] private Object[] customAnimations;
     [SerializeField] private Behaviour[] disabledDuringAnimation;
     [SerializeField] private bool randomDelay = true;
     [SerializeField] private bool fixedDelay;
     [SerializeField] private float maxRandomDelay = 0.25f;
-    public bool debug;
     //[SerializeField] private Vector2 relativeStartPosition;
     //[SerializeField] private float relativeStartRotation;
     //[SerializeField] private float relativeStartScale;
@@ -22,6 +21,7 @@ public class CustomAnimation : MonoBehaviour {
     //private Quaternion targetedRotation;
     //private Vector3 targetedScale;
     //private float totalTime;
+    private Animatable[] customAnimations;
     private Rigidbody2D rb2D;
     private bool wasRb2DKinematic;
     private static int animatedObjects;
@@ -31,6 +31,7 @@ public class CustomAnimation : MonoBehaviour {
     private void Awake() {
         // All the anim init was there
         rb2D = GetComponent<Rigidbody2D>();
+        //customAnimations = new Animatable[3];
     }
 
     private void Start() {
@@ -38,6 +39,11 @@ public class CustomAnimation : MonoBehaviour {
         IsAnimationRunning = true;
         animatedObjects++;
 
+        if (customAnimations[0] != null) {
+            Debug.Log(customAnimations[0]);
+            customAnimations[0] = customAnimations[0] as RotateAnimation;
+            Debug.Log(customAnimations[0]);
+        }
         /*linkedAnimations = GetComponents<Animatable>();
         Debug.Log(linkedAnimations.Length);*/
 
@@ -65,9 +71,8 @@ public class CustomAnimation : MonoBehaviour {
 
     private void StartAnimations() {
         for (int i = 0; i < customAnimations.Length; i++) {
-            //customAnimations[i] = ScriptableObject.CreateInstance(customAnimations[i].GetType());
-            customAnimations[i].BindAnimation(this);
-            customAnimations[i].Animate();
+            //customAnimations[i].BindAnimation(this);
+            //customAnimations[i].Animate();
         }
     }
 	

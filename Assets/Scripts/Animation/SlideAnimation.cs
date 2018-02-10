@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "New slide animation", menuName = "Custom Animations/Slide", order = 0)]
+//[CreateAssetMenu(fileName = "New slide animation", menuName = "Custom Animations/Slide", order = 0)]
 public class SlideAnimation : Animatable {
 
     [System.Serializable]
@@ -54,7 +54,6 @@ public class SlideAnimation : Animatable {
                     evaluatedPosX), Mathf.LerpUnclamped(startAnimationPosY, targetedPosition.y, evaluatedPosY));
             }*/
             yield return null;
-            if (attachedCustomAnimation.debug) { Debug.Log(nextPosition); }
         }
         attachedCustomAnimation.transform.position = targetedPosition;
     }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Animatable : ScriptableObject {
+public abstract class Animatable : Object {
 
     [SerializeField] protected float animationSpeed = 1f;
 

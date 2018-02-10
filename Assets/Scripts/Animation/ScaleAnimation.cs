@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "New scale animation", menuName = "Custom Animations/Scale", order = 2)]
+//[CreateAssetMenu(fileName = "New scale animation", menuName = "Custom Animations/Scale", order = 2)]
 public class ScaleAnimation : Animatable {
 
     [SerializeField] private AnimationCurve scaleCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);

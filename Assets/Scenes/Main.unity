@@ -1299,7 +1299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8df043015216e47bb6e0c584abe5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customAnimations: []
   disabledDuringAnimation: []
   randomDelay: 0
   fixedDelay: 0
@@ -1376,6 +1375,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114616089274622600, guid: 8da75a0c489e0b747b55dc1be24e5412,
+        type: 2}
+      propertyPath: customAnimations.Array.data[0]
+      value: 
+      objectReference: {fileID: 11500000, guid: 5b7c21e7a467141459dc406da977f800,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8da75a0c489e0b747b55dc1be24e5412, type: 2}
   m_IsPrefabParent: 0

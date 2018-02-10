@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "New rotation animation", menuName = "Custom Animations/Rotate", order = 1)]
+//[CreateAssetMenu(fileName = "New rotation animation", menuName = "Custom Animations/Rotate", order = 1)]
 public class RotateAnimation : Animatable {
 
     [SerializeField] private AnimationCurve rotationCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
