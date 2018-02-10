@@ -7,10 +7,12 @@ public class CustomAnimation : MonoBehaviour {
     //[SerializeField] private AnimationCurve rotationAnimation = AnimationCurve.Constant(1f, 1f, 1f);
     //[SerializeField] private AnimationCurve scaleAnimation = AnimationCurve.Constant(1f, 1f, 1f);
     //[SerializeField] private float offScreenDistance;
+    [SerializeField] private Animatable[] customAnimations;
     [SerializeField] private Behaviour[] disabledDuringAnimation;
     [SerializeField] private bool randomDelay = true;
     [SerializeField] private bool fixedDelay;
     [SerializeField] private float maxRandomDelay = 0.25f;
+    public bool debug;
     //[SerializeField] private Vector2 relativeStartPosition;
     //[SerializeField] private float relativeStartRotation;
     //[SerializeField] private float relativeStartScale;
@@ -19,12 +21,10 @@ public class CustomAnimation : MonoBehaviour {
     //private Vector2 targetedPosition;
     //private Quaternion targetedRotation;
     //private Vector3 targetedScale;
-    private Rigidbody2D rb2D;
-    private bool initialRb2DState;
     //private float totalTime;
+    private Rigidbody2D rb2D;
+    private bool wasRb2DKinematic;
     private static int animatedObjects;
-
-    private Animatable[] linkedAnimations;
 
     public static bool IsAnimationRunning { get; private set; }
 
@@ -38,9 +38,8 @@ public class CustomAnimation : MonoBehaviour {
         IsAnimationRunning = true;
         animatedObjects++;
 
-
-        linkedAnimations = GetComponents<Animatable>();
-        Debug.Log(linkedAnimations.Length);
+        /*linkedAnimations = GetComponents<Animatable>();
+        Debug.Log(linkedAnimations.Length);*/
 
         //Keyframe[] lastKeyframes = new Keyframe[curvesAmount - 1];
         //lastKeyframes[0] = rotationAnimation[rotationAnimation.length - 1];
@@ -54,20 +53,21 @@ public class CustomAnimation : MonoBehaviour {
         //}
 
         if (rb2D != null) {
-            initialRb2DState = rb2D.isKinematic;
+            wasRb2DKinematic = rb2D.isKinematic;
             rb2D.isKinematic = true;
         }
         foreach (var behaviour in disabledDuringAnimation) {
             behaviour.enabled = false;
         }
 
-        Invoke("StartAnimation", 0.5f); // Only for debug purposes
+        Invoke("StartAnimations", 0.5f); // Only for debug purposes
     }
 
-    private void StartAnimation() {
-        //StartCoroutine(SlideScaleRotate());
-        foreach (var animation in linkedAnimations) {
-            animation.Animate();
+    private void StartAnimations() {
+        for (int i = 0; i < customAnimations.Length; i++) {
+            //customAnimations[i] = ScriptableObject.CreateInstance(customAnimations[i].GetType());
+            customAnimations[i].BindAnimation(this);
+            customAnimations[i].Animate();
         }
     }
 	
@@ -107,7 +107,7 @@ public class CustomAnimation : MonoBehaviour {
             behaviour.enabled = true;
         }
         if (rb2D != null) {
-            rb2D.isKinematic = initialRb2DState;
+            rb2D.isKinematic = wasRb2DKinematic;
         }
         animatedObjects--;
         if (animatedObjects == 0) {

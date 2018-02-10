@@ -95,93 +95,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8df043015216e47bb6e0c584abe5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideAnimation:
-    xSlide:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    ySlide:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 2.1550903
-        outSlope: 2.1550903
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.6
-        value: 1
-        inSlope: 0.8333333
-        outSlope: 0.8333333
-        tangentMode: 34
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: -0.68479216
-        outSlope: -0.68479216
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-  rotationAnimation:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 2.0858018
-      outSlope: 2.0858018
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: -1.643988
-      outSlope: -1.643988
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  scaleAnimation:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 1.2739164
-      outSlope: 1.2739164
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
+  customAnimations:
+  - {fileID: 11400000, guid: 5f9faf29053df874db76b6ecfe7a81a2, type: 2}
+  - {fileID: 11400000, guid: ccc0f18be04ac2340be94b69186dfbe8, type: 2}
+  - {fileID: 11400000, guid: bfea66dcec6f4f14999210efa29790f2, type: 2}
   disabledDuringAnimation: []
   randomDelay: 1
-  fixedRandomDelay: 0
+  fixedDelay: 0
   maxRandomDelay: 0.2
-  relativeStartPosition: {x: 10, y: -10}
-  relativeStartRotation: 55
-  relativeStartScale: 0
-  animationSpeed: 1
 --- !u!212 &212002720753466018
 SpriteRenderer:
   m_ObjectHideFlags: 1

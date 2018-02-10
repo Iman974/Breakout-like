@@ -1299,6 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8df043015216e47bb6e0c584abe5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customAnimations: []
   disabledDuringAnimation: []
   randomDelay: 0
   fixedDelay: 0

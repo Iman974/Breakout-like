@@ -90,88 +90,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8df043015216e47bb6e0c584abe5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideAnimation:
-    xSlide:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    ySlide:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-  rotationAnimation:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  scaleAnimation:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
+  customAnimations:
+  - {fileID: 11400000, guid: 5f9faf29053df874db76b6ecfe7a81a2, type: 2}
+  - {fileID: 11400000, guid: bfea66dcec6f4f14999210efa29790f2, type: 2}
   disabledDuringAnimation:
   - {fileID: 58680238338222432}
-  maxRandomDelay: 0.25
   randomDelay: 0
-  relativeStartPosition: {x: 0, y: -4}
-  relativeStartRotation: 0
-  relativeStartScale: 0
-  animationSpeed: 1
-  debugAnim: 0
+  fixedDelay: 0
+  maxRandomDelay: 0.25
 --- !u!114 &114065184502798066
 MonoBehaviour:
   m_ObjectHideFlags: 1

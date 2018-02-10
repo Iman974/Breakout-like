@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CustomAnimation))]
+[CreateAssetMenu(fileName = "New slide animation", menuName = "Custom Animations/Slide", order = 0)]
 public class SlideAnimation : Animatable {
 
     [System.Serializable]
@@ -23,14 +23,14 @@ public class SlideAnimation : Animatable {
     [SerializeField] private Vector2 relativeStartPosition;
 
     private Vector2 targetedPosition;
-
-    private void Start() {
-        targetedPosition = transform.position;
-    }
+    private Vector2 nextPosition;
 
     public override void Animate() {
-        transform.position += (Vector3)relativeStartPosition;
-        StartCoroutine(Slide());
+        targetedPosition = attachedCustomAnimation.transform.position;
+        attachedCustomAnimation.transform.position += (Vector3)relativeStartPosition;
+        totalTime = slideCurves.MaxTime;
+
+        attachedCustomAnimation.StartCoroutine(Slide());
     }
 
     private IEnumerator Slide() {
@@ -41,12 +41,21 @@ public class SlideAnimation : Animatable {
             float evaluatedPosX = slideCurves.xSlide.Evaluate(timeToEval);
             float evaluatedPosY = slideCurves.ySlide.Evaluate(timeToEval);
 
-            if (evaluatedPosX > 0 || evaluatedPosY > 0) { // Separate these ?
-                transform.position = new Vector2(Mathf.LerpUnclamped(startAnimationPosX, targetedPosition.x,
-                    evaluatedPosX), Mathf.LerpUnclamped(startAnimationPosY, targetedPosition.y, evaluatedPosY));
+            if (evaluatedPosX > 0) {
+                nextPosition.x = Mathf.LerpUnclamped(startAnimationPosX, targetedPosition.x, evaluatedPosX);
             }
+            if (evaluatedPosY > 0) {
+                nextPosition.y = Mathf.LerpUnclamped(startAnimationPosY, targetedPosition.y, evaluatedPosY);
+            }
+
+            attachedCustomAnimation.transform.position = nextPosition;
+            /*if (evaluatedPosX > 0 || evaluatedPosY > 0) { // Separate these ?
+                attachedCustomAnimation.transform.position = new Vector2(Mathf.LerpUnclamped(startAnimationPosX, targetedPosition.x,
+                    evaluatedPosX), Mathf.LerpUnclamped(startAnimationPosY, targetedPosition.y, evaluatedPosY));
+            }*/
             yield return null;
+            if (attachedCustomAnimation.debug) { Debug.Log(nextPosition); }
         }
-        transform.position = targetedPosition;
+        attachedCustomAnimation.transform.position = targetedPosition;
     }
 }

@@ -24,9 +24,6 @@ GameObject:
   - component: {fileID: 114265254184092346}
   - component: {fileID: 50587279703659828}
   - component: {fileID: 114616089274622600}
-  - component: {fileID: 114604744035287642}
-  - component: {fileID: 114327590675774908}
-  - component: {fileID: 114833113170896192}
   m_Layer: 8
   m_Name: Gamepad
   m_TagString: GameController
@@ -112,87 +109,6 @@ MonoBehaviour:
   checkIfMovingRate: 0.04
   minImpactRequiredAcceleration: 30
   maxAcceleration: 100
---- !u!114 &114327590675774908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1896342121814630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e7fe37e80dcfa4f806db029fca3d18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationSpeed: 1
-  slideCurves:
-    xSlide:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    ySlide:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  relativeStartPosition: {x: 0, y: 0}
---- !u!114 &114604744035287642
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1896342121814630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b7c21e7a467141459dc406da977f800, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationSpeed: 1
-  rotationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  relativeStartRotation: 0
 --- !u!114 &114616089274622600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,43 +120,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8df043015216e47bb6e0c584abe5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customAnimations:
+  - {fileID: 11400000, guid: 5f9faf29053df874db76b6ecfe7a81a2, type: 2}
+  - {fileID: 11400000, guid: ccc0f18be04ac2340be94b69186dfbe8, type: 2}
+  - {fileID: 11400000, guid: bfea66dcec6f4f14999210efa29790f2, type: 2}
   disabledDuringAnimation:
   - {fileID: 61671422472817224}
   - {fileID: 114265254184092346}
   randomDelay: 1
   fixedDelay: 0
   maxRandomDelay: 0.2
---- !u!114 &114833113170896192
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1896342121814630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c7e9001baa7114f8c8b1454c9ff360, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationSpeed: 1
-  scaleAnimation:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  relativeStartScale: 0
 --- !u!212 &212923505263629820
 SpriteRenderer:
   m_ObjectHideFlags: 1

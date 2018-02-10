@@ -1,21 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CustomAnimation))]
+[CreateAssetMenu(fileName = "New rotation animation", menuName = "Custom Animations/Rotate", order = 1)]
 public class RotateAnimation : Animatable {
 
-    [SerializeField] private AnimationCurve rotationCurve;
+    [SerializeField] private AnimationCurve rotationCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] private float relativeStartRotation;
 
     private Quaternion targetedRotation;
 
-    private void Start() {
-        targetedRotation = transform.rotation;
-    }
-
     public override void Animate() {
-        transform.rotation *= Quaternion.Euler(new Vector3(0f, 0f, relativeStartRotation));
-        StartCoroutine(Rotate());
+        targetedRotation = attachedCustomAnimation.transform.rotation;
+        attachedCustomAnimation.transform.rotation *= Quaternion.Euler(new Vector3(0f, 0f, relativeStartRotation));
+        totalTime = rotationCurve[rotationCurve.length - 1].time;
+
+        attachedCustomAnimation.StartCoroutine(Rotate());
     }
 
     private IEnumerator Rotate() {
@@ -24,11 +23,11 @@ public class RotateAnimation : Animatable {
             float evaluatedRotation = rotationCurve.Evaluate(timeToEval);
 
             if (evaluatedRotation > 0) {
-                transform.rotation = Quaternion.LerpUnclamped(startAnimationRotation, targetedRotation,
+                attachedCustomAnimation.transform.rotation = Quaternion.LerpUnclamped(startAnimationRotation, targetedRotation,
                     evaluatedRotation);
             }
             yield return null;
         }
-        transform.rotation = targetedRotation;
+        attachedCustomAnimation.transform.rotation = targetedRotation;
     }
 }
