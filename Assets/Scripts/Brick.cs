@@ -14,11 +14,13 @@ public class Brick : MonoBehaviour {
     private SpriteRenderer thisRenderer;
 
     public static List<Collider2D> brickColliders = new List<Collider2D>();
+    public static int totalScoreValue;
 
     private void Awake() {
         thisCollider = GetComponent<Collider2D>();
         thisRenderer = GetComponent<SpriteRenderer>();
 
+        totalScoreValue += scoreValue;
         brickColliders.Add(thisCollider);
     }
 
@@ -51,6 +53,6 @@ public class Brick : MonoBehaviour {
             thisRenderer.color *= new Color(1f, 1f, 1f, fadeOutFactor);
             yield return null;
         }
-        Destroy(gameObject);
+        Destroy(gameObject); // Not good : ScaleUp can be not finished yet (because of both coroutines)
     }
 }

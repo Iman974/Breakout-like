@@ -283,11 +283,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Animation\Animatable.cs" />
+    <Compile Include="Assets\Scripts\Animation\AnimationBehaviours.cs" />
     <Compile Include="Assets\Scripts\Animation\Animations.cs" />
     <Compile Include="Assets\Scripts\Animation\CustomAnimation.cs" />
     <Compile Include="Assets\Scripts\Animation\GenericAnimation.cs" />
     <Compile Include="Assets\Scripts\Animation\RotateAnimation.cs" />
-    <Compile Include="Assets\Scripts\Animation\ScaleAnimation.cs" />
     <Compile Include="Assets\Scripts\Animation\SlideAnimation.cs" />
     <Compile Include="Assets\Scripts\Animation\TextAnimation.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />

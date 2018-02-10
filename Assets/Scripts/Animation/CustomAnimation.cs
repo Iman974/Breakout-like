@@ -39,11 +39,6 @@ public class CustomAnimation : MonoBehaviour {
         IsAnimationRunning = true;
         animatedObjects++;
 
-        if (customAnimations[0] != null) {
-            Debug.Log(customAnimations[0]);
-            customAnimations[0] = customAnimations[0] as RotateAnimation;
-            Debug.Log(customAnimations[0]);
-        }
         /*linkedAnimations = GetComponents<Animatable>();
         Debug.Log(linkedAnimations.Length);*/
 

@@ -9,6 +9,7 @@ public class AnimationEditor : Editor {
     private SerializedProperty slideBool, rotateBool, scaleBool;
 
     private void OnEnable() {
+        /*
         slideAnimation = serializedObject.FindProperty("slideAnimation");
         rotationAnimation = serializedObject.FindProperty("rotationAnimation");
         scaleAnimation = serializedObject.FindProperty("scaleAnimation");
@@ -16,6 +17,7 @@ public class AnimationEditor : Editor {
         slideBool = serializedObject.FindProperty("doSliding");
         rotateBool = serializedObject.FindProperty("doRotation");
         scaleBool = serializedObject.FindProperty("doScaling");
+        */
     }
 
     /*public override void OnInspectorGUI() {

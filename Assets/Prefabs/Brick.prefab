@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212002720753466018}
   - component: {fileID: 61665808483998040}
   - component: {fileID: 114107859651857820}
-  - component: {fileID: 114569298929162138}
   m_Layer: 9
   m_Name: Brick
   m_TagString: Untagged
@@ -84,25 +83,6 @@ MonoBehaviour:
   fadeOutOverFrames: 15
   fadeOutFactor: 0.7
   scoreValue: 7
---- !u!114 &114569298929162138
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983257029887418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f8df043015216e47bb6e0c584abe5f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customAnimations:
-  - {fileID: 11400000, guid: 5f9faf29053df874db76b6ecfe7a81a2, type: 2}
-  - {fileID: 11400000, guid: ccc0f18be04ac2340be94b69186dfbe8, type: 2}
-  - {fileID: 11400000, guid: bfea66dcec6f4f14999210efa29790f2, type: 2}
-  disabledDuringAnimation: []
-  randomDelay: 1
-  fixedDelay: 0
-  maxRandomDelay: 0.2
 --- !u!212 &212002720753466018
 SpriteRenderer:
   m_ObjectHideFlags: 1

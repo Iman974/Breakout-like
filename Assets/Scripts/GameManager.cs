@@ -18,13 +18,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject mainBallObject;
     [SerializeField] private Text livesText;
     [SerializeField] private Image scoreboard;
+    [SerializeField] private GameObject starsContainerUI;
     [SerializeField] private float comboTime = 0.75f;
     [SerializeField] private int startedEarlyPenalty = -15;
     [SerializeField] private Color scoreUpColor = Color.green;
     [SerializeField] private Color scoreDownColor = Color.red;
     [SerializeField] private int lives = 1;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
-    [SerializeField] private State debugState;
+    [SerializeField] private float[] scoreStarLevels = new float[] { 1f, 1.5f, 2f };
+    //[SerializeField] private State debugState;
 
     private GamepadController gamepad;
     private Camera mainCamera;
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour {
                 if (value == State.WIN) {
                     winText.gameObject.SetActive(true);
                     scoreboard.gameObject.SetActive(true);
+                    
+                    ShowStars(CalculateStars());
                 } else if (value == State.GAMEOVER) {
                     loseText.gameObject.SetActive(true);
                 }
@@ -152,10 +156,10 @@ public class GameManager : MonoBehaviour {
             currentCombo = 1;
             comboTime = initialComboTime;
         }
-        if (debugState != 0) {
+        /*if (debugState != 0) {
             GameState = State.WIN;
             debugState = 0;
-        }
+        }*/
     }
 
     private void UpdateLivesOnUI() {
@@ -169,7 +173,6 @@ public class GameManager : MonoBehaviour {
     public void RestartGame() {
         Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
             Quaternion.identity).GetComponent<Ball>();
-        newMainBall.GetComponent<CustomAnimation>().enabled = false;
 
         StartCoroutine(centerTextAnimation.StartAnimation(Animation.ALPHA, textToDisplay: "One more time !"));
         StartCoroutine(StartGame(false));
@@ -177,5 +180,21 @@ public class GameManager : MonoBehaviour {
 
     private void FixedUpdate() {
         MousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
+    }
+
+    private int CalculateStars() {
+        int stars = 0;
+        foreach (var scoreLevel in scoreStarLevels) {
+            if (score >= Brick.totalScoreValue * scoreLevel) {
+                stars++;
+            }
+        }
+        return stars;
+    }
+
+    private void ShowStars(int amount) {
+        for (int i = 0; i < amount; i++) {
+            starsContainerUI.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 }

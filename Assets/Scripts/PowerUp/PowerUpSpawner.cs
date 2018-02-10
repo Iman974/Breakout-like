@@ -8,8 +8,10 @@ public class PowerUpSpawner : MonoBehaviour {
     [SerializeField] private int powerUpSpawnRate = 2;
     [SerializeField] private float powerUpSpawnTimeRange = 3f;
     [SerializeField] private Vector2 minSpawnArea, maxSpawnArea;
+    [SerializeField] private float deadZoneRadius = 1.5f; // This is used to prevent powerUp from spawning too close to each other
 
     private Vector2 randomSpawnLocation;
+    private Vector2[] spawnedPowerupsLocations;
 
     public static PowerUpSpawner Instance { get; private set; }
 
@@ -21,6 +23,7 @@ public class PowerUpSpawner : MonoBehaviour {
             Destroy(gameObject);
         }
         #endregion
+        spawnedPowerupsLocations = new Vector2[powerUpSpawnRate];
     }
 
     private IEnumerator Start() {
@@ -40,10 +43,21 @@ public class PowerUpSpawner : MonoBehaviour {
 
     private void SpawnPowerUp() {
         for (int i = 0; i < powerUpSpawnRate; i++) {
-            randomSpawnLocation = new Vector2(Random.Range(minSpawnArea.x, maxSpawnArea.x), Random.Range(minSpawnArea.y, maxSpawnArea.y));
+            randomSpawnLocation = GenerateRandomPosition();
+            if (i > 0) {
+                while (Mathf.Abs(spawnedPowerupsLocations[i - 1].x - randomSpawnLocation.x) < deadZoneRadius) {
+                    randomSpawnLocation.x = Random.Range(minSpawnArea.x, maxSpawnArea.x);
+                }
+            }
+
+            spawnedPowerupsLocations[i] = randomSpawnLocation;
             PowerUpInGame newPowerUp = Instantiate(powerUpObject, randomSpawnLocation, Quaternion.identity).GetComponent<PowerUpInGame>();
 
             newPowerUp.powerUp = powerUps[Random.Range(0, powerUps.Length)];
         }
+    }
+
+    private Vector2 GenerateRandomPosition() {
+        return new Vector2(Random.Range(minSpawnArea.x, maxSpawnArea.x), Random.Range(minSpawnArea.y, maxSpawnArea.y));
     }
 }
