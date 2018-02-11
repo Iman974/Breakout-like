@@ -38,21 +38,22 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 10.8478155
+      outSlope: 10.8478155
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 10.94355
+      outSlope: 10.94355
       tangentMode: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_PostInfinity: 1
+    m_RotationOrder: 0
   colliderRadius: 0.3
   lifetime: 10
   targetedRelativePosition: {x: 0, y: -10}
-  movementSpeed: 0.001
-  powerUpDuration: 2
+  yMovementSpeed: 0.0009
+  xMovementSpeed: 0.008
+  xMovementMaxBound: 2
   powerName: 2

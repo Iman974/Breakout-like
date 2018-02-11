@@ -13,7 +13,9 @@ public class PowerUp : ScriptableObject {
     public float colliderRadius = 0.35f;
     public float lifetime = 10f;
     public Vector2 targetedRelativePosition = new Vector2(0f, -10f);
-    public float movementSpeed = 0.001f;
+    public float yMovementSpeed = 0.0007f;
+    public float xMovementSpeed = 0.0007f;
+    public float xMovementMaxBound = 2f;
     public PowersName powerName;
 
     public void InitPower() {

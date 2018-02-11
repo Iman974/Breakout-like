@@ -8,9 +8,13 @@ public class PowerUpInGame : MonoBehaviour {
     private Vector2 startPosition;
     private AnimationCurve powerUpXMovement;
     private AnimationCurve powerUpYMovement;
-    private Vector2 relativeTargetedPosition;
-    private float timeToEval;
-    private float movementSpeed;
+    private float relativeTargetedPositionY = -10f;
+    private float horizontalMovementMaxBound;
+    private float timeToEvalY;
+    private float yMovementSpeed;
+    private float timeToEvalX;
+    private float xMovementSpeed;
+    private Vector2 nextPosition;
 
     private void Start() {
         GetComponent<CircleCollider2D>().radius = powerUp.colliderRadius;
@@ -20,23 +24,30 @@ public class PowerUpInGame : MonoBehaviour {
 
         powerUpXMovement = powerUp.horizontalMovement;
         powerUpYMovement = powerUp.verticalMovement;
-        relativeTargetedPosition = powerUp.targetedRelativePosition;
-        movementSpeed = powerUp.movementSpeed;
+        relativeTargetedPositionY = startPosition.y + powerUp.targetedRelativePosition.y;
+        yMovementSpeed = powerUp.yMovementSpeed;
+        xMovementSpeed = powerUp.xMovementSpeed;
+        horizontalMovementMaxBound = powerUp.xMovementMaxBound;
     }
 
     private void FixedUpdate() {
-        timeToEval += movementSpeed;
-        transform.position = new Vector2(Mathf.Lerp(startPosition.x, relativeTargetedPosition.x, powerUpXMovement.Evaluate(timeToEval)),
-            Mathf.Lerp(startPosition.y, relativeTargetedPosition.y, powerUpYMovement.Evaluate(timeToEval)));
+        timeToEvalY += yMovementSpeed;
+        timeToEvalX += xMovementSpeed;
+
+        nextPosition.x = startPosition.x + (horizontalMovementMaxBound * powerUpXMovement.Evaluate(timeToEvalX));
+        nextPosition.y = startPosition.y + (relativeTargetedPositionY * powerUpYMovement.Evaluate(timeToEvalY));
+
+        transform.position = nextPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (!other.CompareTag("Ball")) {
-            Destroy(gameObject, 1f);
             return;
         }
+
+        Destroy(gameObject, 1f);
         powerUp.TriggerPower();
-        // Play pick up anim
         Destroy(gameObject);
+        // Play pick up anim
     }
 }

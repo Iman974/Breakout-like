@@ -9,9 +9,14 @@ public class PowerUpSpawner : MonoBehaviour {
     [SerializeField] private float powerUpSpawnTimeRange = 3f;
     [SerializeField] private Vector2 minSpawnArea, maxSpawnArea;
     [SerializeField] private float deadZoneRadius = 1.5f; // This is used to prevent powerUp from spawning too close to each other
+    [SerializeField] private LayerMask powerUpLayer;
+    [SerializeField] private float spacingBetweenRays = 0.1f;
 
     private Vector2 randomSpawnLocation;
     private Vector2[] spawnedPowerupsLocations;
+    private int numberOfRayChecks;
+    private Vector2 ballDirection, ballDirectionNormal, ballPosition, raySpacing;
+    private float ballRadius;
 
     public static PowerUpSpawner Instance { get; private set; }
 
@@ -30,6 +35,7 @@ public class PowerUpSpawner : MonoBehaviour {
         while (GameManager.Instance.GameState == GameManager.State.LAUNCH) {
             yield return null;
         }
+
         InvokeRepeating("SpawnPowerUp", powerUpSpawnTimeRange, powerUpSpawnTimeRange);
     }
 
@@ -45,8 +51,14 @@ public class PowerUpSpawner : MonoBehaviour {
         for (int i = 0; i < powerUpSpawnRate; i++) {
             randomSpawnLocation = GenerateRandomPosition();
             if (i > 0) {
-                while (Mathf.Abs(spawnedPowerupsLocations[i - 1].x - randomSpawnLocation.x) < deadZoneRadius) {
-                    randomSpawnLocation.x = Random.Range(minSpawnArea.x, maxSpawnArea.x);
+                int antiLoop = 0;
+                while (Mathf.Abs(spawnedPowerupsLocations[i - 1].x - randomSpawnLocation.x) < deadZoneRadius || CheckIfOnBallPath()) {
+                    randomSpawnLocation.x = Random.Range(minSpawnArea.x, maxSpawnArea.x); // Find another way, this is risky
+                    antiLoop++;
+                    if (antiLoop > 250) {
+                        Debug.LogError(@"infinite loop !!!! /!\");
+                        break;
+                    }
                 }
             }
 
@@ -59,5 +71,24 @@ public class PowerUpSpawner : MonoBehaviour {
 
     private Vector2 GenerateRandomPosition() {
         return new Vector2(Random.Range(minSpawnArea.x, maxSpawnArea.x), Random.Range(minSpawnArea.y, maxSpawnArea.y));
+    }
+
+    private bool CheckIfOnBallPath() {
+        ballDirection = Ball.MainBall.Direction;
+        ballRadius = Ball.MainBall.Radius;
+        ballDirectionNormal = new Vector2(ballDirection.y, -ballDirection.x) * -ballRadius;
+        ballPosition = (Vector2)Ball.MainBall.transform.position - ballDirectionNormal;
+        //numberOfRayChecks = (int)(((ballRadius * 2) / spacingBetweenRays) / ballRadius);
+        raySpacing = ballDirectionNormal * spacingBetweenRays;
+
+        //Debug.DrawRay(ballPosition, ballDirectionNormal, Color.red, 3f);
+        for (int i = 0; i < 11; i++) { // Find out how to calculate the number of rays needed relatively to the ball radius
+            //Debug.DrawRay(ballPosition + (i * raySpacing), ballDirection, Color.cyan, 3f);
+            if (Physics2D.Raycast(ballPosition + (raySpacing * i), ballDirection, 15f, powerUpLayer).collider != null) {
+                Debug.Log("Ontrajectory");
+                return true;
+            }
+        }
+        return false;
     }
 }

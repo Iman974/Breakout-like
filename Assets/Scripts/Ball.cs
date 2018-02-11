@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour {
 
     //private float oldXVelocity;
     private GameManager GMinstance;
-    private CircleCollider2D thisCollider;
+    private SpriteRenderer thisRenderer;
 
     public static Ball MainBall { get; private set; }
     public Rigidbody2D Rb2D { get; private set; }
@@ -45,9 +45,9 @@ public class Ball : MonoBehaviour {
             MainBall = this;
         }
         Rb2D = GetComponent<Rigidbody2D>();
-        thisCollider = GetComponent<CircleCollider2D>();
+        thisRenderer = GetComponent<SpriteRenderer>();
         DoSpeedUpOverTime = true;
-        Radius = thisCollider.radius;
+        Radius = thisRenderer.bounds.center.x - thisRenderer.bounds.min.x;
     }
 
     private void Start() {

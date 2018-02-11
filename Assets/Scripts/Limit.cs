@@ -27,6 +27,7 @@ public class Limit : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (!other.CompareTag("Ball")) {
+            Destroy(other.gameObject, 2f);
             return;
         }
 

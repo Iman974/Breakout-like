@@ -53,6 +53,7 @@ MonoBehaviour:
   colliderRadius: 0.35
   lifetime: 10
   targetedRelativePosition: {x: 0, y: -10}
-  movementSpeed: 0.0007
-  powerUpDuration: 2
+  yMovementSpeed: 0.0006
+  xMovementSpeed: 0.0006
+  xMovementMaxBound: 2
   powerName: 0
