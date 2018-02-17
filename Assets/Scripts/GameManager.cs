@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public enum State {
         LAUNCH,
         PLAYING,
+        RESTART,
         GAMEOVER,
         WIN
     }
@@ -44,16 +45,25 @@ public class GameManager : MonoBehaviour {
         }
         set {
             gameState = value;
-            if (value > State.PLAYING) {
-                PowerUpSpawner.Instance.CancelInvoke();
-                if (value == State.WIN) {
+            switch (value) {
+                case State.LAUNCH:
+                    break;
+                case State.PLAYING:
+                    PowerUpSpawner.Instance.StartSpawning();
+                    break;
+                case State.RESTART:
+                    PowerUpSpawner.Instance.StopSpawning();
+                    break;
+                case State.WIN:
                     winText.gameObject.SetActive(true);
                     scoreboard.gameObject.SetActive(true);
-                    
                     ShowStars(CalculateStars());
-                } else if (value == State.GAMEOVER) {
+                    PowerUpSpawner.Instance.StopSpawning();
+                    break;
+                case State.GAMEOVER:
                     loseText.gameObject.SetActive(true);
-                }
+                    PowerUpSpawner.Instance.StopSpawning();
+                    break;
             }
         }
     }
@@ -83,7 +93,6 @@ public class GameManager : MonoBehaviour {
         }
         #endregion
         initialComboTime = comboTime;
-        GameState = State.LAUNCH;
     }
 
     private void Start() {
@@ -99,6 +108,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator StartGame(bool countDown = true) {
+        GameState = State.LAUNCH;
         while (CustomAnimation.IsAnimationRunning) {
             yield return null;
         }
@@ -171,6 +181,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RestartGame() {
+        GameState = State.RESTART;
         Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
             Quaternion.identity).GetComponent<Ball>();
 
