@@ -13,20 +13,21 @@ public class GameManager : MonoBehaviour {
         WIN
     }
 
-    [SerializeField] private Text winText, loseText;
+    //[SerializeField] private Text winText, loseText;
     [SerializeField] private TextAnimation centerTextAnimation;
-    [SerializeField] private TextAnimation scoreTextAnimation;
+    //[SerializeField] private TextAnimation scoreTextAnimation;
     [SerializeField] private GameObject mainBallObject;
-    [SerializeField] private Text livesText;
-    [SerializeField] private Image scoreboard;
-    [SerializeField] private GameObject starsContainerUI;
+    //[SerializeField] private Text livesText;
+    //[SerializeField] private Image scoreboard;
+    //[SerializeField] private GameObject starsContainerUI;
     [SerializeField] private float comboTime = 0.75f;
     [SerializeField] private int startedEarlyPenalty = -15;
-    [SerializeField] private Color scoreUpColor = Color.green;
-    [SerializeField] private Color scoreDownColor = Color.red;
+    //[SerializeField] private Color scoreUpColor = Color.green;
+    //[SerializeField] private Color scoreDownColor = Color.red;
     [SerializeField] private int lives = 1;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
     [SerializeField] private float[] scoreStarLevels = new float[] { 1f, 1.5f, 2f };
+    [SerializeField] private UIManager UImanager;
     //[SerializeField] private State debugState;
 
     private GamepadController gamepad;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour {
         }
         set {
             gameState = value;
+            UImanager.OnGameStateChanged();
             switch (value) {
                 case State.LAUNCH:
                     break;
@@ -55,13 +57,10 @@ public class GameManager : MonoBehaviour {
                     PowerUpSpawner.Instance.StopSpawning();
                     break;
                 case State.WIN:
-                    winText.gameObject.SetActive(true);
-                    scoreboard.gameObject.SetActive(true);
-                    ShowStars(CalculateStars());
+                    UImanager.ShowStars(CalculateStars());
                     PowerUpSpawner.Instance.StopSpawning();
                     break;
                 case State.GAMEOVER:
-                    loseText.gameObject.SetActive(true);
                     PowerUpSpawner.Instance.StopSpawning();
                     break;
             }
@@ -75,7 +74,7 @@ public class GameManager : MonoBehaviour {
         set {
             if (GameState != State.WIN) {
                 lives = value;
-                UpdateLivesOnUI();
+                UImanager.UpdateLives();
 
                 if (lives <= 0) {
                     GameState = State.GAMEOVER;
@@ -146,17 +145,18 @@ public class GameManager : MonoBehaviour {
 
     private void AddToScore(int valueToAdd) {
         score += valueToAdd;
-        if (valueToAdd > 0) {
-            scoreTextAnimation.ColorToSet = scoreUpColor;
-        } else if (valueToAdd < 0) {
-            scoreTextAnimation.ColorToSet = scoreDownColor;
-        }
+        UImanager.UpdateScore(score);
+        //if (valueToAdd > 0) {
+        //    scoreTextAnimation.ColorToSet = scoreUpColor;
+        //} else if (valueToAdd < 0) {
+        //    scoreTextAnimation.ColorToSet = scoreDownColor;
+        //}
 
-        if (!scoreTextAnimation.IsAnimationRunning) {
-            StartCoroutine(scoreTextAnimation.StartAnimation(Animation.COLOR, textToDisplay: "Score: " + score));
-        } else {
-            scoreTextAnimation.SetText("Score: " + score);
-        }
+        //if (!scoreTextAnimation.IsAnimationRunning) {
+        //    StartCoroutine(scoreTextAnimation.StartAnimation(Animation.COLOR, textToDisplay: "Score: " + score));
+        //} else {
+        //    scoreTextAnimation.SetText("Score: " + score);
+        //}
     }
 
     private void Update() {
@@ -170,14 +170,6 @@ public class GameManager : MonoBehaviour {
             GameState = State.WIN;
             debugState = 0;
         }*/
-    }
-
-    private void UpdateLivesOnUI() {
-        if (lives > 1) {
-            livesText.text = "x" + (lives - 1);
-        } else {
-            livesText.transform.parent.gameObject.SetActive(false);
-        }
     }
 
     public void RestartGame() {
@@ -201,11 +193,5 @@ public class GameManager : MonoBehaviour {
             }
         }
         return stars;
-    }
-
-    private void ShowStars(int amount) {
-        for (int i = 0; i < amount; i++) {
-            starsContainerUI.transform.GetChild(i).gameObject.SetActive(true);
-        }
     }
 }

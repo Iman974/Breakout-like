@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4983606727916206}
   - component: {fileID: 114282958409452230}
+  - component: {fileID: 114916497090351272}
   - component: {fileID: 114837739829467550}
   - component: {fileID: 114548148951014804}
   m_Layer: 8
@@ -53,25 +54,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fadb8a455f5a5974b8d3f32006b7b132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winText: {fileID: 0}
-  loseText: {fileID: 0}
   centerTextAnimation: {fileID: 0}
   scoreTextAnimation: {fileID: 0}
   mainBallObject: {fileID: 1856787026408946, guid: d458690baec646c48bf9250d94dd96a9,
     type: 2}
-  livesText: {fileID: 0}
-  scoreboard: {fileID: 0}
-  starsContainerUI: {fileID: 0}
   comboTime: 1
   startedEarlyPenalty: -15
-  scoreUpColor: {r: 0, g: 1, b: 0, a: 1}
-  scoreDownColor: {r: 1, g: 0, b: 0, a: 1}
   lives: 2
   startBallDistanceYFromGamePad: 1
   scoreStarLevels:
   - 1
   - 1.5
   - 2
+  UImanager: {fileID: 114916497090351272}
 --- !u!114 &114548148951014804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,8 +113,25 @@ MonoBehaviour:
   powerUpSpawnTimeRange: 9
   minSpawnArea: {x: -5, y: 1}
   maxSpawnArea: {x: 5, y: -1}
-  deadZoneRadius: 1.5
   powerUpLayer:
     serializedVersion: 2
     m_Bits: 4096
   spacingBetweenRays: 0.2
+--- !u!114 &114916497090351272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907727119124048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdcf0b2e6d179d44290c93d87e8ed5b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winText: {fileID: 0}
+  loseText: {fileID: 0}
+  scoreText: {fileID: 0}
+  livesText: {fileID: 0}
+  scoreboardPannel: {fileID: 0}
+  scoreUpColor: {r: 0, g: 1, b: 0, a: 1}
+  scoreDownColor: {r: 1, g: 0, b: 0, a: 1}

@@ -277,16 +277,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
+    - target: {fileID: 114916497090351272, guid: dfd04877fe4161c4497b7efe080f2caf,
         type: 2}
       propertyPath: winText
       value: 
       objectReference: {fileID: 291966314}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
+    - target: {fileID: 114916497090351272, guid: dfd04877fe4161c4497b7efe080f2caf,
         type: 2}
       propertyPath: loseText
       value: 
       objectReference: {fileID: 1867333593}
+    - target: {fileID: 114916497090351272, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 133697587}
+    - target: {fileID: 114916497090351272, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: livesText
+      value: 
+      objectReference: {fileID: 1195263107}
+    - target: {fileID: 114916497090351272, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: scoreboardPannel
+      value: 
+      objectReference: {fileID: 720961737}
     - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
         type: 2}
       propertyPath: centerTextAnimation
@@ -297,21 +312,6 @@ Prefab:
       propertyPath: scoreTextAnimation
       value: 
       objectReference: {fileID: 133697589}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
-        type: 2}
-      propertyPath: livesText
-      value: 
-      objectReference: {fileID: 1195263107}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
-        type: 2}
-      propertyPath: scoreboard
-      value: 
-      objectReference: {fileID: 720961737}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
-        type: 2}
-      propertyPath: starsContainerUI
-      value: 
-      objectReference: {fileID: 1263653408}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfd04877fe4161c4497b7efe080f2caf, type: 2}
   m_IsPrefabParent: 0
