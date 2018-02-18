@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     [System.Serializable]
     public enum State {
+        MAINMENU,
         LAUNCH,
         PLAYING,
         RESTART,
@@ -47,22 +48,10 @@ public class GameManager : MonoBehaviour {
         set {
             gameState = value;
             UImanager.OnGameStateChanged();
-            switch (value) {
-                case State.LAUNCH:
-                    break;
-                case State.PLAYING:
-                    PowerUpSpawner.Instance.StartSpawning();
-                    break;
-                case State.RESTART:
-                    PowerUpSpawner.Instance.StopSpawning();
-                    break;
-                case State.WIN:
-                    UImanager.ShowStars(CalculateStars());
-                    PowerUpSpawner.Instance.StopSpawning();
-                    break;
-                case State.GAMEOVER:
-                    PowerUpSpawner.Instance.StopSpawning();
-                    break;
+            if (value > State.PLAYING) {
+                PowerUpSpawner.Instance.StopSpawning();
+            } else if (value == State.PLAYING) {
+                PowerUpSpawner.Instance.StartSpawning();
             }
         }
     }
@@ -185,7 +174,7 @@ public class GameManager : MonoBehaviour {
         MousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
     }
 
-    private int CalculateStars() {
+    public int CalculateStars() {
         int stars = 0;
         foreach (var scoreLevel in scoreStarLevels) {
             if (score >= Brick.totalScoreValue * scoreLevel) {

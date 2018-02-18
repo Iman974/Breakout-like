@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Reflection;
 
 [CreateAssetMenu(fileName = "New Power Up")]
 public class PowerUp : ScriptableObject {
@@ -19,7 +20,8 @@ public class PowerUp : ScriptableObject {
     public PowersName powerName;
 
     public void InitPower() {
-        power = (IPower)typeof(Powers).GetField(powerName.ToString()).GetValue(Powers.Instance);
+        //power = (IPower)typeof(Powers).GetField(powerName.ToString(), BindingFlags.Instance | BindingFlags.NonPublic).GetValue(Powers.Instance);
+        power = Powers.Instance.powers[(int)powerName];
     }
 
     public void TriggerPower() {

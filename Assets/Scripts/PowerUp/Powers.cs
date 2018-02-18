@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Reflection;
 
 public enum PowersName {
-    defaultSpeedUpPower,
-    defaultDestroyPower,
-    defaultDividePower
+    SPEEDUP,
+    DESTROY,
+    DIVIDE
 }
 
 public class Powers : MonoBehaviour {
 
-    public static Powers Instance;
+    [SerializeField] private SpeedUpPower speedUpPower;
+    [SerializeField] private DestroyPower destroyPower;
+    [SerializeField] private DividePower dividePower;
 
-    public SpeedUpPower defaultSpeedUpPower;
-    public DestroyPower defaultDestroyPower;
-    public DividePower defaultDividePower;
+    public IPower[] powers;
+
+    public static Powers Instance;
 
     private void Awake() {
         #region Singleton
@@ -23,6 +26,12 @@ public class Powers : MonoBehaviour {
             Destroy(gameObject);
         }
         #endregion
+        FieldInfo[] powerFields = GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+        powers = new IPower[powerFields.Length];
+        
+        for (int i = 0; i < powers.Length; i++) {
+            powers[i] = (IPower)powerFields[i].GetValue(Instance);
+        }
     }
 
     [System.Serializable]
@@ -78,7 +87,7 @@ public class Powers : MonoBehaviour {
 
         [SerializeField] private GameObject subDivisionBall;
         [SerializeField] private int divisionBallCount = 3;
-        [SerializeField] private float subBallDistanceFromMainBall = 0.5f;
+        //[SerializeField] private float subBallDistanceFromMainBall = 0.5f;
         [SerializeField] private float subBallDivisionOffset = 5f;
         [SerializeField] private float subBallSpeedMultiplier = 1.5f;
         [SerializeField] private int maxHitCount = 4;
@@ -104,8 +113,8 @@ public class Powers : MonoBehaviour {
             float subBallSpeed = Ball.MainBall.Speed * subBallSpeedMultiplier;
             Ball[] subDivisionBalls = new Ball[divisionBallCount];
 
-            Ball firstSubBall = InstantiateSubBall((Vector2)Ball.MainBall.transform.position + (Ball.MainBall.Direction *
-                    subBallDistanceFromMainBall), ((Ball.MainBall.Radius * 100f) * -count) + (subBallDivisionOffset * -count));
+            Ball firstSubBall = InstantiateSubBall((Vector2)Ball.MainBall.transform.position + (Ball.MainBall.Direction * 0.5f),
+                ((Ball.MainBall.Radius * 100f) * -count) + (subBallDivisionOffset * -count));
             subDivisionBalls[0] = firstSubBall;
             firstSubBall.Speed = subBallSpeed;
             firstSubBall.Direction = firstSubBall.transform.position - Ball.MainBall.transform.position;
@@ -118,22 +127,6 @@ public class Powers : MonoBehaviour {
                 newSubBall.Speed = subBallSpeed;
                 newSubBall.Direction = newSubBall.transform.position - Ball.MainBall.transform.position;
             }
-
-            /*int destroyedSubBalls = 0;
-            while (destroyedSubBalls < divisionBallCount) {
-                for (int i = 0; i < divisionBallCount; i++) {
-                    if (subDivisionBalls[i] == null) {
-                        continue;
-                    }
-
-                    if (subDivisionBalls[i].CollisionCount >= subBallMaxHitCount) {
-                        Destroy(subDivisionBalls[i].gameObject);
-                        subDivisionBalls[i] = null;
-                        destroyedSubBalls++;
-                    }
-                }
-                yield return null;
-            }*/
         }
 
         private Ball InstantiateSubBall(Vector2 atPosition, float rotationAroundMainBall) {

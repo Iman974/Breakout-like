@@ -54,6 +54,7 @@ public class UIManager : MonoBehaviour {
             case GameManager.State.WIN:
                 winText.gameObject.SetActive(true);
                 scoreboardPannel.gameObject.SetActive(true);
+                ShowStars(GameManager.Instance.CalculateStars());
                 break;
             case GameManager.State.GAMEOVER:
                 loseText.gameObject.SetActive(true);

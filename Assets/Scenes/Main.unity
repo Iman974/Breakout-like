@@ -277,6 +277,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
+        type: 2}
+      propertyPath: centerTextAnimation
+      value: 
+      objectReference: {fileID: 1262246869}
     - target: {fileID: 114916497090351272, guid: dfd04877fe4161c4497b7efe080f2caf,
         type: 2}
       propertyPath: winText
@@ -302,16 +307,6 @@ Prefab:
       propertyPath: scoreboardPannel
       value: 
       objectReference: {fileID: 720961737}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
-        type: 2}
-      propertyPath: centerTextAnimation
-      value: 
-      objectReference: {fileID: 1262246869}
-    - target: {fileID: 114282958409452230, guid: dfd04877fe4161c4497b7efe080f2caf,
-        type: 2}
-      propertyPath: scoreTextAnimation
-      value: 
-      objectReference: {fileID: 133697589}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfd04877fe4161c4497b7efe080f2caf, type: 2}
   m_IsPrefabParent: 0

@@ -71,6 +71,7 @@ public class PowerUpSpawner : MonoBehaviour {
                     break;
                 }
             }
+            Debug.Log("random spawn iterations: " + antiLoop);
 
             spawnedPowerupsLocations[i] = randomSpawnLocation;
             PowerUpInGame newPowerUp = Instantiate(powerUpObject, randomSpawnLocation, Quaternion.identity).GetComponent<PowerUpInGame>();
