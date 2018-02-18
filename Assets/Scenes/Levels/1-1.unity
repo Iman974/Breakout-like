@@ -1256,7 +1256,7 @@ GameObject:
   - component: {fileID: 720961738}
   - component: {fileID: 720961737}
   m_Layer: 5
-  m_Name: Scoreboard Panel
+  m_Name: ScoreboardPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

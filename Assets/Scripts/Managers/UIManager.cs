@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField] private Text winText, loseText;
     [SerializeField] private Text scoreText, livesText;
-    [SerializeField] private Image scoreboardPannel;
+    [SerializeField] private Image scoreboardPanel;
 
     [SerializeField] private Color scoreUpColor = Color.green;
     [SerializeField] private Color scoreDownColor = Color.red;
@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour {
             switch (newState) {
                 case GameManager.State.WIN:
                     winText.gameObject.SetActive(true);
-                    scoreboardPannel.gameObject.SetActive(true);
+                    scoreboardPanel.gameObject.SetActive(true);
                     ShowStars(GameManager.Instance.CalculateStars());
                     break;
                 case GameManager.State.GAMEOVER:
