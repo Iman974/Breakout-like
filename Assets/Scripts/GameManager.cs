@@ -81,22 +81,23 @@ public class GameManager : MonoBehaviour {
         }
         #endregion
         initialComboTime = comboTime;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
-        Lives = lives;
-        AddToScore(0);
+        //gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        StartCoroutine(StartGame());
+        GameState = State.MAINMENU;
     }
 
     private IEnumerator StartGame(bool countDown = true) {
+        Lives = lives;
+        AddToScore(0);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         GameState = State.LAUNCH;
+
         while (CustomAnimation.IsAnimationRunning) {
             yield return null;
         }

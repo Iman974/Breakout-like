@@ -21,8 +21,6 @@ GameObject:
   - component: {fileID: 4983606727916206}
   - component: {fileID: 114282958409452230}
   - component: {fileID: 114916497090351272}
-  - component: {fileID: 114837739829467550}
-  - component: {fileID: 114548148951014804}
   m_Layer: 8
   m_Name: GameManager
   m_TagString: Untagged
@@ -66,55 +64,6 @@ MonoBehaviour:
   - 1.5
   - 2
   UImanager: {fileID: 114916497090351272}
---- !u!114 &114548148951014804
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1907727119124048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01106a0939a5bed4f980e80f41fd7860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedUpPower:
-    powerDuration: 2
-    speedUpMultiplier: 1.25
-  destroyPower:
-    powerDuration: 2
-  dividePower:
-    powerDuration: 0
-    subDivisionBall: {fileID: 1190938799236838, guid: 7acd7deda44829b45a0933fbdc5c7d04,
-      type: 2}
-    divisionBallCount: 4
-    subBallDivisionOffset: 15
-    subBallSpeedMultiplier: 1.5
-    maxHitCount: 3
---- !u!114 &114837739829467550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1907727119124048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb0d1a7f1c8be7547b1ac7183823ff76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUps:
-  - {fileID: 11400000, guid: 7ee9ef38b8568354aa1d6af43b7a4187, type: 2}
-  - {fileID: 11400000, guid: 5c7db548a0b958349bb306a3e675fbf9, type: 2}
-  - {fileID: 11400000, guid: 2510f1fee60ff9e4492addb893bb03a2, type: 2}
-  powerUpObject: {fileID: 1123985711743280, guid: da38537bed3a13241a466265f229a645,
-    type: 2}
-  powerUpSpawnRate: 2
-  powerUpSpawnTimeRange: 9
-  minSpawnArea: {x: -5, y: 1}
-  maxSpawnArea: {x: 5, y: -1}
-  powerUpLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  spacingBetweenRays: 0.2
 --- !u!114 &114916497090351272
 MonoBehaviour:
   m_ObjectHideFlags: 1

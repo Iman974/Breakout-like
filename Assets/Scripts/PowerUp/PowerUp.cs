@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Reflection;
 
 [CreateAssetMenu(fileName = "New Power Up")]
 public class PowerUp : ScriptableObject {

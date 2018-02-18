@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour {
     }
 
     private void Start() {
-        starsContainer = scoreboardPannel.transform.GetChild(3).gameObject;
+        //starsContainer = scoreboardPannel.transform.GetChild(3).gameObject;
     }
 
     public void UpdateLives() {
@@ -50,15 +50,17 @@ public class UIManager : MonoBehaviour {
 
     public void OnGameStateChanged() {
         GameManager.State newState = GameManager.Instance.GameState;
-        switch (newState) {
-            case GameManager.State.WIN:
-                winText.gameObject.SetActive(true);
-                scoreboardPannel.gameObject.SetActive(true);
-                ShowStars(GameManager.Instance.CalculateStars());
-                break;
-            case GameManager.State.GAMEOVER:
-                loseText.gameObject.SetActive(true);
-                break;
+        if (newState != GameManager.State.MAINMENU) {
+            switch (newState) {
+                case GameManager.State.WIN:
+                    winText.gameObject.SetActive(true);
+                    scoreboardPannel.gameObject.SetActive(true);
+                    ShowStars(GameManager.Instance.CalculateStars());
+                    break;
+                case GameManager.State.GAMEOVER:
+                    loseText.gameObject.SetActive(true);
+                    break;
+            }
         }
     }
 }
