@@ -63,7 +63,6 @@ MonoBehaviour:
   - 1
   - 1.5
   - 2
-  UImanager: {fileID: 114916497090351272}
 --- !u!114 &114916497090351272
 MonoBehaviour:
   m_ObjectHideFlags: 1

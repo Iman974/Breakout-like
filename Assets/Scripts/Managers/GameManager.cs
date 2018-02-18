@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int lives = 1;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
     [SerializeField] private float[] scoreStarLevels = new float[] { 1f, 1.5f, 2f };
-    [SerializeField] private UIManager UImanager;
     //[SerializeField] private State debugState;
 
     private GamepadController gamepad;
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviour {
     private int score;
     private int currentCombo = 1;
     private float initialComboTime;
+    private UIManager UiManager;
 
     public static GameManager Instance { get; private set; }
     public float MousePositionX { get; private set; }
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
         }
         set {
             gameState = value;
-            UImanager.OnGameStateChanged();
+            UiManager.OnGameStateChanged();
             if (value > State.PLAYING) {
                 PowerUpSpawner.Instance.StopSpawning();
             } else if (value == State.PLAYING) {
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour {
         set {
             if (GameState != State.WIN) {
                 lives = value;
-                UImanager.UpdateLives();
+                UiManager.UpdateLives();
 
                 if (lives <= 0) {
                     GameState = State.GAMEOVER;
@@ -86,9 +86,11 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        //gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
+        gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
+        UiManager = GetComponent<UIManager>();
 
         GameState = State.MAINMENU;
+        StartCoroutine(StartGame());
     }
 
     private IEnumerator StartGame(bool countDown = true) {
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour {
 
     private void AddToScore(int valueToAdd) {
         score += valueToAdd;
-        UImanager.UpdateScore(score);
+        UiManager.UpdateScore(score);
         //if (valueToAdd > 0) {
         //    scoreTextAnimation.ColorToSet = scoreUpColor;
         //} else if (valueToAdd < 0) {

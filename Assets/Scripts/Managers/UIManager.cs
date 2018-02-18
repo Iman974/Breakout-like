@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField] private Text winText, loseText;
     [SerializeField] private Text scoreText, livesText;
-    [SerializeField] private Image scoreboardPanel;
+    [SerializeField] private GameObject scoreboardPanel;
 
     [SerializeField] private Color scoreUpColor = Color.green;
     [SerializeField] private Color scoreDownColor = Color.red;
@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour {
     }
 
     private void Start() {
-        //starsContainer = scoreboardPannel.transform.GetChild(3).gameObject;
+        starsContainer = scoreboardPanel.transform.GetChild(3).gameObject;
     }
 
     public void UpdateLives() {

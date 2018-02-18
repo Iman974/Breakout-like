@@ -66,7 +66,7 @@ public class PowerUpSpawner : MonoBehaviour {
 
                 randomSpawnLocation.x = Random.Range(minSpawnArea.x, maxSpawnArea.x); // Find another way, this is risky
                 antiLoop++;
-                if (antiLoop > 20) {
+                if (antiLoop > 50) {
                     Debug.LogError(@"too big loop !!!! /!\");
                     break;
                 }
