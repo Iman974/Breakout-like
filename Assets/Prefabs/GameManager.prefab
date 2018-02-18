@@ -79,6 +79,6 @@ MonoBehaviour:
   loseText: {fileID: 0}
   scoreText: {fileID: 0}
   livesText: {fileID: 0}
-  scoreboardPannel: {fileID: 0}
+  scoreboardPanel: {fileID: 0}
   scoreUpColor: {r: 0, g: 1, b: 0, a: 1}
   scoreDownColor: {r: 1, g: 0, b: 0, a: 1}

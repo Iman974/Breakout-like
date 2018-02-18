@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
@@ -9,15 +8,20 @@ public class LevelManager : MonoBehaviour {
 
     private class World {
         public Level[] levels;
+        public int worldNumber;
     }
 
     private class Level {
-        public int levelIndex;
+        public int levelNumber;
     }
 
     private World[] worlds;
 
-    private void PlayGameLevel(int level) {
-        SceneManager.LoadSceneAsync("" + "-" + "");
+    public void SetCurrentWorld(Text senderText) {
+        currentWorld = senderText.text[senderText.text.Length - 1];
+    }
+
+    public void PlayGameLevel(Text levelText) {
+        SceneManager.LoadSceneAsync(currentWorld + "-" + levelText.text[levelText.text.Length - 1]);
     }
 }
