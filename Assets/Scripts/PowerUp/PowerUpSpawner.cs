@@ -31,7 +31,11 @@ public class PowerUpSpawner : MonoBehaviour {
         spawnedPowerupsLocations = new Vector2[powerUpSpawnRate];
     }
 
-    private IEnumerator Start() {
+    private void OnEnable() {
+        StartCoroutine(WaitForLaunch());
+    }
+
+    private IEnumerator WaitForLaunch() {
         while (GameManager.Instance.GameState == GameManager.State.LAUNCH) {
             yield return null;
         }

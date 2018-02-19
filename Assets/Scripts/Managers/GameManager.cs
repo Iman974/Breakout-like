@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
 
     [System.Serializable]
     public enum State {
-        MAINMENU,
         LAUNCH,
         PLAYING,
         RESTART,
@@ -28,7 +27,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int lives = 1;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
     [SerializeField] private float[] scoreStarLevels = new float[] { 1f, 1.5f, 2f };
-    //[SerializeField] private State debugState;
 
     private GamepadController gamepad;
     private Camera mainCamera;
@@ -82,15 +80,23 @@ public class GameManager : MonoBehaviour {
         #endregion
         initialComboTime = comboTime;
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(centerTextAnimation.transform.parent.gameObject);
+        UiManager = GetComponent<UIManager>();
+        gameObject.SetActive(false);
     }
 
-    private void Start() {
+    private void OnEnable() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
-        UiManager = GetComponent<UIManager>();
+        centerTextAnimation.transform.parent.gameObject.SetActive(true); // Enables the game canvas
 
-        GameState = State.MAINMENU;
         StartCoroutine(StartGame());
+    }
+
+    private void OnDisable() {
+        if (centerTextAnimation != null) {
+            centerTextAnimation.transform.parent.gameObject.SetActive(false); // Disables the game canvas
+        }
     }
 
     private IEnumerator StartGame(bool countDown = true) {
@@ -158,10 +164,6 @@ public class GameManager : MonoBehaviour {
             currentCombo = 1;
             comboTime = initialComboTime;
         }
-        /*if (debugState != 0) {
-            GameState = State.WIN;
-            debugState = 0;
-        }*/
     }
 
     public void RestartGame() {

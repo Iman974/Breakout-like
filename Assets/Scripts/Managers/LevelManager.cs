@@ -30,12 +30,19 @@ public class LevelManager : MonoBehaviour {
 
     private IEnumerator LoadLevel(string levelName) {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelName);
-        
+        loadOperation.completed += EnableGameManager;
+
         while (!loadOperation.isDone) {
             loadingBar.transform.parent.gameObject.SetActive(true);
             loadingBar.value = Mathf.Clamp01(loadOperation.progress / 0.9f);
             yield return null;
         }
+         // ?
+    }
+
+    private void EnableGameManager(AsyncOperation operation) {
+        GameManager.Instance.gameObject.SetActive(true);
+        operation.completed -= EnableGameManager;
     }
 
     private int GetNumberInString(string toParse) {
