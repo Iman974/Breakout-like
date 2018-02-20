@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private TextAnimation centerTextAnimation;
     //[SerializeField] private TextAnimation scoreTextAnimation;
     [SerializeField] private GameObject mainBallObject;
+    [SerializeField] private GameObject gamepadObject;
     //[SerializeField] private Text livesText;
     //[SerializeField] private Image scoreboard;
     //[SerializeField] private GameObject starsContainerUI;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour {
     private int currentCombo = 1;
     private float initialComboTime;
     private UIManager UiManager;
+    private SceneData currentSceneData;
 
     public static GameManager Instance { get; private set; }
     public float MousePositionX { get; private set; }
@@ -83,12 +85,16 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(centerTextAnimation.transform.parent.gameObject);
         UiManager = GetComponent<UIManager>();
         gameObject.SetActive(false);
+        PowerUpSpawner.Instance.enabled = true;
     }
 
     private void OnEnable() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        gamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
         centerTextAnimation.transform.parent.gameObject.SetActive(true); // Enables the game canvas
+        currentSceneData = GameObject.FindWithTag("SceneData").GetComponent<SceneDataHolder>().sceneData;
+
+        Instantiate(mainBallObject, currentSceneData.mainBallPosition, Quaternion.identity);
+        gamepad = Instantiate(gamepadObject, currentSceneData.gamepadPosition, Quaternion.identity).GetComponent<GamepadController>();
 
         StartCoroutine(StartGame());
     }

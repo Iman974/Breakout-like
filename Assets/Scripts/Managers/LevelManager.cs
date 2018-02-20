@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour {
 
     public void SetCurrentWorld(Text senderText) {
         currentWorld = GetNumberInString(senderText.text);
+        //SceneManager.sceneCountInBuildSettings
     }
 
     public void PlayGameLevel(Text levelText) {
@@ -37,7 +38,6 @@ public class LevelManager : MonoBehaviour {
             loadingBar.value = Mathf.Clamp01(loadOperation.progress / 0.9f);
             yield return null;
         }
-         // ?
     }
 
     private void EnableGameManager(AsyncOperation operation) {
