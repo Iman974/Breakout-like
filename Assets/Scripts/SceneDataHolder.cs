@@ -2,5 +2,5 @@
 
 public class SceneDataHolder : MonoBehaviour {
 
-    public SceneData sceneData;
+    public LevelData sceneData;
 }

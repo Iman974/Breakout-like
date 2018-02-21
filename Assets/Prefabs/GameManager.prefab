@@ -92,6 +92,7 @@ MonoBehaviour:
   - 1
   - 1.5
   - 2
+  levelManager: {fileID: 0}
 --- !u!114 &114916497090351272
 MonoBehaviour:
   m_ObjectHideFlags: 1

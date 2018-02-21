@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int lives = 1;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
     [SerializeField] private float[] scoreStarLevels = new float[] { 1f, 1.5f, 2f };
+    [SerializeField] private LevelManager levelManager;
 
     private GamepadController gamepad;
     private Camera mainCamera;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour {
     private int currentCombo = 1;
     private float initialComboTime;
     private UIManager UiManager;
-    private SceneData currentSceneData;
+    private LevelData currentSceneData;
 
     public static GameManager Instance { get; private set; }
     public float MousePositionX { get; private set; }
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour {
             Instance = this;
         } else if (Instance != this) {
             Destroy(gameObject);
+            return;
         }
         #endregion
         initialComboTime = comboTime;
@@ -174,6 +176,11 @@ public class GameManager : MonoBehaviour {
         } else {
             currentCombo = 1;
             comboTime = initialComboTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            gameObject.SetActive(false);
+            levelManager.ReturnToMainMenu();
         }
     }
 

@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour {
     private void Awake() {
         if (instantiated == true) {
             Destroy(gameObject);
+            return;
         }
         instantiated = true;
     }
