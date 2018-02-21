@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour {
             UiManager.OnGameStateChanged();
             if (value > State.PLAYING) {
                 PowerUpSpawner.Instance.StopSpawning();
+                if (value == State.WIN) {
+                    currentSceneData.hasWon = true;
+                }
             } else if (value == State.PLAYING) {
                 PowerUpSpawner.Instance.StartSpawning();
             }
@@ -91,7 +94,9 @@ public class GameManager : MonoBehaviour {
     private void OnEnable() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         centerTextAnimation.transform.parent.gameObject.SetActive(true); // Enables the game canvas
-        currentSceneData = GameObject.FindWithTag("SceneData").GetComponent<SceneDataHolder>().sceneData;
+        GameObject sceneDataHolder = GameObject.FindWithTag("SceneData");
+        currentSceneData = sceneDataHolder.GetComponent<SceneDataHolder>().sceneData;
+        Destroy(sceneDataHolder);
 
         Instantiate(mainBallObject, currentSceneData.mainBallPosition, Quaternion.identity);
         gamepad = Instantiate(gamepadObject, currentSceneData.gamepadPosition, Quaternion.identity).GetComponent<GamepadController>();

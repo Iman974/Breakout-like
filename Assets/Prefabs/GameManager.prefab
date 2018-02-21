@@ -82,6 +82,8 @@ MonoBehaviour:
   centerTextAnimation: {fileID: 0}
   mainBallObject: {fileID: 1856787026408946, guid: d458690baec646c48bf9250d94dd96a9,
     type: 2}
+  gamepadObject: {fileID: 1896342121814630, guid: 8da75a0c489e0b747b55dc1be24e5412,
+    type: 2}
   comboTime: 1
   startedEarlyPenalty: -15
   lives: 2
