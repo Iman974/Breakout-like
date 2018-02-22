@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -10,11 +9,13 @@ public class GameManager : MonoBehaviour {
         PLAYING,
         RESTART,
         GAMEOVER,
-        WIN
+        WIN,
+        EARLYEXIT
     }
 
     //[SerializeField] private Text winText, loseText;
     [SerializeField] private TextAnimation centerTextAnimation;
+    [SerializeField] private GameObject pausePannel;
     //[SerializeField] private TextAnimation scoreTextAnimation;
     [SerializeField] private GameObject mainBallObject;
     [SerializeField] private GameObject gamepadObject;
@@ -28,7 +29,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int lives = 1;
     [SerializeField] private float startBallDistanceYFromGamePad = 1f;
     [SerializeField] private float[] scoreStarLevels = new float[] { 1f, 1.5f, 2f };
-    [SerializeField] private LevelManager levelManager;
 
     private GamepadController gamepad;
     private Camera mainCamera;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour {
     private float initialComboTime;
     private UIManager UiManager;
     private LevelData currentSceneData;
+    private bool gamePaused;
 
     public static GameManager Instance { get; private set; }
     public float MousePositionX { get; private set; }
@@ -179,13 +180,24 @@ public class GameManager : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Return)) {
-            gameObject.SetActive(false);
-            levelManager.ReturnToMainMenu();
+            /*gameObject.SetActive(false);
+            LevelManager.GoToMainMenu();*/
+            PauseGame(!gamePaused);
         }
     }
 
-    public void RestartGame() {
-        GameState = State.RESTART;
+    private void PauseGame(bool pause) {
+        gamePaused = pause;
+        Cursor.visible = pause;
+        pausePannel.SetActive(pause);
+        Time.timeScale = pause ? 0f : 1f;
+    }
+
+    public void GoToMainMenu() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+    }
+
+    public void RestartGameLevel() {
         Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
             Quaternion.identity).GetComponent<Ball>();
 

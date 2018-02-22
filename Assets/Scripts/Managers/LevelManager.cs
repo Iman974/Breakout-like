@@ -5,20 +5,24 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
+    [SerializeField] private LevelNamesData levelsNames;
     [SerializeField] private Slider loadingBar;
-    [SerializeField] private LevelsInfo levelsInfo;
 
-    private static bool instantiated;
+    private static LevelManager instance;
 
     [HideInInspector] public int currentWorld = 1;
 
     private void Awake() {
-        if (instantiated == true) {
+        if (instance != null) {
             Destroy(gameObject);
             return;
         }
-        instantiated = true;
+        instance = this;
         //DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnDestroy() {
+        instance = null;
     }
 
     public void SetCurrentWorld(Text senderText) {
@@ -36,16 +40,10 @@ public class LevelManager : MonoBehaviour {
         }
 
         while (!loadOperation.isDone) {
-            if (loadingBar != null) {
-                loadingBar.transform.parent.gameObject.SetActive(true);
-                loadingBar.value = Mathf.Clamp01(loadOperation.progress / 0.9f);
-            }
+            loadingBar.transform.parent.gameObject.SetActive(true);
+            loadingBar.value = loadOperation.progress;
             yield return null;
         }
-    }
-
-    public void ReturnToMainMenu() {
-        StartCoroutine(LoadLevel("Menu", false));
     }
 
     private static void EnableGameManager(AsyncOperation operation) {
@@ -54,6 +52,9 @@ public class LevelManager : MonoBehaviour {
     }
 
     public static int GetNumberInString(string toParse) {
-        return int.Parse(System.Text.RegularExpressions.Regex.Match(toParse, @"\d+").Value);
+        if (toParse != string.Empty) {
+            return int.Parse(System.Text.RegularExpressions.Regex.Match(toParse, @"\d+").Value);
+        }
+        throw new System.Exception("Empty string");
     }
 }

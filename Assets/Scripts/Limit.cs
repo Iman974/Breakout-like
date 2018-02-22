@@ -34,7 +34,8 @@ public class Limit : MonoBehaviour {
         GameManager.Instance.Lives--;
         Destroy(other.gameObject, 2f);
         if (GameManager.Instance.GameState == GameManager.State.PLAYING) {
-            GameManager.Instance.Invoke("RestartGame", 2f);
+            GameManager.Instance.GameState = GameManager.State.RESTART;
+            GameManager.Instance.Invoke("RestartGameLevel", 2f);
         }
     }
 
