@@ -5,10 +5,13 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-    [SerializeField] private LevelNamesData levelsNames;
+    [SerializeField] private LevelNamesData levelsInfo;
     [SerializeField] private Slider loadingBar;
+    [SerializeField] private GameObject levelButton;
+    [SerializeField] private RectTransform levelPanel;
 
     private static LevelManager instance;
+    private Camera mainCamera;
 
     [HideInInspector] public int currentWorld = 1;
 
@@ -18,7 +21,23 @@ public class LevelManager : MonoBehaviour {
             return;
         }
         instance = this;
-        //DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start() {
+        RectTransform levelButtonRectTransform = levelButton.GetComponent<RectTransform>();
+        float levelButtonWidth = levelButtonRectTransform.rect.width;
+        float levelButtonHeight = levelButtonRectTransform.rect.height;
+        Vector2 levelButtonPos;
+        mainCamera = Camera.main;
+
+        foreach (var world in levelsInfo.worlds) {
+            for (int i = 0; i < world.levels.Count; i++) {
+                levelButtonPos.x = levelPanel.rect.x + (levelButtonWidth * 0.5f);
+                levelButtonPos.y = levelPanel.rect.y + (levelButtonHeight * 0.5f);
+
+                Instantiate(levelButton, levelButtonPos, Quaternion.identity);
+            }
+        }
     }
 
     private void OnDestroy() {

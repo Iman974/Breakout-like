@@ -26,6 +26,7 @@ public class LevelNamesSaver {
                 continue;
             }
             levelNames.scenesNames.Add(match.Groups[1].Value);
+            levelNames.scenesPaths.Add(match.Value);
         }
 
         levelNames.ProcessInfos();
