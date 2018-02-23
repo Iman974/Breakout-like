@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114109019909760090}
   m_Layer: 0
   m_Name: LevelManager
-  m_TagString: Untagged
+  m_TagString: LevelManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defcefa2fc35a7d409e577d8e5ecab0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsInfo: {fileID: 11400000, guid: 0ef4bc55a3141a245aa236f765624d89, type: 2}
+  levelsInfo: {fileID: 11400000, guid: 02fc5f95f711cfd4396a4ecfeba69fc2, type: 2}
   loadingBar: {fileID: 0}
-  levelButton: {fileID: 1459968903276614, guid: 81b70963d1b72954897ffcdfee97a7a1,
+  levelButtonPrefab: {fileID: 1459968903276614, guid: 81b70963d1b72954897ffcdfee97a7a1,
     type: 2}
   levelPanel: {fileID: 0}
   currentWorld: 1

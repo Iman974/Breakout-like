@@ -5,15 +5,15 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-    [SerializeField] private LevelNamesData levelsInfo;
+    [SerializeField] private LevelsInfoData levelsInfo;
     [SerializeField] private Slider loadingBar;
-    [SerializeField] private GameObject levelButton;
+    [SerializeField] private GameObject levelButtonPrefab;
     [SerializeField] private RectTransform levelPanel;
 
     private static LevelManager instance;
     private Camera mainCamera;
 
-    [HideInInspector] public int currentWorld = 1;
+    [HideInInspector] public int currentWorld = 1; // Use the name of the level stored instead (1-1)
 
     private void Awake() {
         if (instance != null) {
@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void Start() {
-        RectTransform levelButtonRectTransform = levelButton.GetComponent<RectTransform>();
+        RectTransform levelButtonRectTransform = levelButtonPrefab.GetComponent<RectTransform>();
         float levelButtonWidth = levelButtonRectTransform.rect.width;
         float levelButtonHeight = levelButtonRectTransform.rect.height;
         Vector2 levelButtonPos;
@@ -32,10 +32,13 @@ public class LevelManager : MonoBehaviour {
 
         foreach (var world in levelsInfo.worlds) {
             for (int i = 0; i < world.levels.Count; i++) {
-                levelButtonPos.x = levelPanel.rect.x + (levelButtonWidth * 0.5f);
-                levelButtonPos.y = levelPanel.rect.y + (levelButtonHeight * 0.5f);
+                levelButtonPos.x = levelPanel.rect.xMin + (levelButtonWidth * 0.5f);
+                levelButtonPos.y = levelPanel.rect.yMax - (levelButtonHeight * 0.5f);
 
-                Instantiate(levelButton, levelButtonPos, Quaternion.identity);
+                Transform levelButtonTransform = Instantiate(levelButtonPrefab, Vector3.zero, Quaternion.identity, levelPanel).transform;
+                levelButtonTransform.localPosition = levelButtonPos;
+                Button levelButton = levelButtonTransform.GetComponent<Button>();
+                
             }
         }
     }
@@ -45,11 +48,11 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void SetCurrentWorld(Text senderText) {
-        currentWorld = GetNumberInString(senderText.text);
+        currentWorld = RegexUtility.GetNumberInString(senderText.text);
     }
 
-    public void PlayGameLevel(Text levelText) {
-        StartCoroutine(LoadLevel(currentWorld + "-" + GetNumberInString(levelText.text)));
+    public void PlayGameLevel(int level) {
+        StartCoroutine(LoadLevel(currentWorld + "-" + level));
     }
 
     private IEnumerator LoadLevel(string levelName, bool enableGM = true) {
@@ -70,10 +73,4 @@ public class LevelManager : MonoBehaviour {
         operation.completed -= EnableGameManager;
     }
 
-    public static int GetNumberInString(string toParse) {
-        if (toParse != string.Empty) {
-            return int.Parse(System.Text.RegularExpressions.Regex.Match(toParse, @"\d+").Value);
-        }
-        throw new System.Exception("Empty string");
-    }
 }

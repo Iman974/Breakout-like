@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222820791777362928}
   - component: {fileID: 114296327536976418}
   - component: {fileID: 114605026990218156}
+  - component: {fileID: 114859262863694520}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -112,20 +113,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: PlayGameLevel
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 114607695268999624}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1459968903276614}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 114859262863694520}
+        m_MethodName: CallLoadLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -169,6 +159,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1
+--- !u!114 &114859262863694520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1459968903276614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf5afe45114b274fbb15ab71319385a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222010921270522864
 CanvasRenderer:
   m_ObjectHideFlags: 1
