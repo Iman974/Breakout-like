@@ -20,7 +20,7 @@ public class LevelsInfoData : ScriptableObject {
             int levelIndex = 1;
             do {
                 // Add more infos and maybe get back to info nomenclature
-                worlds[worldIndex].worldNumber = worldIndex + 1;
+                //worlds[worldIndex].worldNumber = worldIndex + 1;
                 currentLevelName = scenesNames[sceneIndex];
 
                 worlds[worldIndex].levels.Add(new Level(levelIndex, SceneUtility.GetBuildIndexByScenePath(scenesPaths[sceneIndex]),
@@ -39,7 +39,7 @@ public class LevelsInfoData : ScriptableObject {
 [System.Serializable]
 public class World {
     public List<Level> levels = new List<Level>();
-    public int worldNumber;
+    //public int worldNumber;
 }
 
 [System.Serializable]
