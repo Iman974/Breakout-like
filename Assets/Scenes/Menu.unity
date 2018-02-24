@@ -121,6 +121,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 17435843}
+  - component: {fileID: 17435844}
   m_Layer: 5
   m_Name: LevelButtonsPanel
   m_TagString: Untagged
@@ -144,8 +145,31 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 650, y: 400}
+  m_SizeDelta: {x: 600, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &17435844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 17435842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 60, y: 60}
+  m_Spacing: {x: 20, y: 24.28585}
+  m_Constraint: 0
+  m_ConstraintCount: 6
 --- !u!1 &23677637
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &93375559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -384,7 +408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &253502142
 RectTransform:
   m_ObjectHideFlags: 0
@@ -623,17 +647,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 599086302}
-        m_MethodName: SetCurrentWorld
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 416159495}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 74451700}
         m_MethodName: SetActive
         m_Mode: 6
@@ -817,12 +830,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db73e3bbec4f6a645aa496a9e534f65f, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &599086302 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114109019909760090, guid: db73e3bbec4f6a645aa496a9e534f65f,
-    type: 2}
-  m_PrefabInternal: {fileID: 599086301}
-  m_Script: {fileID: 11500000, guid: defcefa2fc35a7d409e577d8e5ecab0e, type: 3}
 --- !u!1 &675291526
 GameObject:
   m_ObjectHideFlags: 0

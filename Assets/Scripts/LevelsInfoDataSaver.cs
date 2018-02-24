@@ -31,6 +31,7 @@ public class LevelsInfoDataSaver {
         }
 
         levelsInfo.ProcessInfos();
+        EditorUtility.SetDirty(levelsInfo);
 
         // Writes the unsaved asset changes to disk
         AssetDatabase.SaveAssets();

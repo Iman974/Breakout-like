@@ -4,22 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelsInfoData : ScriptableObject {
 
-    [System.Serializable]
-    public class World {
-        public List<Level> levels = new List<Level>();
-        public int worldNumber;
-    }
-
-    [System.Serializable]
-    public class Level {
-        public int levelNumber;
-        public int sceneIndex;
-        public string levelName;
-    }
 
     [HideInInspector] public World[] worlds;
     [HideInInspector] public List<string> scenesPaths = new List<string>();
-    [HideInInspector] public List<string> scenesNames = new List<string>(); // Try static members for these
+    [HideInInspector] public List<string> scenesNames = new List<string>(); // Try static members for these (research :micro-optimization)
 
     public void ProcessInfos() {
         string currentLevelName;
@@ -35,8 +23,8 @@ public class LevelsInfoData : ScriptableObject {
                 worlds[worldIndex].worldNumber = worldIndex + 1;
                 currentLevelName = scenesNames[sceneIndex];
 
-                worlds[worldIndex].levels.Add(new Level() { levelNumber = levelIndex,
-                    sceneIndex = SceneUtility.GetBuildIndexByScenePath(scenesPaths[sceneIndex]), levelName = currentLevelName });
+                worlds[worldIndex].levels.Add(new Level(levelIndex, SceneUtility.GetBuildIndexByScenePath(scenesPaths[sceneIndex]),
+                    currentLevelName));
 
                 sceneIndex++;
                 levelIndex++;
@@ -45,5 +33,25 @@ public class LevelsInfoData : ScriptableObject {
         //Debug.Log("worlds : " + worlds.Length);
         //Debug.Log("world 1 : " + worlds[0].levels.Count + " levels");
         //Debug.Log("Level one : " + worlds[0].levels[0].levelNumber + worlds[0].levels[0].sceneIndex);
+    }
+}
+
+[System.Serializable]
+public class World {
+    public List<Level> levels = new List<Level>();
+    public int worldNumber;
+}
+
+[System.Serializable]
+public class Level {
+    public int levelNumber;
+    public int sceneIndex; // Not needed since levelName holds a related value ?
+    public string levelName;
+    public LevelData levelData;
+
+    public Level(int lvlNumber, int sceneIndexInBuild, string lvlName) {
+        levelNumber = lvlNumber;
+        sceneIndex = sceneIndexInBuild;
+        levelName = lvlName;
     }
 }

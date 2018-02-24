@@ -4,17 +4,9 @@ using UnityEngine;
 [CustomEditor(typeof(LevelsInfoData))]
 public class LevelsInfoDataEditor : Editor {
 
-    private struct CustomFoldout {
-        public bool IsFoldout { get; private set; }
-
-        public void Foldout(string label) {
-            IsFoldout = EditorGUILayout.Foldout(IsFoldout, label, true);
-        }
-    }
-
     private static GUIStyle paddingLevel1;
     private static GUIStyle paddingLevel2;
-    private static CustomFoldout[] levelFoldouts = new CustomFoldout[5];
+    private static bool[] areLevelsFoldout = new bool[5];
 
     public override void OnInspectorGUI() {
         LevelsInfoData levelsInfo = (LevelsInfoData)target;
@@ -29,10 +21,9 @@ public class LevelsInfoDataEditor : Editor {
                 EditorGUILayout.LabelField("World " + (worldIndex + 1), new GUIStyle() { fontStyle = FontStyle.Bold });
 
                 EditorGUILayout.BeginVertical(paddingLevel1);
-                //levelFoldout = EditorGUILayout.Foldout(levelFoldout, "Level " + (i + 1), true);
+                areLevelsFoldout[i] = EditorGUILayout.Foldout(areLevelsFoldout[i], "Level " + (i + 1), true);
 
-                levelFoldouts[i].Foldout("Level " + (i + 1));
-                if (levelFoldouts[i].IsFoldout) {
+                if (areLevelsFoldout[i]) {
                     EditorGUILayout.BeginVertical(paddingLevel1);
 
                     EditorGUILayout.LabelField(world.levels[i].levelName);

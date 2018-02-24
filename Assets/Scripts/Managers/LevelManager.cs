@@ -13,8 +13,6 @@ public class LevelManager : MonoBehaviour {
     private static LevelManager instance;
     private Camera mainCamera;
 
-    [HideInInspector] public int currentWorld = 1; // Use the name of the level stored instead (1-1)
-
     private void Awake() {
         if (instance != null) {
             Destroy(gameObject);
@@ -24,21 +22,14 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void Start() {
-        RectTransform levelButtonRectTransform = levelButtonPrefab.GetComponent<RectTransform>();
-        float levelButtonWidth = levelButtonRectTransform.rect.width;
-        float levelButtonHeight = levelButtonRectTransform.rect.height;
-        Vector2 levelButtonPos;
         mainCamera = Camera.main;
 
         foreach (var world in levelsInfo.worlds) {
             for (int i = 0; i < world.levels.Count; i++) {
-                levelButtonPos.x = levelPanel.rect.xMin + (levelButtonWidth * 0.5f);
-                levelButtonPos.y = levelPanel.rect.yMax - (levelButtonHeight * 0.5f);
-
-                Transform levelButtonTransform = Instantiate(levelButtonPrefab, Vector3.zero, Quaternion.identity, levelPanel).transform;
-                levelButtonTransform.localPosition = levelButtonPos;
-                Button levelButton = levelButtonTransform.GetComponent<Button>();
-                
+                Text levelText = Instantiate(levelButtonPrefab, Vector3.zero, Quaternion.identity, levelPanel).GetComponentInChildren<Text>();
+                levelText.text = (i + 1).ToString();
+                LevelButton levelButton = levelText.GetComponentInParent<LevelButton>();
+                levelButton.level = world.levels[i];
             }
         }
     }
@@ -47,16 +38,15 @@ public class LevelManager : MonoBehaviour {
         instance = null;
     }
 
-    public void SetCurrentWorld(Text senderText) {
-        currentWorld = RegexUtility.GetNumberInString(senderText.text);
-    }
-
-    public void PlayGameLevel(int level) {
-        StartCoroutine(LoadLevel(currentWorld + "-" + level));
+    public void PlayGameLevel(string levelName) {
+        StartCoroutine(LoadLevel(levelName));
     }
 
     private IEnumerator LoadLevel(string levelName, bool enableGM = true) {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelName);
+        if (loadOperation == null) {
+            yield break;
+        }
         if (enableGM) {
             loadOperation.completed += EnableGameManager;
         }

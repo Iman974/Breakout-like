@@ -11,6 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050f32a4fcafa954aba08f51bc2f633c, type: 3}
   m_Name: LevelsInfo
   m_EditorClassIdentifier: 
-  worlds: []
-  scenesPaths: []
-  scenesNames: []
+  worlds:
+  - levels:
+    - levelNumber: 1
+      sceneIndex: 2
+      levelName: 1-1
+    worldNumber: 1
+  scenesPaths:
+  - Assets/Scenes/Levels/1-1.unity
+  scenesNames:
+  - 1-1

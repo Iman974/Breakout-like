@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour {
 
     private LevelManager levelManager;
-    private int levelNumber;
+
+    public Level level;
 
     private void Start() {
-        levelNumber = RegexUtility.GetNumberInString(GetComponentInChildren<Text>().text);
         levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
     public void CallLoadLevel() {
-        levelManager.PlayGameLevel(levelNumber);
+        levelManager.PlayGameLevel(level.levelName);
     }
 }
