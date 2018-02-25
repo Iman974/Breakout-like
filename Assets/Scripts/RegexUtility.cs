@@ -2,9 +2,13 @@
 
 public static class RegexUtility {
 
-    public static int GetNumberInString(string toParse) {
+    public static int GetNumberInString(string toParse, int rank = 1) {
         if (toParse != string.Empty) {
-            return int.Parse(Regex.Match(toParse, @"\d+").Value);
+            Match digitMatch = Regex.Match(toParse, @"(\d+)");
+            for (int i = 1; i < rank; i++) {
+                digitMatch = digitMatch.NextMatch();
+            }
+            return int.Parse(digitMatch.Value);
         }
         throw new System.Exception("Empty string");
     }

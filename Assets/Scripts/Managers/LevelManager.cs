@@ -39,17 +39,16 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void PlayGameLevel(string levelName) {
-        StartCoroutine(LoadLevel(levelName));
+        StartCoroutine(LoadGameLevel(levelName));
     }
 
-    private IEnumerator LoadLevel(string levelName, bool enableGM = true) {
+    private IEnumerator LoadGameLevel(string levelName) {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelName);
         if (loadOperation == null) {
             yield break;
         }
-        if (enableGM) {
-            loadOperation.completed += EnableGameManager;
-        }
+        loadOperation.completed += EnableGameManager;
+        GameManager.Instance.CurrentLevelData = levelsInfo[levelName].levelData;
 
         while (!loadOperation.isDone) {
             loadingBar.transform.parent.gameObject.SetActive(true);
@@ -58,7 +57,7 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    private static void EnableGameManager(AsyncOperation operation) {
+    private void EnableGameManager(AsyncOperation operation) {
         GameManager.Instance.gameObject.SetActive(true);
         operation.completed -= EnableGameManager;
     }

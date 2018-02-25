@@ -26,8 +26,9 @@ public class LevelsInfoDataEditor : Editor {
                 if (areLevelsFoldout[i]) {
                     EditorGUILayout.BeginVertical(paddingLevel2);
 
-                    EditorGUILayout.LabelField("Name: ", world.levels[i].levelName);
-                    EditorGUILayout.LabelField("Scene Index: ", levelsInfo.worlds[worldIndex].levels[0].sceneIndex.ToString());
+                    EditorGUILayout.LabelField("Name: " + world.levels[i].levelName);
+                    EditorGUILayout.LabelField("Scene Index: " + world.levels[0].sceneIndex.ToString());
+                    EditorGUILayout.LabelField("Level Data: " + (world.levels[i].levelData != null ? "Found" : "Not found"));
 
                     EditorGUILayout.EndVertical();
                 }

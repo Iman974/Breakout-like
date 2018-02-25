@@ -16,8 +16,4 @@ MonoBehaviour:
     - levelNumber: 1
       sceneIndex: 2
       levelName: 1-1
-      levelData: {fileID: 0}
-  scenesPaths:
-  - Assets/Scenes/Levels/1-1.unity
-  scenesNames:
-  - 1-1
+      levelData: {fileID: 11400000, guid: ef9a7df3b6ea62d419df988c26f92f7c, type: 2}

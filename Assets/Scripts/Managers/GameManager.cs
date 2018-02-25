@@ -36,11 +36,15 @@ public class GameManager : MonoBehaviour {
     private int currentCombo = 1;
     private float initialComboTime;
     private UIManager UiManager;
-    private LevelData currentSceneData;
     private bool gamePaused;
 
     public static GameManager Instance { get; private set; }
-    public float MousePositionX { get; private set; }
+    public float MousePositionX {
+        get {
+            return mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
+        }
+    }
+    public LevelData CurrentLevelData { get; set; }
 
     private State gameState;
     public State GameState {
@@ -53,7 +57,7 @@ public class GameManager : MonoBehaviour {
             if (value > State.PLAYING) {
                 PowerUpSpawner.Instance.StopSpawning();
                 if (value == State.WIN) {
-                    currentSceneData.hasWon = true;
+                    CurrentLevelData.hasWon = true;
                 }
             } else if (value == State.PLAYING) {
                 PowerUpSpawner.Instance.StartSpawning();
@@ -97,12 +101,12 @@ public class GameManager : MonoBehaviour {
     private void OnEnable() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         centerTextAnimation.transform.parent.gameObject.SetActive(true); // Enables the game canvas
-        GameObject sceneDataHolder = GameObject.FindWithTag("SceneData");
-        currentSceneData = sceneDataHolder.GetComponent<SceneDataHolder>().sceneData;
-        Destroy(sceneDataHolder);
+        //GameObject sceneDataHolder = GameObject.FindWithTag("SceneData");
+        //currentSceneData = sceneDataHolder.GetComponent<SceneDataHolder>().sceneData;
+        //Destroy(sceneDataHolder);
 
-        Instantiate(mainBallObject, currentSceneData.mainBallPosition, Quaternion.identity);
-        gamepad = Instantiate(gamepadObject, currentSceneData.gamepadPosition, Quaternion.identity).GetComponent<GamepadController>();
+        Instantiate(mainBallObject, CurrentLevelData.mainBallPosition, Quaternion.identity);
+        gamepad = Instantiate(gamepadObject, CurrentLevelData.gamepadPosition, Quaternion.identity).GetComponent<GamepadController>();
 
         StartCoroutine(StartGame());
     }
@@ -203,10 +207,6 @@ public class GameManager : MonoBehaviour {
 
         StartCoroutine(centerTextAnimation.StartAnimation(Animation.ALPHA, textToDisplay: "One more time !"));
         StartCoroutine(StartGame(false));
-    }
-
-    private void FixedUpdate() {
-        MousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
     }
 
     public int CalculateStars() {
