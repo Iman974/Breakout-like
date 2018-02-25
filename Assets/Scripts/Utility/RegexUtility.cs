@@ -4,8 +4,9 @@ public static class RegexUtility {
 
     public static int GetNumberInString(string toParse, int rank = 1) {
         if (toParse != string.Empty) {
+            rank--;
             Match digitMatch = Regex.Match(toParse, @"(\d+)");
-            for (int i = 1; i < rank; i++) {
+            for (int i = 0; i < rank; i++) {
                 digitMatch = digitMatch.NextMatch();
             }
             return int.Parse(digitMatch.Value);
