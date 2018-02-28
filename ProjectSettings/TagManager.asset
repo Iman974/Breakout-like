@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Ball
   - Bricks
-  - PowerUp
-  - SceneData
   - LevelManager
   layers:
   - Default

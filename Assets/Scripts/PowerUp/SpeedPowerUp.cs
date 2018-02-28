@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class _SpeedPowerUp : _PowerUp {
+public class SpeedPowerUp : PowerUp {
     [SerializeField] private float speedUpMultiplier = 1.25f;
 
     private float speedBeforePowerUp;

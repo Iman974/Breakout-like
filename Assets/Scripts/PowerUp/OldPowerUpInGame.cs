@@ -22,12 +22,12 @@ public class PowerUpInGame : MonoBehaviour {
         startPosition = transform.position;
         //powerUp.InitPower();
 
-        powerUpXMovement = powerUp.horizontalMovement;
-        powerUpYMovement = powerUp.verticalMovement;
-        relativeTargetedPositionY = startPosition.y + powerUp.targetedRelativePosition.y;
-        yMovementSpeed = powerUp.yMovementSpeed;
-        xMovementSpeed = powerUp.xMovementSpeed;
-        horizontalMovementMaxBound = powerUp.xMovementMaxBound;
+        //powerUpXMovement = powerUp.horizontalMovement;
+        //powerUpYMovement = powerUp.verticalMovement;
+        //relativeTargetedPositionY = startPosition.y + powerUp.targetedRelativePosition.y;
+        //yMovementSpeed = powerUp.yMovementSpeed;
+        //xMovementSpeed = powerUp.xMovementSpeed;
+        //horizontalMovementMaxBound = powerUp.xMovementMaxBound;
     }
 
     private void FixedUpdate() {

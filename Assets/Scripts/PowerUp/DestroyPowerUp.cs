@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class _DestroyPowerUp : _PowerUp {
+public class DestroyPowerUp : PowerUp {
 
     protected override void PowerUpPayload() {
-        GameManager.Instance.StartCoroutine(SetBricksAsDestroyable());
+        StartCoroutine(SetBricksAsDestroyable());
     }
 
     private IEnumerator SetBricksAsDestroyable() {
@@ -13,9 +13,13 @@ public class _DestroyPowerUp : _PowerUp {
         }
 
         yield return new WaitForSeconds(powerUpDuration);
+        PowerUpHasExpired();
+    }
 
+    protected override void PowerUpHasExpired() {
         foreach (Collider2D collider in Brick.brickColliders) {
             collider.isTrigger = false;
         }
+        base.PowerUpHasExpired();
     }
 }

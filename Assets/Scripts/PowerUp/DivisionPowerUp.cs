@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class _DivisionPowerUp : _PowerUp {
+public class DivisionPowerUp : PowerUp {
 
     [SerializeField] private GameObject subDivisionBall;
     [SerializeField] private int divisionBallCount = 3;
@@ -9,7 +9,7 @@ public class _DivisionPowerUp : _PowerUp {
     [SerializeField] private float subBallSpeedMultiplier = 1.5f;
     [SerializeField] private int maxHitCount = 4;
 
-    public _DivisionPowerUp(int ballCount, int newMaxHitCount) {
+    public DivisionPowerUp(int ballCount, int newMaxHitCount) {
         divisionBallCount = ballCount;
         maxHitCount = newMaxHitCount;
 
@@ -22,6 +22,7 @@ public class _DivisionPowerUp : _PowerUp {
 
     protected override void PowerUpPayload() {
         DivideMainBall();
+        base.PowerUpPayload();
     }
 
     public void DivideMainBall() {

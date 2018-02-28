@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4559670299464262}
   - component: {fileID: 212253515630621848}
-  - component: {fileID: 114419873192321464}
+  - component: {fileID: 58928850809828238}
   - component: {fileID: 50733524887233648}
-  m_Layer: 0
+  - component: {fileID: 114419873192321464}
+  m_Layer: 12
   m_Name: SpeedPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,6 +63,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58928850809828238
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384443362572634}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &114419873192321464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,9 +130,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   targetedRelativePosition: {x: 0, y: -10}
-  yMovementSpeed: 0
+  yMovementSpeed: 0.0006
   xMovementSpeed: 0
-  xMovementMaxBound: 2
+  xMovementBound: 0
   speedUpMultiplier: 1.25
 --- !u!212 &212253515630621848
 SpriteRenderer:

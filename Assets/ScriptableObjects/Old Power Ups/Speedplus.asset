@@ -11,9 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe0e2684eefa0b4db280a056c5a46f7, type: 3}
   m_Name: Speedplus
   m_EditorClassIdentifier: 
-  powerUpSprite: {fileID: 21300000, guid: ea2849522ef536544bed32231c0e9441, type: 3}
-  powerUpName: Speed +
-  pickUpEffect: {fileID: 0}
   verticalMovement:
     serializedVersion: 2
     m_Curve:
@@ -50,10 +47,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  colliderRadius: 0.35
   lifetime: 10
   targetedRelativePosition: {x: 0, y: -10}
   yMovementSpeed: 0.0006
-  xMovementSpeed: 0.0006
+  xMovementSpeed: 0
   xMovementMaxBound: 2
-  powerName: 0
