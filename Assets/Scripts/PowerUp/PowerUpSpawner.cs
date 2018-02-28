@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PowerUpSpawner : MonoBehaviour {
 
-    [SerializeField] private PowerUp[] powerUps;
-    [SerializeField] private GameObject powerUpObject;
+    [SerializeField] private GameObject[] powerUps;
+    //[SerializeField] private GameObject powerUpObject;
     [SerializeField] private int powerUpSpawnRate = 2;
     [SerializeField] private float powerUpSpawnTimeRange = 3f;
     [SerializeField] private Vector2 minSpawnArea, maxSpawnArea;
@@ -78,9 +78,7 @@ public class PowerUpSpawner : MonoBehaviour {
             Debug.Log("random spawn iterations: " + antiLoop);
 
             spawnedPowerupsLocations[i] = randomSpawnLocation;
-            PowerUpInGame newPowerUp = Instantiate(powerUpObject, randomSpawnLocation, Quaternion.identity).GetComponent<PowerUpInGame>();
-
-            newPowerUp.powerUp = powerUps[Random.Range(0, powerUps.Length)];
+            Instantiate(powerUps[Random.Range(0, powerUps.Length)], randomSpawnLocation, Quaternion.identity);
         }
     }
 

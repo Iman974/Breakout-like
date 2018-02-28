@@ -17,10 +17,10 @@ public class PowerUpInGame : MonoBehaviour {
     private Vector2 nextPosition;
 
     private void Start() {
-        GetComponent<CircleCollider2D>().radius = powerUp.colliderRadius;
-        GetComponent<SpriteRenderer>().sprite = powerUp.powerUpSprite;
+        //GetComponent<CircleCollider2D>().radius = powerUp.colliderRadius;
+        //GetComponent<SpriteRenderer>().sprite = powerUp.powerUpSprite;
         startPosition = transform.position;
-        powerUp.InitPower();
+        //powerUp.InitPower();
 
         powerUpXMovement = powerUp.horizontalMovement;
         powerUpYMovement = powerUp.verticalMovement;
@@ -46,8 +46,8 @@ public class PowerUpInGame : MonoBehaviour {
         }
 
         Destroy(gameObject, 1f);
-        powerUp.TriggerPower();
-        Destroy(gameObject);
+        //powerUp.TriggerPower();
+        //Destroy(gameObject); // WHY ??!
         // Play pick up anim
     }
 }
