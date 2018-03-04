@@ -3,7 +3,7 @@
 public class PowerUpInGame : MonoBehaviour {
     
     public PowerUp powerUp;
-
+#pragma warning disable 0649
     //private float timeSinceInstantiation;
     private Vector2 startPosition;
     private AnimationCurve powerUpXMovement;

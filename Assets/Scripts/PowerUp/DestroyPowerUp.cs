@@ -8,7 +8,7 @@ public class DestroyPowerUp : PowerUp {
     }
 
     private IEnumerator SetBricksAsDestroyable() {
-        foreach (Collider2D collider in Brick.brickColliders) {
+        foreach (Collider2D collider in Brick.BrickColliders) {
             collider.isTrigger = true;
         }
 
@@ -17,7 +17,7 @@ public class DestroyPowerUp : PowerUp {
     }
 
     protected override void PowerUpHasExpired() {
-        foreach (Collider2D collider in Brick.brickColliders) {
+        foreach (Collider2D collider in Brick.BrickColliders) {
             collider.isTrigger = false;
         }
         base.PowerUpHasExpired();

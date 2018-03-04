@@ -11,7 +11,6 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private RectTransform levelPanel;
 
     private static LevelManager instance;
-    private Camera mainCamera;
 
     private void Awake() {
         if (instance != null) {
@@ -22,8 +21,6 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void Start() {
-        mainCamera = Camera.main;
-
         foreach (var world in levelsInfo.worlds) {
             for (int i = 0; i < world.levels.Count; i++) {
                 Text levelText = Instantiate(levelButtonPrefab, Vector3.zero, Quaternion.identity, levelPanel).GetComponentInChildren<Text>();

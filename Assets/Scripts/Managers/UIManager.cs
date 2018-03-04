@@ -3,10 +3,11 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
+#pragma warning disable 0649
     [SerializeField] private Text winText, loseText;
     [SerializeField] private Text scoreText, livesText;
     [SerializeField] private GameObject scoreboardPanel;
-
+#pragma warning disable 0414
     [SerializeField] private Color scoreUpColor = Color.green;
     [SerializeField] private Color scoreDownColor = Color.red;
 

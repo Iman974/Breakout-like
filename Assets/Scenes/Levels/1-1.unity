@@ -928,9 +928,32 @@ Prefab:
       propertyPath: m_Name
       value: Brick1
       objectReference: {fileID: 0}
+    - target: {fileID: 114107859651857820, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: power
+      value: 
+      objectReference: {fileID: 11400000, guid: cba82f1a75a212a46add8b60d563bf99,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1094858064 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1094858063}
+--- !u!114 &1094858065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1094858064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyPattern: {fileID: 11400000, guid: 267012bdb2113dc41ac6780bad73f783, type: 2}
 --- !u!1001 &1133169833
 Prefab:
   m_ObjectHideFlags: 0
@@ -982,6 +1005,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1133169833}
+--- !u!1 &1133169835 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1133169833}
+--- !u!114 &1133169836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133169835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyPattern: {fileID: 11400000, guid: 267012bdb2113dc41ac6780bad73f783, type: 2}
 --- !u!1001 &1203358599
 Prefab:
   m_ObjectHideFlags: 0
@@ -1183,6 +1223,12 @@ Prefab:
       propertyPath: m_Name
       value: Brick19
       objectReference: {fileID: 0}
+    - target: {fileID: 114107859651857820, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: power
+      value: 
+      objectReference: {fileID: 11400000, guid: cba82f1a75a212a46add8b60d563bf99,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
   m_IsPrefabParent: 0
@@ -1395,6 +1441,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1943348416}
+--- !u!1 &1953114296 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1663606094}
+--- !u!114 &1953114297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1953114296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyPattern: {fileID: 11400000, guid: 267012bdb2113dc41ac6780bad73f783, type: 2}
 --- !u!1001 &1985231944
 Prefab:
   m_ObjectHideFlags: 0

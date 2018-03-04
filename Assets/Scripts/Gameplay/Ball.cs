@@ -11,7 +11,6 @@ public class Ball : MonoBehaviour {
     [SerializeField] private float speed = 6f;
 
     //private float oldXVelocity;
-    private GameManager GMinstance;
     private SpriteRenderer thisRenderer;
 
     public static Ball MainBall { get; private set; }
@@ -48,10 +47,6 @@ public class Ball : MonoBehaviour {
         thisRenderer = GetComponent<SpriteRenderer>();
         DoSpeedUpOverTime = true;
         Radius = thisRenderer.bounds.center.x - thisRenderer.bounds.min.x;
-    }
-
-    private void Start() {
-        GMinstance = GameManager.Instance;
     }
 
     public void Launch() { // should the ball be launched in a random direction or may the player be able to choose ?

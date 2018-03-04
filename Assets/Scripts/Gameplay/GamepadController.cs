@@ -15,7 +15,6 @@ public class GamepadController : MonoBehaviour {
     private float upperYBound;
     private GameManager GMinstance;
     private float xBeginDrag;
-    private Rigidbody2D rb2D;
     private float accelerationTime;
     private bool impactTriggered;
     private float dragDirection = 1f;
@@ -31,7 +30,6 @@ public class GamepadController : MonoBehaviour {
     private void Awake() {
         gamepadRenderer = GetComponent<SpriteRenderer>();
         upperYBound = gamepadRenderer.bounds.max.y;
-        rb2D = GetComponent<Rigidbody2D>();
         nextPosition.y = transform.position.y;
         xExtent = gamepadRenderer.bounds.extents.x;
     }

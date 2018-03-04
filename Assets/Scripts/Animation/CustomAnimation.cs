@@ -21,6 +21,7 @@ public class CustomAnimation : MonoBehaviour {
     //private Quaternion targetedRotation;
     //private Vector3 targetedScale;
     //private float totalTime;
+#pragma warning disable 0649
     private Animatable[] customAnimations;
     private Rigidbody2D rb2D;
     private bool wasRb2DKinematic;

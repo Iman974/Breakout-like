@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PowerUpSpawner : MonoBehaviour {
-
+#pragma warning disable 0649
     [SerializeField] private GameObject[] powerUps;
     //[SerializeField] private GameObject powerUpObject;
     [SerializeField] private int powerUpSpawnRate = 2;
@@ -102,7 +102,7 @@ public class PowerUpSpawner : MonoBehaviour {
         //Debug.DrawRay(ballPosition, ballDirectionNormal, Color.red, 3f);
         //for (int i = 0; i < 11; i++) { // Find out how to calculate the number of rays needed relatively to the ball radius
         //    //Debug.DrawRay(ballPosition + (i * raySpacing), ballDirection, Color.cyan, 3f);
-        //    if (Physics2D.Raycast(ballPosition + (raySpacing * i), ballDirection, 15f, powerUpLayer).collider != null) {
+        //    if (Physics2D.Raycast(ballPosition + (raySpacing * i), ballDirection, 15f, 1 << powerUpLayer).collider != null) {
         //        Debug.Log("Ontrajectory");
         //        return true;
         //    }

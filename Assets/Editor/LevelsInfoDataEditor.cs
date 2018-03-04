@@ -4,8 +4,6 @@ using UnityEngine;
 [CustomEditor(typeof(LevelsInfoData))]
 public class LevelsInfoDataEditor : Editor {
 
-    private static GUIStyle paddingLevel1, paddingLevel2;// paddingLevel3;
-    private static GUIStyle boldFontStyle;
     private static bool[] areLevelsFoldout = new bool[5];
 
     public override void OnInspectorGUI() {
@@ -18,31 +16,25 @@ public class LevelsInfoDataEditor : Editor {
         int worldIndex = 0;
         foreach (var world in levelsInfo.worlds) {
             for (int i = 0; i < world.levels.Count; i++) {
-                EditorGUILayout.LabelField("World " + (worldIndex + 1), boldFontStyle);
+                EditorGUILayout.LabelField("World " + (worldIndex + 1), GUIStyleUtility.boldFontStyle);
 
-                EditorGUILayout.BeginVertical(paddingLevel1);
+                EditorGUILayout.BeginVertical(GUIStyleUtility.foldoutPadding);
+
                 areLevelsFoldout[i] = EditorGUILayout.Foldout(areLevelsFoldout[i], "Level " + (i + 1), true);
 
                 if (areLevelsFoldout[i]) {
-                    EditorGUILayout.BeginVertical(paddingLevel2);
+                    EditorGUI.indentLevel += 1;
 
                     EditorGUILayout.LabelField("Name: " + world.levels[i].levelName);
                     EditorGUILayout.LabelField("Scene Index: " + world.levels[0].sceneIndex.ToString());
                     EditorGUILayout.LabelField("Level Data: " + (world.levels[i].levelData != null ? "Found" : "Not found"));
 
-                    EditorGUILayout.EndVertical();
+                    EditorGUI.indentLevel -= 1;
                 }
 
                 EditorGUILayout.EndVertical();
             }
             worldIndex++;
         }
-    }
-
-    private void OnEnable() {
-        paddingLevel1 = new GUIStyle { padding = new RectOffset(22, 0, 0, 0) };
-        paddingLevel2 = new GUIStyle { padding = new RectOffset(14, 0, 0, 0) };
-        //paddingLevel3 = new GUIStyle { padding = new RectOffset(20, 0, 0, 0) };
-        boldFontStyle = new GUIStyle() { fontStyle = FontStyle.Bold };
     }
 }

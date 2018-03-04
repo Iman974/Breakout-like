@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour {
             if (value > State.PLAYING) {
                 PowerUpSpawner.Instance.StopSpawning();
                 if (value == State.WIN) {
-                    CurrentLevelData.hasWon = true;
+                    CurrentLevelData.IsDone = true;
                 }
             } else if (value == State.PLAYING) {
                 PowerUpSpawner.Instance.StartSpawning();
@@ -101,12 +101,9 @@ public class GameManager : MonoBehaviour {
     private void OnEnable() {
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         centerTextAnimation.transform.parent.gameObject.SetActive(true); // Enables the game canvas
-        //GameObject sceneDataHolder = GameObject.FindWithTag("SceneData");
-        //currentSceneData = sceneDataHolder.GetComponent<SceneDataHolder>().sceneData;
-        //Destroy(sceneDataHolder);
 
-        Instantiate(mainBallObject, CurrentLevelData.mainBallPosition, Quaternion.identity);
-        gamepad = Instantiate(gamepadObject, CurrentLevelData.gamepadPosition, Quaternion.identity).GetComponent<GamepadController>();
+        Instantiate(mainBallObject, CurrentLevelData.MainBallPosition, Quaternion.identity);
+        gamepad = Instantiate(gamepadObject, CurrentLevelData.GamepadPosition, Quaternion.identity).GetComponent<GamepadController>();
 
         StartCoroutine(StartGame());
     }
@@ -154,7 +151,7 @@ public class GameManager : MonoBehaviour {
             comboTime = initialComboTime;
         }
 
-        if (Brick.brickColliders.Count == 0) {
+        if (Brick.BrickColliders.Count == 0) {
             GameState = State.WIN;
         }
     }
@@ -202,8 +199,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void RestartGameLevel() {
-        Ball newMainBall = Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad),
-            Quaternion.identity).GetComponent<Ball>();
+        Instantiate(mainBallObject, new Vector2(0f, gamepad.transform.position.y + startBallDistanceYFromGamePad), Quaternion.identity);
 
         StartCoroutine(centerTextAnimation.StartAnimation(Animation.ALPHA, textToDisplay: "One more time !"));
         StartCoroutine(StartGame(false));
@@ -212,7 +208,7 @@ public class GameManager : MonoBehaviour {
     public int CalculateStars() {
         int stars = 0;
         foreach (var scoreLevel in scoreStarLevels) {
-            if (score >= Brick.totalScoreValue * scoreLevel) {
+            if (score >= Brick.TotalScoreValue * scoreLevel) {
                 stars++;
             }
         }
