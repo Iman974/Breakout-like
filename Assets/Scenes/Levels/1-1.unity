@@ -953,7 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPattern: {fileID: 11400000, guid: 267012bdb2113dc41ac6780bad73f783, type: 2}
+  destroyPattern: {fileID: 11400000, guid: 109415619909fb441a9a831abb65e39f, type: 2}
 --- !u!1001 &1133169833
 Prefab:
   m_ObjectHideFlags: 0
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPattern: {fileID: 11400000, guid: 267012bdb2113dc41ac6780bad73f783, type: 2}
+  destroyPattern: {fileID: 11400000, guid: 109415619909fb441a9a831abb65e39f, type: 2}
 --- !u!1001 &1203358599
 Prefab:
   m_ObjectHideFlags: 0
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPattern: {fileID: 11400000, guid: 267012bdb2113dc41ac6780bad73f783, type: 2}
+  destroyPattern: {fileID: 11400000, guid: d382c6b218be816419ffcf13820bd2c3, type: 2}
 --- !u!1001 &1985231944
 Prefab:
   m_ObjectHideFlags: 0

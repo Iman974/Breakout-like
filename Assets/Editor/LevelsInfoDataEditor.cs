@@ -16,7 +16,7 @@ public class LevelsInfoDataEditor : Editor {
         int worldIndex = 0;
         foreach (var world in levelsInfo.worlds) {
             for (int i = 0; i < world.levels.Count; i++) {
-                EditorGUILayout.LabelField("World " + (worldIndex + 1), GUIStyleUtility.boldFontStyle);
+                EditorGUILayout.LabelField("World " + (worldIndex + 1), GUIStyleUtility.boldFont);
 
                 EditorGUILayout.BeginVertical(GUIStyleUtility.foldoutPadding);
 

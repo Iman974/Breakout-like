@@ -9,46 +9,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 060ffb78d98b9a245bf1aa8cdb20202d, type: 3}
-  m_Name: Plus
+  m_Name: Cross
   m_EditorClassIdentifier: 
   brickVectors:
   - angle: 0
     direction: {x: 0, y: 1}
     count: 1
     length: Infinity
-    enabled: 1
-  - angle: 45
-    direction: {x: 0.70710677, y: 0.70710677}
-    count: 1
-    length: Infinity
     enabled: 0
+  - angle: 55
+    direction: {x: 0.81915206, y: 0.57357645}
+    count: 2
+    length: Infinity
+    enabled: 1
   - angle: 90
     direction: {x: 1, y: -0.00000004371139}
     count: 1
     length: Infinity
-    enabled: 1
-  - angle: 135
-    direction: {x: 0.70710677, y: -0.70710677}
-    count: 1
-    length: Infinity
     enabled: 0
+  - angle: 125
+    direction: {x: 0.819152, y: -0.57357645}
+    count: 2
+    length: Infinity
+    enabled: 1
   - angle: 180
     direction: {x: -0.00000008742278, y: -1}
     count: 1
     length: Infinity
-    enabled: 1
-  - angle: 225
-    direction: {x: -0.7071067, y: -0.7071068}
-    count: 1
-    length: Infinity
     enabled: 0
+  - angle: 235
+    direction: {x: -0.8191521, y: -0.57357633}
+    count: 2
+    length: Infinity
+    enabled: 1
   - angle: 270
     direction: {x: -1, y: 0.000000011924881}
     count: 1
     length: Infinity
-    enabled: 1
-  - angle: 315
-    direction: {x: -0.7071069, y: 0.70710665}
-    count: 1
-    length: Infinity
     enabled: 0
+  - angle: 305
+    direction: {x: -0.8191521, y: 0.57357633}
+    count: 2
+    length: Infinity
+    enabled: 1

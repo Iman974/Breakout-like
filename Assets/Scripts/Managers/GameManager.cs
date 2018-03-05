@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void PauseGame(bool pause) {
+    public void PauseGame(bool pause) {
         gamePaused = pause;
         Cursor.visible = pause;
         pausePannel.SetActive(pause);
