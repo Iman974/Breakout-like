@@ -119,10 +119,6 @@ public class ScaleAnimation : Animatable {
 
     private Vector3 targetedScale;
 
-    private void Awake() {
-        Debug.Log("demarré");
-    }
-
     public override void Animate() {
         targetedScale = attachedCustomAnimation.transform.localScale;
         attachedCustomAnimation.transform.localScale += new Vector3(relativeStartScale, relativeStartScale, 0f);

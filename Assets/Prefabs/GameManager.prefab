@@ -61,10 +61,7 @@ MonoBehaviour:
   powerUpSpawnTimeRange: 9
   minSpawnArea: {x: -5, y: 1}
   maxSpawnArea: {x: 5, y: -1}
-  powerUpLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  spacingBetweenRays: 0.2
+  deadZoneRadius: 1.25
 --- !u!114 &114282958409452230
 MonoBehaviour:
   m_ObjectHideFlags: 1

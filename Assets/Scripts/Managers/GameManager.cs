@@ -183,15 +183,22 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Return)) {
             /*gameObject.SetActive(false);
             LevelManager.GoToMainMenu();*/
-            PauseGame(!gamePaused);
+            PauseGame(PauseState.PAUSEDFROMGAME);
         }
     }
 
-    public void PauseGame(bool pause) {
-        gamePaused = pause;
-        Cursor.visible = pause;
-        pausePannel.SetActive(pause);
-        Time.timeScale = pause ? 0f : 1f;
+    [System.Serializable]
+    public enum PauseState {
+        PAUSEDFROMGAME = 1,
+        UNPAUSED,
+        UNPAUSETOMAINMENU = 4
+    }
+
+    public void PauseGame(PauseState pauseState) {
+        gamePaused = (pauseState & PauseState.PAUSEDFROMGAME) != 0;
+        Cursor.visible = ((pauseState & PauseState.UNPAUSED) != 0);
+        pausePannel.SetActive((pauseState & PauseState.UNPAUSED) != 0);
+        Time.timeScale = (pauseState & PauseState.UNPAUSED) != 0 ? 0f : 1f;
     }
 
     public void GoToMainMenu() {
