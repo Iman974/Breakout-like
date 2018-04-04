@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "New Destroy Pattern", menuName = "Brick Power/Destroy Pattern")]
-public class DestroyPattern : ScriptableObject {
+[CreateAssetMenu(fileName = "New Destroy Pattern", menuName = "Breakout/Brick Power/Destroy Pattern")]
+public class DestructionPattern : ScriptableObject {
 
     [SerializeField] private BrickVector[] brickVectors = new BrickVector[] {
         new BrickVector(0f, "Up"),

@@ -28,7 +28,10 @@ public class TextAnimation : MonoBehaviour {
         }
     }
 
-    public string CurrentAnimatingString { get; private set; }
+    /// <summary>
+    /// The string that is currently being animated.
+    /// </summary>
+    public string AnimatingString { get; private set; }
     public Color ColorToSet { private get; set; }
     public bool IsAnimationRunning { get; private set; }
 
@@ -49,7 +52,7 @@ public class TextAnimation : MonoBehaviour {
         textToAnimate.enabled = true;
 
         foreach (string currentString in stringToSet) {
-            CurrentAnimatingString = currentString;
+            AnimatingString = currentString;
             textToAnimate.text = currentString;
 
             float timeBeforeAnimation = Time.time;

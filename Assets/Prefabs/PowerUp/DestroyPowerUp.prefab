@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114310749674542526}
   m_Layer: 12
   m_Name: DestroyPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,38 +99,44 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 1
+      inSlope: 2.3071074
+      outSlope: 2.3071074
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 0.5
+      inSlope: -3.8032422
+      outSlope: -3.8032422
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 0
+      inSlope: 2.0768614
+      outSlope: 2.0768614
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   horizontalMovement:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   targetedRelativePosition: {x: 0, y: -10}
-  yMovementSpeed: 0.0009
+  yMovementSpeed: 0.03
   xMovementSpeed: 0
   xMovementBound: 0
 --- !u!212 &212730155844166840

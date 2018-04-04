@@ -156,6 +156,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick8
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -210,6 +225,21 @@ Prefab:
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_Name
       value: Brick18
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
       objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
@@ -266,6 +296,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick7
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -320,6 +365,21 @@ Prefab:
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_Name
       value: Brick17
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
       objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
@@ -376,6 +436,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick3
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -429,7 +504,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 20
+  far clip plane: 1000
   field of view: 60
   orthographic: 1
   orthographic size: 5
@@ -553,6 +628,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick12
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -607,6 +697,21 @@ Prefab:
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_Name
       value: Brick9
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
       objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
@@ -663,6 +768,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick2
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -675,6 +795,128 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 946639542}
+--- !u!1 &968452494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 968452495}
+  - component: {fileID: 968452497}
+  - component: {fileID: 968452496}
+  m_Layer: 11
+  m_Name: Edge 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &968452495
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 968452494}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1596700403}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968452496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 968452494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHorizontal: 0
+  closeDistance: 0.25
+  impactForce: {x: -3, y: 0}
+--- !u!68 &968452497
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 968452494}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0, y: 5}
+  - {x: 0, y: -5}
+--- !u!1 &992466029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 992466030}
+  - component: {fileID: 992466032}
+  - component: {fileID: 992466031}
+  m_Layer: 11
+  m_Name: Edge 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992466030
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992466029}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1596700403}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &992466031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992466029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHorizontal: 0
+  closeDistance: 0.25
+  impactForce: {x: 3, y: 0}
+--- !u!68 &992466032
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992466029}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0, y: 5}
+  - {x: 0, y: -5}
 --- !u!1001 &1094858063
 Prefab:
   m_ObjectHideFlags: 0
@@ -724,6 +966,21 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: cba82f1a75a212a46add8b60d563bf99,
         type: 2}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -747,7 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPattern: {fileID: 11400000, guid: 109415619909fb441a9a831abb65e39f, type: 2}
+  destroyPattern: {fileID: 11400000, guid: d382c6b218be816419ffcf13820bd2c3, type: 2}
 --- !u!1001 &1133169833
 Prefab:
   m_ObjectHideFlags: 0
@@ -791,6 +1048,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick14
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -803,23 +1075,67 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1133169833}
---- !u!1 &1133169835 stripped
+--- !u!1 &1158489361
 GameObject:
-  m_PrefabParentObject: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1133169833}
---- !u!114 &1133169836
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1158489362}
+  - component: {fileID: 1158489364}
+  - component: {fileID: 1158489363}
+  m_Layer: 11
+  m_Name: Edge 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1158489362
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1158489361}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1596700403}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1158489363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1133169835}
+  m_GameObject: {fileID: 1158489361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPattern: {fileID: 11400000, guid: 109415619909fb441a9a831abb65e39f, type: 2}
+  isHorizontal: 0
+  closeDistance: 0
+  impactForce: {x: 0, y: 0}
+--- !u!68 &1158489364
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1158489361}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -5, y: 0}
+  - {x: 5, y: 0}
 --- !u!1001 &1203358599
 Prefab:
   m_ObjectHideFlags: 0
@@ -863,6 +1179,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick6
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -875,67 +1206,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1203358599}
---- !u!1 &1317869118
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1317869119}
-  - component: {fileID: 1317869121}
-  - component: {fileID: 1317869120}
-  m_Layer: 11
-  m_Name: Edge 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1317869119
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1317869118}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2010806747}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1317869120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1317869118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHorizontal: 0
-  closeDistance: 0.25
-  impactForce: {x: 0, y: -3}
---- !u!68 &1317869121
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1317869118}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -5, y: 0}
-  - {x: 5, y: 0}
 --- !u!1001 &1357978081
 Prefab:
   m_ObjectHideFlags: 0
@@ -979,6 +1249,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick20
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -991,6 +1276,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1357978081}
+--- !u!1 &1357978083 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1357978081}
+--- !u!114 &1357978084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357978083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyPattern: {fileID: 11400000, guid: d382c6b218be816419ffcf13820bd2c3, type: 2}
 --- !u!1001 &1362168269
 Prefab:
   m_ObjectHideFlags: 0
@@ -1034,6 +1336,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick16
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -1046,42 +1363,59 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1362168269}
---- !u!1 &1480452989
+--- !u!1 &1362168271 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1362168269}
+--- !u!114 &1362168272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1362168271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyPattern: {fileID: 11400000, guid: d382c6b218be816419ffcf13820bd2c3, type: 2}
+--- !u!1 &1532093504
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1480452990}
-  - component: {fileID: 1480452992}
-  - component: {fileID: 1480452991}
+  - component: {fileID: 1532093505}
+  - component: {fileID: 1532093507}
+  - component: {fileID: 1532093506}
   m_Layer: 11
-  m_Name: Edge 1
+  m_Name: Edge 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1480452990
+--- !u!4 &1532093505
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1480452989}
+  m_GameObject: {fileID: 1532093504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2010806747}
-  m_RootOrder: 0
+  m_Father: {fileID: 1596700403}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1480452991
+--- !u!114 &1532093506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1480452989}
+  m_GameObject: {fileID: 1532093504}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
@@ -1089,13 +1423,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHorizontal: 0
   closeDistance: 0.25
-  impactForce: {x: 3, y: 0}
---- !u!68 &1480452992
+  impactForce: {x: 0, y: -3}
+--- !u!68 &1532093507
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1480452989}
+  m_GameObject: {fileID: 1532093504}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1105,8 +1439,40 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0, y: 5}
-  - {x: 0, y: -5}
+  - {x: -5, y: 0}
+  - {x: 5, y: 0}
+--- !u!1 &1596700402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1596700403}
+  m_Layer: 11
+  m_Name: Limits
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1596700403
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596700402}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.341709, y: 1, z: 1}
+  m_Children:
+  - {fileID: 992466030}
+  - {fileID: 968452495}
+  - {fileID: 1532093505}
+  - {fileID: 1158489362}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1601694447 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
@@ -1161,6 +1527,21 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: cba82f1a75a212a46add8b60d563bf99,
         type: 2}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -1216,6 +1597,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick10
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -1228,128 +1624,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1760071651}
---- !u!1 &1772945988
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1772945989}
-  - component: {fileID: 1772945991}
-  - component: {fileID: 1772945990}
-  m_Layer: 11
-  m_Name: Edge 4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1772945989
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1772945988}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2010806747}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1772945990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1772945988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHorizontal: 0
-  closeDistance: 0
-  impactForce: {x: 0, y: 0}
---- !u!68 &1772945991
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1772945988}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -5, y: 0}
-  - {x: 5, y: 0}
---- !u!1 &1822519609
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1822519610}
-  - component: {fileID: 1822519612}
-  - component: {fileID: 1822519611}
-  m_Layer: 11
-  m_Name: Edge 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1822519610
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1822519609}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2010806747}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1822519611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1822519609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 371ed69722d5e0149b3947a0536c37c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHorizontal: 0
-  closeDistance: 0.25
-  impactForce: {x: -3, y: 0}
---- !u!68 &1822519612
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1822519609}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 0, y: 5}
-  - {x: 0, y: -5}
 --- !u!1001 &1916773437
 Prefab:
   m_ObjectHideFlags: 0
@@ -1392,6 +1666,21 @@ Prefab:
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_Name
       value: Brick21
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
       objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
@@ -1448,6 +1737,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick4
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -1503,6 +1807,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick13
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -1515,23 +1834,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1943348416}
---- !u!1 &1953114296 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1663606094}
---- !u!114 &1953114297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1953114296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95a38b459e92527499654133ef8436f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyPattern: {fileID: 11400000, guid: d382c6b218be816419ffcf13820bd2c3, type: 2}
 --- !u!1001 &1985231944
 Prefab:
   m_ObjectHideFlags: 0
@@ -1575,6 +1877,21 @@ Prefab:
       propertyPath: m_Name
       value: Brick15
       objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
+      objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
       value: Brick
@@ -1587,38 +1904,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4764000467480312, guid: 56134f381e1359d43b2df5eb7d285b5c,
     type: 2}
   m_PrefabInternal: {fileID: 1985231944}
---- !u!1 &2010806745
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2010806747}
-  m_Layer: 11
-  m_Name: Limits
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2010806747
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2010806745}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.341709, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1480452990}
-  - {fileID: 1822519610}
-  - {fileID: 1317869119}
-  - {fileID: 1772945989}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2106784636
 Prefab:
   m_ObjectHideFlags: 0
@@ -1661,6 +1946,21 @@ Prefab:
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_Name
       value: Brick11
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
       objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString
@@ -1716,6 +2016,21 @@ Prefab:
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_Name
       value: Brick5
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9170743
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.24524222
+      objectReference: {fileID: 0}
+    - target: {fileID: 212002720753466018, guid: 56134f381e1359d43b2df5eb7d285b5c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9264706
       objectReference: {fileID: 0}
     - target: {fileID: 1983257029887418, guid: 56134f381e1359d43b2df5eb7d285b5c, type: 2}
       propertyPath: m_TagString

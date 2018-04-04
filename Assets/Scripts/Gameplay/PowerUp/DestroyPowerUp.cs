@@ -13,6 +13,7 @@ public class DestroyPowerUp : PowerUp {
         }
 
         yield return new WaitForSeconds(powerUpDuration);
+
         PowerUpHasExpired();
     }
 
@@ -20,6 +21,7 @@ public class DestroyPowerUp : PowerUp {
         foreach (Collider2D collider in Brick.BrickColliders) {
             collider.isTrigger = false;
         }
+
         base.PowerUpHasExpired();
     }
 }

@@ -1,33 +1,45 @@
 ﻿using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(LevelsInfoData))]
 public class LevelsInfoDataEditor : Editor {
 
-    private static bool[] areLevelsFoldout = new bool[5];
+    private static bool[][] areLevelsFoldout;
+    private LevelsInfoData levelsInfo;
+
+    private void OnEnable() {
+        levelsInfo = (LevelsInfoData)target;
+
+        if (areLevelsFoldout != null) {
+            return;
+        }
+
+        areLevelsFoldout = new bool[levelsInfo.Worlds.Length][];
+        for (int i = 0; i < areLevelsFoldout.Length; i++) {
+            areLevelsFoldout[i] = new bool[levelsInfo.Worlds[i].LevelCount];
+        }
+    }
 
     public override void OnInspectorGUI() {
-        LevelsInfoData levelsInfo = (LevelsInfoData)target;
-
         if (levelsInfo == null) {
             return;
         }
 
         int worldIndex = 0;
-        foreach (var world in levelsInfo.worlds) {
-            for (int i = 0; i < world.levels.Count; i++) {
-                EditorGUILayout.LabelField("World " + (worldIndex + 1), GUIStyleUtility.boldFont);
 
+        foreach (var world in levelsInfo.Worlds) {
+            EditorGUILayout.LabelField("World " + (worldIndex + 1), GUIStyleUtility.boldFont);
+
+            for (int i = 0; i < world.LevelCount; i++) {
                 EditorGUILayout.BeginVertical(GUIStyleUtility.foldoutPadding);
 
-                areLevelsFoldout[i] = EditorGUILayout.Foldout(areLevelsFoldout[i], "Level " + (i + 1), true);
+                areLevelsFoldout[worldIndex][i] = EditorGUILayout.Foldout(areLevelsFoldout[worldIndex][i], "Level " + (i + 1), true);
 
-                if (areLevelsFoldout[i]) {
+                if (areLevelsFoldout[worldIndex][i]) {
                     EditorGUI.indentLevel += 1;
 
-                    EditorGUILayout.LabelField("Name: " + world.levels[i].levelName);
-                    EditorGUILayout.LabelField("Scene Index: " + world.levels[0].sceneIndex.ToString());
-                    EditorGUILayout.LabelField("Level Data: " + (world.levels[i].levelData != null ? "Found" : "Not found"));
+                    EditorGUILayout.LabelField("Name: " + world[i].Name);
+                    EditorGUILayout.LabelField("Scene Build Index: " + world[i].SceneIndex);
+                    EditorGUILayout.LabelField("Level Data: " + (world[i].Data != null ? "Found" : "Missing"));
 
                     EditorGUI.indentLevel -= 1;
                 }

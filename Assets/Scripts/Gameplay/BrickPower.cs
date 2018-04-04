@@ -3,5 +3,5 @@
 // Assign each power randomly to some bricks ?
 public abstract class BrickPower : MonoBehaviour {
 
-    public abstract bool TriggerPower();
+    public abstract void TriggerPower();
 }

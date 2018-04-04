@@ -2,7 +2,8 @@
 
 public class Limit : MonoBehaviour {
 
-    [SerializeField] private float closeDistance = 1f;
+    [SerializeField] private bool isHorizontal;
+    [SerializeField] private float closeDistance = 0.25f;
     [SerializeField] private Vector2 impactForce;
 
     private Collider2D thisCollider;
@@ -10,6 +11,7 @@ public class Limit : MonoBehaviour {
     private Collider2D ballCollider;
     private GamepadController mainGamepad;
     private float inverseMaxAcceleration;
+    private float closeDistanceSquared;
 
     public static Limit[] Instances = new Limit[4];
 
@@ -17,25 +19,26 @@ public class Limit : MonoBehaviour {
         thisCollider = GetComponent<Collider2D>();
 
         Instances[(int)System.Char.GetNumericValue(name[name.Length - 1]) - 1] = this;
+
+        closeDistanceSquared = closeDistance * closeDistance;
     }
 
     private void Start() {
-        ballCollider = Ball.MainBall.GetComponent<Collider2D>();
+        ballCollider = Ball.Main.GetComponent<Collider2D>();
         mainGamepad = GameObject.FindWithTag("GameController").GetComponent<GamepadController>();
+
         inverseMaxAcceleration = 1f / mainGamepad.maxAcceleration;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (!other.CompareTag("Ball")) {
-            Destroy(other.gameObject, 2f);
+        if (!thisCollider.isTrigger) {
             return;
         }
 
-        GameManager.Instance.Lives--;
-        Destroy(other.gameObject, 2f);
-        if (GameManager.Instance.GameState == GameManager.State.PLAYING) {
-            GameManager.Instance.GameState = GameManager.State.RESTART;
-            GameManager.Instance.Invoke("RestartGameLevel", 2f);
+        Destroy(other.gameObject, 1f);
+
+        if (other.CompareTag("Ball")) {
+            GameManager.Instance.Lives--;
         }
     }
 
@@ -43,15 +46,16 @@ public class Limit : MonoBehaviour {
         if (thisCollider.isTrigger) {
             return;
         }
+
         if (ballCollider == null) {
-            ballCollider = Ball.MainBall.GetComponent<Collider2D>();
+            ballCollider = Ball.Main.GetComponent<Collider2D>();
         }
 
-        Vector2 limitClosestPoint = thisCollider.bounds.ClosestPoint(Ball.MainBall.transform.position);
+        Vector2 limitClosestPoint = thisCollider.bounds.ClosestPoint(Ball.Main.Position);
         ballClosestPoint = ballCollider.bounds.ClosestPoint(limitClosestPoint);
 
-        if ((ballClosestPoint - limitClosestPoint).sqrMagnitude <= closeDistance * closeDistance) {
-            Ball.MainBall.Direction += impactForce * (mainGamepad.XAcceleration * inverseMaxAcceleration);
+        if ((ballClosestPoint - limitClosestPoint).sqrMagnitude <= closeDistanceSquared) {
+            Ball.Main.Direction += impactForce * (mainGamepad.XAcceleration * inverseMaxAcceleration);
         }
     }
 

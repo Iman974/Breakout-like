@@ -1,12 +1,12 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(DestroyPattern))]
-public class DestroyPatternEditor : Editor {
+[CustomEditor(typeof(DestructionPattern))]
+public class DestructionPatternEditor : Editor {
 
     private SerializedProperty brickVectorArray;
     private SerializedProperty[] areVectorsEnabled;
-    private DestroyPattern pattern;
+    private DestructionPattern pattern;
     private SerializedProperty[] dirAngles, directions, counts, lengths;
 
     private void OnEnable() {
@@ -17,7 +17,7 @@ public class DestroyPatternEditor : Editor {
             areVectorsEnabled[i] = brickVectorArray.GetArrayElementAtIndex(i).FindPropertyRelative("enabled");
         }
 
-        pattern = (DestroyPattern)target;
+        pattern = (DestructionPattern)target;
 
         dirAngles = new SerializedProperty[brickVectorArray.arraySize];
         directions = new SerializedProperty[brickVectorArray.arraySize];
@@ -53,7 +53,7 @@ public class DestroyPatternEditor : Editor {
             EditorGUILayout.BeginHorizontal();
 
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(dirAngles[i], GUILayout.Width(255f));
+            EditorGUILayout.PropertyField(dirAngles[i], GUILayout.Width(260f));
             if (EditorGUI.EndChangeCheck()) {
                 directions[i].vector2Value =
                     BrickVector.GetDirectionFromAngle(dirAngles[i].floatValue);

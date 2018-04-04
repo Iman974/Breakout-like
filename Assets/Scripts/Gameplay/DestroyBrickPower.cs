@@ -4,7 +4,12 @@ using System.Collections;
 //[CreateAssetMenu(fileName = "New Pattern Power", menuName = "Brick Power/Destroy Pattern Power")]
 public class DestroyBrickPower : BrickPower {
 
-    [SerializeField] private DestroyPattern destroyPattern;
+    [SerializeField] private DestructionPattern destroyPattern;
+    public DestructionPattern DestroyPattern {
+        set {
+            destroyPattern = value;
+        }
+    }
 
     private int brickLayer;
     private BrickVector[] brickVectors; // Cache the pattern
@@ -23,22 +28,35 @@ public class DestroyBrickPower : BrickPower {
         }
     }
 
-    public override bool TriggerPower() {
+    public override void TriggerPower() {
         for (int i = 0; i < brickVectors.Length; i++) {
             //Debug.DrawRay(transform.position, brickVectors[i].Direction, Color.red, 4f);
             Physics2D.RaycastNonAlloc(transform.position, brickVectors[i].Direction, rayHits2D[i],
                 brickVectors[i].Length, 1 << brickLayer);
         }
         GameManager.Instance.StartCoroutine(DestroyBricks());
-        return true;
     }
 
     private IEnumerator DestroyBricks() {
-        foreach (var rayHits2DArray in rayHits2D) {
+        foreach (RaycastHit2D[] rayHits2DArray in rayHits2D) {
             foreach (RaycastHit2D hit in rayHits2DArray) {
                 if (hit) {
-                    GameManager.Instance.StartCoroutine(Brick.Bricks.Find(
-                        brick => brick.gameObject == hit.collider.gameObject).DestroyBrick());
+                    //IEnumerator destroyBrick = null; //= Brick.Bricks.Find(brick => brick.gameObject == hit.collider.gameObject).DestroyBrick();
+                    //foreach (Brick brick in Brick.Bricks) {
+                    //    if (brick == null) {
+                    //        Debug.LogError("Brick is null");
+                    //    }
+
+                    //    Debug.Log("Brick: " + brick.gameObject.name + ", hit: " + hit.collider.gameObject.name);
+
+                    //    if (brick.gameObject == hit.collider.gameObject) {
+                    //        destroyBrick = brick.DestroyBrick();
+                    //        if (destroyBrick == null) Debug.LogError("DestroyBrick IEnumerator is null");
+                    //    }
+                    //}
+                    // The list search is to avoid the getComponent<Brick>() on the hit.collider.gameObject
+                    // Research impact performance of GetComponent
+                    hit.collider.GetComponent<Brick>().RemoveBrick(); // Error due to how fast we launch a level ??
                 }
                 yield return null;
             }

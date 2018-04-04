@@ -11,9 +11,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050f32a4fcafa954aba08f51bc2f633c, type: 3}
   m_Name: LevelsInfo
   m_EditorClassIdentifier: 
+  levelDatas:
+  - {fileID: 11400000, guid: ef9a7df3b6ea62d419df988c26f92f7c, type: 2}
+  - {fileID: 11400000, guid: f935a4480ec45484ca86685087de1d16, type: 2}
   worlds:
   - levels:
-    - levelNumber: 1
+    - number: 1
       sceneIndex: 2
-      levelName: 1-1
-      levelData: {fileID: 11400000, guid: ef9a7df3b6ea62d419df988c26f92f7c, type: 2}
+      name: 1-1
+      data: {fileID: 11400000, guid: ef9a7df3b6ea62d419df988c26f92f7c, type: 2}
+  - levels:
+    - number: 1
+      sceneIndex: 3
+      name: 2-1
+      data: {fileID: 11400000, guid: f935a4480ec45484ca86685087de1d16, type: 2}

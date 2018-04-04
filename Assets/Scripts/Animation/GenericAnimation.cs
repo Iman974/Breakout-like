@@ -15,7 +15,7 @@ public class GenericAnimation : MonoBehaviour {
         public UnityEvent triggerAtEnd;
     }
 
-    [SerializeField] new private Animation animation;
+    [SerializeField] private Animation thisAnimation;
     [SerializeField] private Graphic[] componentToAnimate;
 
     private float timeToEval;
@@ -25,19 +25,19 @@ public class GenericAnimation : MonoBehaviour {
     }
 
     private IEnumerator Animate() {
-        float animationSpeed = animation.animationSpeed;
-        float totalTime = animation.animationCurve[animation.animationCurve.length - 1].time;
+        float animationSpeed = thisAnimation.animationSpeed;
+        float totalTime = thisAnimation.animationCurve[thisAnimation.animationCurve.length - 1].time;
         Color nextColor = componentToAnimate[0].color;
-        float startAlpha = componentToAnimate[0].color.a, lerpToAlpha = animation.toColor.a;
+        float startAlpha = componentToAnimate[0].color.a, lerpToAlpha = thisAnimation.toColor.a;
 
         for (float timeToEval = 0; timeToEval < totalTime; timeToEval += animationSpeed * Time.deltaTime) {
-            nextColor.a = Mathf.Lerp(startAlpha, lerpToAlpha, animation.animationCurve.Evaluate(timeToEval));
+            nextColor.a = Mathf.Lerp(startAlpha, lerpToAlpha, thisAnimation.animationCurve.Evaluate(timeToEval));
             componentToAnimate[0].color = nextColor;
             yield return null;//new WaitForSeconds(animation.animationSpeed);
         }
-        componentToAnimate[0].color += new Color(0f, 0f, 0f, animation.animationCurve.Evaluate(totalTime));
-        if (animation.triggerAtEnd != null) {
-            animation.triggerAtEnd.Invoke();
+        componentToAnimate[0].color += new Color(0f, 0f, 0f, thisAnimation.animationCurve.Evaluate(totalTime));
+        if (thisAnimation.triggerAtEnd != null) {
+            thisAnimation.triggerAtEnd.Invoke();
         }
     }
 }

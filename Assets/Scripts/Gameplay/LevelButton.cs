@@ -2,15 +2,15 @@
 
 public class LevelButton : MonoBehaviour {
 
-    private LevelManager levelManager;
+    //private LevelManager levelManager;
 
-    public Level level;
+    public Level Level { get; set; }
 
-    private void Start() {
-        levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
-    }
+    //private void Start() {
+    //    levelManager = GameObject.FindWithTag("LevelManager").GetComponent<LevelManager>();
+    //}
 
     public void CallLoadLevel() {
-        levelManager.PlayGameLevel(level.levelName);
+        LevelManager.LoadLevelAsync(Level.Name);
     }
 }

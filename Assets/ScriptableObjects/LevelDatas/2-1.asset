@@ -9,8 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a05c0df0f2f4a254e8a3a9dd927199fa, type: 3}
-  m_Name: 1-1
+  m_Name: 2-1
   m_EditorClassIdentifier: 
-  gamepadPosition: {x: 0, y: -4}
-  mainBallPosition: {x: 0, y: -3}
+  gamepadPosition: {x: 0, y: -3}
+  mainBallPosition: {x: 0, y: -2}
   levelLives: 2
+  starLevels: 000000000000000000000000
+  poweredBrickCount: 2
+  brickPower: []

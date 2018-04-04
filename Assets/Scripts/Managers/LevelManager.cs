@@ -1,62 +1,70 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-    [SerializeField] private LevelsInfoData levelsInfo;
-    [SerializeField] private Slider loadingBar;
-    [SerializeField] private GameObject levelButtonPrefab;
-    [SerializeField] private RectTransform levelPanel;
+    public static LevelsInfoData LevelsInfo { get; private set; }
 
-    private static LevelManager instance;
+    public delegate void OnLevelUnloadCallback();
+    public static event OnLevelUnloadCallback SceneUnload;
 
-    private void Awake() {
-        if (instance != null) {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-    }
+    //private static LevelManager instance;
+
+    //private void Awake() {
+    //    #region Private Singleton
+    //    if (instance != null) {
+    //        Destroy(gameObject);
+    //        return;
+    //    }
+    //    instance = this;
+    //    #endregion
+    //}
 
     private void Start() {
-        foreach (var world in levelsInfo.worlds) {
-            for (int i = 0; i < world.levels.Count; i++) {
-                Text levelText = Instantiate(levelButtonPrefab, Vector3.zero, Quaternion.identity, levelPanel).GetComponentInChildren<Text>();
-                levelText.text = (i + 1).ToString();
-                LevelButton levelButton = levelText.GetComponentInParent<LevelButton>();
-                levelButton.level = world.levels[i];
-            }
+        if (LevelsInfo == null) {
+            LevelsInfo = FindObjectOfType<Preloader>().LevelsInfoData; // if we keep private singleton, then all this is not required anymore
+            SceneManager.UnloadSceneAsync(0);
+        }
+
+        SceneManager.sceneLoaded += GameManager.Instance.OnLevelLoaded;
+    }
+
+    //private void OnDestroy() {
+    //    instance = null;
+    //}
+
+    //public void PlayGameLevel(string levelName) {
+    //    StartCoroutine(LoadGameLevel(levelName));
+    //}
+
+    public static void LoadLevelAsync(string levelName) {
+        AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(levelName);
+
+        if (loadingOperation == null) {
+            throw new System.NullReferenceException("The loading operation failed.");
+        }
+
+        if (SceneUnload != null) {
+            SceneUnload.Invoke();
+        }
+
+        if (SceneManager.GetActiveScene().name == "Menu") { // Really needed ?!
+            GameManager.UiManager.OnLevelLoad(loadingOperation);
+        } else {
+            GameManager.UiManager.OnLevelLoad(loadingOperation, true);
         }
     }
 
-    private void OnDestroy() {
-        instance = null;
-    }
+    //public static void GoToMainMenu() {
+    //    LoadLevel("Menu");
+    //}
 
-    public void PlayGameLevel(string levelName) {
-        StartCoroutine(LoadGameLevel(levelName));
-    }
-
-    private IEnumerator LoadGameLevel(string levelName) {
-        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelName);
-        if (loadOperation == null) {
-            yield break;
+    public static void ReloadCurrentLevel() {
+        if (SceneUnload != null) {
+            SceneUnload.Invoke();
         }
-        loadOperation.completed += EnableGameManager;
-        GameManager.Instance.CurrentLevelData = levelsInfo[levelName].levelData;
 
-        while (!loadOperation.isDone) {
-            loadingBar.transform.parent.gameObject.SetActive(true);
-            loadingBar.value = loadOperation.progress;
-            yield return null;
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-    private void EnableGameManager(AsyncOperation operation) {
-        GameManager.Instance.gameObject.SetActive(true);
-        operation.completed -= EnableGameManager;
-    }
-
 }

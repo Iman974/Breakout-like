@@ -12,17 +12,17 @@ public class SpeedPowerUp : PowerUp {
     }
 
     private IEnumerator SpeedUp() {
-        Ball.MainBall.DoSpeedUpOverTime = false;
-        speedBeforePowerUp = Ball.MainBall.Speed;
-        Ball.MainBall.Speed *= speedUpMultiplier;
+        Ball.Main.DoSpeedUpOverTime = false;
+        speedBeforePowerUp = Ball.Main.Speed;
+        Ball.Main.Speed *= speedUpMultiplier;
 
         yield return new WaitForSeconds(powerUpDuration);
         PowerUpHasExpired();
     }
 
     protected override void PowerUpHasExpired() {
-        Ball.MainBall.Speed = speedBeforePowerUp;
-        Ball.MainBall.DoSpeedUpOverTime = true;
+        Ball.Main.Speed = speedBeforePowerUp;
+        Ball.Main.DoSpeedUpOverTime = true;
         base.PowerUpHasExpired();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Power Up")]
+//[CreateAssetMenu(fileName = "New Power Up")]
 public class OldPowerUp : ScriptableObject {
 
     //private IPower power;

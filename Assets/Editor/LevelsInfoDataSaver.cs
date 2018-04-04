@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 public class LevelsInfoDataSaver {
 
-    [MenuItem("Scenes Info/Save Scenes Names")]
+    [MenuItem("Scenes Info/Save Scenes Info")]
     private static void SaveScenesNames() {
 
         // First, try to load the list if it already exists
@@ -27,10 +27,12 @@ public class LevelsInfoDataSaver {
             if (!match.Success) {
                 continue;
             }
+
             string levelDataAssetPath = string.Format("Assets/ScriptableObjects/LevelDatas/{0}.asset", match.Groups[1].Value);
             LevelData levelData = AssetDatabase.LoadAssetAtPath<LevelData>(levelDataAssetPath);
             levelsInfo.AddData(match.Groups[1].Value, buildSettingsScenes[i].path, levelData);
         }
+
         levelsInfo.ProcessData();
         EditorUtility.SetDirty(levelsInfo);
 

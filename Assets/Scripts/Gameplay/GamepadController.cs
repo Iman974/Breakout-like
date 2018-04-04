@@ -7,13 +7,14 @@ public class GamepadController : MonoBehaviour {
     [SerializeField] private GameObject smokeEffect;
     [SerializeField] private Vector2 smokeEffectOffset;
     [SerializeField] private float firstPosLerpTime = 0.5f; // Mobile input
-    [SerializeField] private float checkIfMovingRate = 0.04f;
+    [SerializeField] private float checkMoveFrequency = 0.04f;
     [SerializeField] private float minImpactRequiredAcceleration = 10f;
+    [SerializeField] private float smoothMovement = 0.75f;
 
     private Camera mainCamera;
     private SpriteRenderer gamepadRenderer;
     private float upperYBound;
-    private GameManager GMinstance;
+    //private GameManager GMinstance;
     private float xBeginDrag;
     private float accelerationTime;
     private bool impactTriggered;
@@ -25,6 +26,18 @@ public class GamepadController : MonoBehaviour {
 
     public float XAcceleration { get; private set; }
 
+    /// <summary>
+    /// Shorthand for writing transform.position.
+    /// </summary>
+    public Vector2 Position {
+        get {
+            return transform.position;
+        }
+        set {
+            transform.position = value;
+        }
+    }
+
     public float maxAcceleration = 100f;
 
     private void Awake() {
@@ -35,8 +48,8 @@ public class GamepadController : MonoBehaviour {
     }
 
     private void Start () {
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        GMinstance = GameManager.Instance;
+        mainCamera = Camera.main;
+        //GMinstance = GameManager.Instance;
     }
 
     private IEnumerator SmoothStart() { // For mobile input
@@ -45,28 +58,31 @@ public class GamepadController : MonoBehaviour {
 
         for (float currentLerpTime = 0f; currentLerpTime < firstPosLerpTime; currentLerpTime += Time.deltaTime) {
             transform.position = Vector2.Lerp(transform.position, new Vector2(firstMousePositionX, transform.position.y),
-                Mathf.Sin((currentLerpTime / firstPosLerpTime) * Mathf.PI * 0.5f));
+                Mathf.Sin((currentLerpTime * 2f) * Mathf.PI * 0.5f));
             firstMousePositionX = mainCamera.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, 0f)).x;
             yield return null;
         }
         //startSmoothing = false;
     }
 
-    private void FixedUpdate() { // Makes the gamepad follow the mouse
-        UpdateGamepadPosition();
+    private void FixedUpdate() {
+        UpdateGamepadPosition(); // Makes the gamepad follow the mouse
     }
 
     private void Update() {
         if (Input.GetButtonDown("Fire1")) {
             ResetAcceleration();
             InvokeRepeating("AccelerationTimer", 0f, 0.02f);
-            InvokeRepeating("CheckIfMoving", 0f, checkIfMovingRate);
+            InvokeRepeating("CheckIfMoving", 0f, checkMoveFrequency);
         }
+
         if (Input.GetButton("Fire1") && transform.position.x >= minHorizontal && transform.position.x <= maxHorizontal) {
             clampHorizontal = true;
 
             if (Mathf.Approximately(nextPosition.x, minHorizontal) || Mathf.Approximately(nextPosition.x, maxHorizontal)) {
+
                 XAcceleration = Mathf.Abs(transform.position.x - xBeginDrag) / accelerationTime;
+
                 if (XAcceleration > maxAcceleration) {
                     XAcceleration = maxAcceleration;
                 }
@@ -85,20 +101,21 @@ public class GamepadController : MonoBehaviour {
     }
 
     private void CheckIfMoving() {
-        if (transform.hasChanged == false) {
+        if (!transform.hasChanged) {
             ResetAcceleration();
             return;
         }
+
         transform.hasChanged = false;
 
-        if (dragDirection != (transform.position.x > xBeginDrag ? 1f : -1f)) {
+        if (!Mathf.Approximately(dragDirection, (transform.position.x > xBeginDrag ? 1f : -1f))) {
             dragDirection = -dragDirection;
             ResetAcceleration(); // This whole test doesn't work if drag started outside clampHorizontal
         }
     }
 
     public void UpdateGamepadPosition() {
-        nextPosition.x = GMinstance.MousePositionX;
+        nextPosition.x = Mathf.Lerp(nextPosition.x, GameManager.MousePositionX, smoothMovement);
 
         if (clampHorizontal) {
             nextPosition.x = Mathf.Clamp(nextPosition.x, minHorizontal, maxHorizontal); 
@@ -115,7 +132,7 @@ public class GamepadController : MonoBehaviour {
         impactTriggered = true;
         ResetAcceleration();
 
-        foreach (Limit limit in Limit.Instances) { // make the impact only on the side where the gamepad hit
+        foreach (Limit limit in Limit.Instances) { // TODO: make the impact only on the side where the gamepad hit ?
             limit.Impact();
         }
     }
