@@ -12,7 +12,7 @@ public static class VectorUtility {
     /// What value to assign to z component.
     /// </param>
     /// <returns></returns>
-    public static Vector3 BuildVector(Vector2 xy, float z) {
+    public static Vector3 Vector3(Vector2 xy, float z) {
         return new Vector3(xy.x, xy.y, z);
     }
 }

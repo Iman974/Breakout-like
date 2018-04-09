@@ -7,36 +7,50 @@ using System.Collections;
 /// </summary>
 public class MenuUIManager : MonoBehaviour {
 
-    private enum Navigation {
+    private enum Navigation { // Not needed ?
         Main = 1,
         Worlds = 2,
         Options = 3
+    }
+
+    private enum SlideDirection {
+        Left,
+        Right
     }
 
     [SerializeField] private RectTransform worldSpaceCanvas;
     [SerializeField] private Text starsCountText;
     [SerializeField] private LevelButton levelButtonPrefab;
     [SerializeField] private Transform worldPanelPrefab;
-    [SerializeField] private GameObject backButtonObj, mainMenuObj, optionsMenuObj, worldsMenuObj;
+    [SerializeField] private GameObject mainMenuObj, optionsMenuObj, worldsMenuObj;
+    [SerializeField] private Button backButton;
+
+    [Tooltip("Animation played when a button is clicked.")]
     [SerializeField] private AnimationCurve navigationAnimation = AnimationCurve.Linear(0f, 0f, 1f, 1f);
-    [SerializeField] private AnimationCurve backBtnRevealAnimation = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] private float navigationSpeed = 1f;
-    [SerializeField] private float backBtnRevealSpeed = 2f;
+    [SerializeField] private AnimationCurve backBtnFadeAnimation = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+    [SerializeField] private float backBtnFadeSpeed = 1f;
     [SerializeField] private float backBtnAnimDelay = 0.75f;
+
+    [Tooltip("Animation played when sliding to a world panel.")]
+    [SerializeField] private AnimationCurve slideAnimation = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+    [SerializeField] private float slideSpeed = 1f;
 
     [Tooltip("The spacing of the stars horizontalGroup when there are 2 stars to display.")]
     [SerializeField] private float spacingWhenTwo;
 
     private Navigation navigation;
-    private Camera mainCamera;
+    private SlideDirection slideDirection;
+    private Transform cameraTransform;
     private bool delayButtonAnimation = true;
     private Transform firstWorldPanel;
+    private Transform lastWorldPanel;
+    private RectTransform backBtnRectTransform;
+    private Vector2 backButtonOffset;
+    private int selectedWorldPanel = 0;
+    private bool canSlide;
 
-#if UNITY_STANDALONE
-    private RectTransform backButtonRectTransform;
-#else
     private Image backButtonImg;
-#endif
 
     public static MenuUIManager Instance { get; private set; }
 
@@ -52,14 +66,15 @@ public class MenuUIManager : MonoBehaviour {
     }
 
     private void Start() {
-        mainCamera = Camera.main;
+        cameraTransform = Camera.main.transform;
 
-#if UNITY_STANDALONE
-        backButtonRectTransform = backButtonObj.GetComponent<RectTransform>();
-#else
-        //backButtonImg = 
-#endif
+        backButtonImg = backButton.GetComponent<Image>();
+        backBtnRectTransform = backButton.GetComponent<RectTransform>();
+        backButtonOffset = backBtnRectTransform.anchoredPosition;
+
         GeneratePanels();
+        firstWorldPanel = worldsMenuObj.transform.GetChild(0);
+        lastWorldPanel = worldsMenuObj.transform.GetChild(worldsMenuObj.transform.childCount - 1);
 
         UpdateTotalStarsCount(GameManager.TotalStarsCount);
     }
@@ -103,14 +118,7 @@ public class MenuUIManager : MonoBehaviour {
 
             worldNumber++;
         }
-
-        firstWorldPanel = worldsMenuObj.transform.GetChild(0);
     }
-
-    //private void Update() {
-    //    //Debug.Log("Width: " + Camera.main.pixelWidth + ", Height: " + Camera.main.pixelHeight + ", Scaled width: " +
-    //    //    Camera.main.scaledPixelWidth + ", Scaled height: " + Camera.main.scaledPixelHeight + ", Aspect: " + Camera.main.aspect);
-    //}
 
     private void UpdateTotalStarsCount(int newCount) {
         if (newCount > 0) {
@@ -120,115 +128,154 @@ public class MenuUIManager : MonoBehaviour {
         }
     }
 
-    //public void GoBack() {
-    //    if (worldsMenuObj.activeSelf) {
-    //        navigation = Navigation.Worlds;
-    //    } else if (optionsMenuObj.activeSelf) {
-    //        navigation = Navigation.Options;
-    //    }
-
-    //    switch (navigation) {
-    //        case Navigation.Worlds:
-    //            //worldsMenuObj.SetActive(false);
-    //            //backButtonObj.SetActive(false);
-    //            //mainMenuObj.SetActive(true);
-    //            //StartCoroutine(TransitionTowards(mainMenuObj.transform, worldsMenuObj, backButtonObj));
-    //            break;
-    //        case Navigation.Options:
-    //            //optionsMenuObj.SetActive(false);
-    //            //backButtonObj.SetActive(false);
-    //            //mainMenuObj.SetActive(true);
-    //            //StartCoroutine(TransitionTowards(mainMenuObj.transform, optionsMenuObj, backButtonObj));
-    //            break;
-    //    }
-    //}
-
-    public void DoTransition(Transform towardsMenu) {
-        StartCoroutine(TransitionTowards(towardsMenu));
+    public void DoTransition(Transform to) {
+        StartCoroutine(AnimateBackButton(to));
+        MoveCameraTo(to);
     }
 
     public void DoWorldsMenuTransition() {
-        StartCoroutine(TransitionTowards(firstWorldPanel));
+        StartCoroutine(AnimateBackButton(false, true));
+        StartCoroutine(SlideToDelayed());
+    }
+
+    private IEnumerator SlideToDelayed() {
+        yield return MoveCameraTo(firstWorldPanel);
+
+        canSlide = true;
     }
 
     /// <summary>
-    /// Moves the camera smoothly, based on the navigation animation curve, towards a menu's position.
+    /// Moves the camera, based on the navigation animation curve, to a menu's position.
     /// </summary>
-    /// <param name="towardsMenu">
+    /// <param name="to">
     /// Menu to lerp towards.
     /// </param>
     /// <returns></returns>
-    private IEnumerator TransitionTowards(Transform towardsMenu) {
-        Vector3 startPosition = mainCamera.transform.position;
-        Vector2 endPosition = towardsMenu.position;
-
-        StartCoroutine(AnimateBackButton());
-
-        for (float time = 0f; time < 1f; time += navigationSpeed * Time.deltaTime) {
-            mainCamera.transform.position = VectorUtility.BuildVector(Vector2.LerpUnclamped(startPosition, endPosition,
-                navigationAnimation.Evaluate(time)), startPosition.z);
-            yield return null;
-        }
-        mainCamera.transform.position = endPosition;
+    private Coroutine MoveCameraTo(Transform to) {
+        return StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, to.position, navigationAnimation, navigationSpeed));
     }
 
     /// <summary>
-    /// Moves the back button out of the screen or into it.
+    /// Fades the back button in or out.
     /// </summary>
-    private IEnumerator AnimateBackButton(/*bool isReveal = true*/) {
+    private IEnumerator AnimateBackButton(Transform towardsMenu) {
         if (delayButtonAnimation) {
             delayButtonAnimation = false;
+
             yield return new WaitForSeconds(backBtnAnimDelay);
+
+            // Sets the back button in the appropriate corner (bottom left, bottom right, top left or top right)
+            bool isRightCorner = towardsMenu.position.x < mainMenuObj.transform.position.x;
+            bool isTopCorner = towardsMenu.position.y < mainMenuObj.transform.position.y;
+
+            Vector2 anchorPosition = new Vector2(isRightCorner ? 1f : 0f, isTopCorner ? 1f : 0f);
+
+            backBtnRectTransform.anchorMin = anchorPosition;
+            backBtnRectTransform.anchorMax = anchorPosition;
+            backBtnRectTransform.anchoredPosition = new Vector2((isRightCorner ? 1f : -1f ) * backButtonOffset.x,
+                (isTopCorner ? 1f : -1f) * backButtonOffset.y);
+            backBtnRectTransform.rotation = Quaternion.Euler(0f, isRightCorner ? 0f : 180f, 0f);
         } else {
             delayButtonAnimation = true;
         }
 
-#if UNITY_STANDALONE
-        Vector2 startPosition = backButtonRectTransform.anchoredPosition;
-        Vector2 endPosition = -startPosition;
-        //Vector3[] fourCorners = new Vector3[4];
+        Color startColor = backButtonImg.color;
+        Color endColor = startColor;
+        endColor.a = 1f - endColor.a;
 
-        for (float time = 0f; time < 1f; time += backBtnRevealSpeed * Time.deltaTime) {
-            backButtonRectTransform.anchoredPosition = Vector2.LerpUnclamped(startPosition, endPosition,
-                backBtnRevealAnimation.Evaluate(time));
-
-            //backButtonRectTransform.GetWorldCorners(fourCorners);
-            //if (fourCorners[1].y < mainCamera.ViewportToWorldPoint(Vector3.zero).y) {
-            //    break;
-            //}
+        for (float time = 0f; time < 1f; time += backBtnFadeSpeed * Time.deltaTime) {
+            backButtonImg.color = Color.Lerp(startColor, endColor, backBtnFadeAnimation.Evaluate(time));
             yield return null;
         }
-        backButtonRectTransform.anchoredPosition = endPosition;
+        backButtonImg.color = endColor;
+        backButton.interactable = Mathf.Approximately(endColor.a, 1f);
+    }
 
-#else
-        for (int i = 0; i < length; i++) {
-            
+    private IEnumerator AnimateBackButton(bool isRightCorner, bool isTopCorner) {
+        if (delayButtonAnimation) {
+            delayButtonAnimation = false;
+
+            yield return new WaitForSeconds(backBtnAnimDelay);
+
+            Vector2 anchorPosition = new Vector2(isRightCorner ? 1f : 0f, isTopCorner ? 1f : 0f);
+
+            backBtnRectTransform.anchorMin = anchorPosition;
+            backBtnRectTransform.anchorMax = anchorPosition;
+            backBtnRectTransform.anchoredPosition = new Vector2((isRightCorner ? 1f : -1f) * backButtonOffset.x,
+                (isTopCorner ? 1f : -1f) * backButtonOffset.y);
+            backBtnRectTransform.rotation = Quaternion.Euler(0f, isRightCorner ? 0f : 180f, 0f);
+        } else {
+            delayButtonAnimation = true;
         }
-#endif
+
+        Color startColor = backButtonImg.color;
+        Color endColor = startColor;
+        endColor.a = 1f - endColor.a;
+
+        for (float time = 0f; time < 1f; time += backBtnFadeSpeed * Time.deltaTime) {
+            backButtonImg.color = Color.Lerp(startColor, endColor, backBtnFadeAnimation.Evaluate(time));
+            yield return null;
+        }
+        backButtonImg.color = endColor;
+        backButton.interactable = Mathf.Approximately(endColor.a, 1f);
     }
 
     private void Update() {
-        if (Input.touchCount > 0) {
-            Touch touch = Input.GetTouch(0);
-            Debug.Log("Touch ! " + touch.phase);
+        if (Input.touchCount < 1 || !canSlide) {
+            return;
+        }
+
+        Touch touch = Input.GetTouch(0);
+        if (touch.phase == TouchPhase.Moved) {
+            if (/*!Mathf.Approximately(touch.deltaPosition.x, 0f) &&*/true) {
+                float x = Mathf.Clamp(cameraTransform.position.x - touch.deltaPosition.x * touch.deltaTime,
+                    firstWorldPanel.position.x, lastWorldPanel.position.x);
+                cameraTransform.position = new Vector3(x, 0f);
+            }
+        } else if (touch.phase == TouchPhase.Ended && !IsCameraOnEdges()) {
+            DoTouchSlide();
         }
     }
 
-    ///// <summary>
-    ///// Same as TransitionTowards(), but disables the given gameObjects at the end of the animation.
-    ///// </summary>
-    ///// <param name="towardsMenu">
-    ///// Menu to lerp towards.
-    ///// </param>
-    ///// <param name="toDisable">
-    ///// Gameobjects to disable at the end.
-    ///// </param>
-    ///// <returns></returns>
-    //private IEnumerator TransitionTowards(Transform towardsMenu, params GameObject[] toDisable) {
-    //    yield return StartCoroutine(TransitionTowards(towardsMenu));
+    private bool IsCameraOnEdges() {
+        return Mathf.Approximately(cameraTransform.position.x, firstWorldPanel.position.x) ||
+               Mathf.Approximately(cameraTransform.position.x, lastWorldPanel.position.x);
+    }
+    
+    private void DoTouchSlide() {
+        Transform worldsMenu = worldsMenuObj.transform;
+        Transform previousPanel = worldsMenu.GetChild(selectedWorldPanel);
+        Transform nextPanel;
 
-    //    foreach (GameObject gameObject in toDisable) {
-    //        gameObject.SetActive(false);
-    //    }
-    //}
+        if (slideDirection == SlideDirection.Left) {
+            nextPanel = worldsMenu.GetChild(selectedWorldPanel < worldsMenu.childCount - 1 ? selectedWorldPanel + 1 : selectedWorldPanel);
+        } else {
+            nextPanel = worldsMenu.GetChild(selectedWorldPanel > 0 ? selectedWorldPanel - 1 : selectedWorldPanel);
+        }
+
+        Vector3 startPosition = cameraTransform.position;
+
+        if (previousPanel == nextPanel) {
+            StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, previousPanel.position, slideAnimation, slideSpeed));
+            return;
+        }
+
+        float distanceToPrevious = Mathf.Abs(previousPanel.position.x - startPosition.x);
+        float distanceToNext = Mathf.Abs(nextPanel.position.x - startPosition.x);
+
+        Vector2 endPosition;
+
+        if (distanceToNext < distanceToPrevious) {
+            endPosition = nextPanel.position;
+            selectedWorldPanel++;
+        } else {
+            endPosition = previousPanel.position;
+
+            if (selectedWorldPanel > 0) {
+                selectedWorldPanel--;
+            }
+        }
+
+        StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, endPosition, slideAnimation, slideSpeed));
+    }
 }
