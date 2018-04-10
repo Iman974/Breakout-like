@@ -13,9 +13,7 @@ public static class AnimationUtility {
     /// The curve to play the animation from.
     /// </param>
     public static IEnumerator DoAnimation(float speed, AnimationCurve curve) {
-        float totalTime = curve[curve.length - 1].time;
-
-        for (float time = 0f; time < totalTime; time += speed * Time.deltaTime) {
+        for (float time = 0f; time < 1f; time += speed * Time.deltaTime) {
             //backButtonImg.color = Color.Lerp(startColor, endColor, backBtnFadeAnimation.Evaluate(time)); //delegates ? but because of speed, just totally useless ?
             yield return null;
         }

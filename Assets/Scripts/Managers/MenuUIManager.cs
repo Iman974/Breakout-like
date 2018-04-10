@@ -7,16 +7,11 @@ using System.Collections;
 /// </summary>
 public class MenuUIManager : MonoBehaviour {
 
-    private enum Navigation { // Not needed ?
-        Main = 1,
-        Worlds = 2,
-        Options = 3
-    }
-
-    private enum SlideDirection {
-        Left,
-        Right
-    }
+    //private enum Navigation { // Not needed ?
+    //    Main = 1,
+    //    Worlds = 2,
+    //    Options = 3
+    //}
 
     [SerializeField] private RectTransform worldSpaceCanvas;
     [SerializeField] private Text starsCountText;
@@ -39,17 +34,21 @@ public class MenuUIManager : MonoBehaviour {
     [Tooltip("The spacing of the stars horizontalGroup when there are 2 stars to display.")]
     [SerializeField] private float spacingWhenTwo;
 
-    private Navigation navigation;
-    private SlideDirection slideDirection;
+    //private Navigation navigation;
     private Transform cameraTransform;
     private bool delayButtonAnimation = true;
-    private Transform firstWorldPanel;
-    private Transform lastWorldPanel;
+
+    public Transform FirstWorldPanel { get; private set; }
+    public Transform LastWorldPanel { get; private set; }
+    public int SelectedWorldPanel { get; private set; }
+    public int WorldPanelCount {
+        get {
+            return worldsMenuObj.transform.childCount;
+        }
+    }
+
     private RectTransform backBtnRectTransform;
     private Vector2 backButtonOffset;
-    private int selectedWorldPanel = 0;
-    private bool canSlide;
-
     private Image backButtonImg;
 
     public static MenuUIManager Instance { get; private set; }
@@ -73,8 +72,8 @@ public class MenuUIManager : MonoBehaviour {
         backButtonOffset = backBtnRectTransform.anchoredPosition;
 
         GeneratePanels();
-        firstWorldPanel = worldsMenuObj.transform.GetChild(0);
-        lastWorldPanel = worldsMenuObj.transform.GetChild(worldsMenuObj.transform.childCount - 1);
+        FirstWorldPanel = worldsMenuObj.transform.GetChild(0);
+        LastWorldPanel = worldsMenuObj.transform.GetChild(worldsMenuObj.transform.childCount - 1);
 
         UpdateTotalStarsCount(GameManager.TotalStarsCount);
     }
@@ -139,9 +138,10 @@ public class MenuUIManager : MonoBehaviour {
     }
 
     private IEnumerator SlideToDelayed() {
-        yield return MoveCameraTo(firstWorldPanel);
+        yield return MoveCameraTo(FirstWorldPanel);
 
-        canSlide = true;
+        //canSlide = true;
+        //TouchManager.
     }
 
     /// <summary>
@@ -165,8 +165,8 @@ public class MenuUIManager : MonoBehaviour {
             yield return new WaitForSeconds(backBtnAnimDelay);
 
             // Sets the back button in the appropriate corner (bottom left, bottom right, top left or top right)
-            bool isRightCorner = towardsMenu.position.x < mainMenuObj.transform.position.x;
-            bool isTopCorner = towardsMenu.position.y < mainMenuObj.transform.position.y;
+            bool isRightCorner = towardsMenu.position.x <= mainMenuObj.transform.position.x;
+            bool isTopCorner = towardsMenu.position.y <= mainMenuObj.transform.position.y;
 
             Vector2 anchorPosition = new Vector2(isRightCorner ? 1f : 0f, isTopCorner ? 1f : 0f);
 
@@ -219,63 +219,46 @@ public class MenuUIManager : MonoBehaviour {
         backButtonImg.color = endColor;
         backButton.interactable = Mathf.Approximately(endColor.a, 1f);
     }
-
-    private void Update() {
-        if (Input.touchCount < 1 || !canSlide) {
-            return;
-        }
-
-        Touch touch = Input.GetTouch(0);
-        if (touch.phase == TouchPhase.Moved) {
-            if (/*!Mathf.Approximately(touch.deltaPosition.x, 0f) &&*/true) {
-                float x = Mathf.Clamp(cameraTransform.position.x - touch.deltaPosition.x * touch.deltaTime,
-                    firstWorldPanel.position.x, lastWorldPanel.position.x);
-                cameraTransform.position = new Vector3(x, 0f);
-            }
-        } else if (touch.phase == TouchPhase.Ended && !IsCameraOnEdges()) {
-            DoTouchSlide();
-        }
-    }
-
-    private bool IsCameraOnEdges() {
-        return Mathf.Approximately(cameraTransform.position.x, firstWorldPanel.position.x) ||
-               Mathf.Approximately(cameraTransform.position.x, lastWorldPanel.position.x);
-    }
     
-    private void DoTouchSlide() {
-        Transform worldsMenu = worldsMenuObj.transform;
-        Transform previousPanel = worldsMenu.GetChild(selectedWorldPanel);
-        Transform nextPanel;
+    public Coroutine DoTouchSlide(TouchManager.SlideDirection direction) {
+        SelectedWorldPanel = direction == TouchManager.SlideDirection.Left ? SelectedWorldPanel + 1 : SelectedWorldPanel - 1;
 
-        if (slideDirection == SlideDirection.Left) {
-            nextPanel = worldsMenu.GetChild(selectedWorldPanel < worldsMenu.childCount - 1 ? selectedWorldPanel + 1 : selectedWorldPanel);
-        } else {
-            nextPanel = worldsMenu.GetChild(selectedWorldPanel > 0 ? selectedWorldPanel - 1 : selectedWorldPanel);
-        }
+        Vector2 endPosition = worldsMenuObj.transform.GetChild(SelectedWorldPanel).position;
 
-        Vector3 startPosition = cameraTransform.position;
+        return StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, endPosition, slideAnimation, slideSpeed));
 
-        if (previousPanel == nextPanel) {
-            StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, previousPanel.position, slideAnimation, slideSpeed));
-            return;
-        }
+        //Debug.Log(SelectedWorldPanel);
+        //Transform worldsMenu = worldsMenuObj.transform;
+        //Transform previousPanel = worldsMenu.GetChild(SelectedWorldPanel);
+        //Transform nextPanel;
 
-        float distanceToPrevious = Mathf.Abs(previousPanel.position.x - startPosition.x);
-        float distanceToNext = Mathf.Abs(nextPanel.position.x - startPosition.x);
+        //if (direction == TouchManager.SlideDirection.Left) {
+        //    nextPanel = worldsMenu.GetChild(SelectedWorldPanel < worldsMenu.childCount - 1 ? SelectedWorldPanel + 1 : SelectedWorldPanel);
+        //} else {
+        //    nextPanel = worldsMenu.GetChild(SelectedWorldPanel > 0 ? SelectedWorldPanel - 1 : SelectedWorldPanel);
+        //}
 
-        Vector2 endPosition;
+        //Vector3 startPosition = cameraTransform.position;
 
-        if (distanceToNext < distanceToPrevious) {
-            endPosition = nextPanel.position;
-            selectedWorldPanel++;
-        } else {
-            endPosition = previousPanel.position;
+        //if (previousPanel == nextPanel) {
+        //    StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, previousPanel.position, slideAnimation, slideSpeed));
+        //    Debug.Log(SelectedWorldPanel + " -> equal panels");
+        //    return;
+        //}
 
-            if (selectedWorldPanel > 0) {
-                selectedWorldPanel--;
-            }
-        }
+        //float distanceToPrevious = Mathf.Abs(previousPanel.position.x - startPosition.x);
+        //float distanceToNext = Mathf.Abs(nextPanel.position.x - startPosition.x);
 
-        StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, endPosition, slideAnimation, slideSpeed));
+        //Vector2 endPosition;
+
+        //if (distanceToNext < distanceToPrevious) {
+        //    endPosition = nextPanel.position;
+        //    SelectedWorldPanel++;
+        //} else {
+        //    endPosition = previousPanel.position;
+        //    SelectedWorldPanel--;
+        //}
+        //Debug.Log(SelectedWorldPanel);
+        //StartCoroutine(AnimationUtility.MoveToPosition(cameraTransform, endPosition, slideAnimation, slideSpeed));
     }
 }
